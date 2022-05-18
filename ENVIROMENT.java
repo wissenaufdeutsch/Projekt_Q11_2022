@@ -5,7 +5,7 @@ public class ENVIROMENT
 {
   public ENVIROMENT()
   {
-     ArrayList<OBSTACLE> obstacle = new ArrayList<OBSTACLE>();
+     ArrayList<OBSTACLE> obstacles = new ArrayList<OBSTACLE>();
   }
  }
 

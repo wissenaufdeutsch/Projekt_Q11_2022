@@ -1,7 +1,7 @@
 
 
 
-public abstract class RECTANGULAROBJECT
+public abstract class RECTANGULAROBJECT extends OBSTACLE
 {
  int size;
 

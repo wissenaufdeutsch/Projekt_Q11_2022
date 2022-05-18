@@ -1,7 +1,7 @@
 
 
 
-public abstract class CIRCULAROBJECT
+public abstract class CIRCULAROBJECT extends OBSTACLE
 {
  int radius;
 
