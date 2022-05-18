@@ -7,6 +7,8 @@ public abstract class SYMBOL
  
  public SYMBOL ()
  {
- observer = new OBSERVER();  
+
+observer = new OBSERVER();  
+
 }
 }

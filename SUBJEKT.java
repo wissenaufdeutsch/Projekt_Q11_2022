@@ -8,7 +8,7 @@ public class SUBJEKT
  
  public SUBJEKT ()
  {
- observer = new OBSERVER();  
-}
 
+  observer = new OBSERVER();  
+ }
 }
