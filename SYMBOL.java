@@ -1,14 +1,12 @@
 
 
 
-public class SUBJEKT
+public abstract class SYMBOL
 {
-
  OBSERVER observer;
  
- public SUBJEKT ()
+ public SYMBOL ()
  {
 observer = new OBSERVER();  
 }
-
 }
