@@ -12,3 +12,5 @@ public class SUBJEKT
   observer = new OBSERVER();  
  }
 }
+
+

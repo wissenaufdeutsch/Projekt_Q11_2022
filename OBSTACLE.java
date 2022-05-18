@@ -3,6 +3,6 @@
 
 public abstract class OBSTACLE 
 {
- SUBJEKT subjekt; 
+SUBJEKT subjekt; 
  int center;
 }
