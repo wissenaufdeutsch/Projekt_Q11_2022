@@ -1,14 +1,17 @@
 import java.util.ArrayList;
-
-/**
- * Abstrakte Klasse LEVEL - Enthält alle wichtigen Methoden, die für die Erstellung von Levels nötig sind
- * 
- * @author (Stefanie)
- * @version (18.05.2022)
- */
-public abstract class LEVEL
+public class LEVEL
 {
-    ArrayList <OBSTACLE> obstacles;
+    private OBSTACLE [][] obstacles;
+    private int ende;
+    public LEVEL()
+    {
+        obstacles = new OBSTACLE [1000][1000];
+        ende = 0;
+    }
     
-    
-}
+    public OBSTACLE GiveObstacle(int level, int obstacle)
+    {
+        return obstacles[level][obstacle];
+    }
+    }
+
