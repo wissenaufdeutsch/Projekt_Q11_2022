@@ -9,7 +9,6 @@ public class KÄSTCHEN
     void Belegen(String s){
         if(belegt!=null){
             belegt=s; 
-
         } else {
             System.out.println("Schon belegt!");
         }
