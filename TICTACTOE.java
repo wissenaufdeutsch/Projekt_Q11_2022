@@ -17,13 +17,14 @@ public class TICTACTOE
     void Zug(int x, int y){
         if(SpielerAmZug==1){
             spielfeld[x][y].Belegen("Kreuz");
+            SpielerAmZug=2;
         } else {
             spielfeld[x][y].Belegen("Kreis");
+            SpielerAmZug=1;
         }
-        
-        if(HatGewonnen()!=null){
-            //Sieger darstellen, bitte abändern
-            System.out.println("Gewonnen hat Spieler "+ SpielerAmZug+"!");
+
+        if (HatGewonnen()!=null){
+            //SiegerDarstellen(HatGewonnen()); Methode sol den Sieger darstellen, bekommt entweder String "Kreuz" oder "Kreis" als Übergabeparameter
         }
 
     }
@@ -43,7 +44,6 @@ public class TICTACTOE
 
     }
 
-    
     String IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
         if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben()!=null){
             return k1.belegtGeben();
@@ -59,11 +59,10 @@ public class TICTACTOE
             }
         }
     }
-    
+
     int SpielerAmZugGeben(){
         return SpielerAmZug;
     }
-    
 
     KÄSTCHEN[][] SpielfeldGeben(){
         return spielfeld; 
