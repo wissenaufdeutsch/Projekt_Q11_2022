@@ -23,33 +23,11 @@ public class TICTACTOE
             SpielerAmZug=1;
         }
 
-        if (HatGewonnen()!=null){
+        if (HatGewonnen().equals("unbelegt")==false){
+            System.out.println("Sieger!");
             //SiegerDarstellen(HatGewonnen()); Methode sol den Sieger darstellen, bekommt entweder String "Kreuz" oder "Kreis" als Übergabeparameter
         }
 
-    }
-
-    String HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst null
-    {
-
-        if (IstGleich(spielfeld[0][0], spielfeld[1][0], spielfeld[2][0])!=null || IstGleich(spielfeld[0][0], spielfeld[0][1], spielfeld[0][2])!=null || IstGleich(spielfeld[0][0], spielfeld[1][1], spielfeld[2][2])!=null){
-            return spielfeld[0][0].belegtGeben();
-        }else if(IstGleich(spielfeld[1][0], spielfeld[1][1], spielfeld[1][2])!=null ||IstGleich(spielfeld[0][1], spielfeld[1][1], spielfeld[2][1])!=null || IstGleich(spielfeld[0][2], spielfeld[1][1], spielfeld[2][0])!=null){
-            return spielfeld[1][1].belegtGeben();
-        } else if(IstGleich(spielfeld[2][0], spielfeld[2][1], spielfeld[2][2])!=null || IstGleich(spielfeld[0][2], spielfeld[1][2], spielfeld[2][2])!=null){
-            return spielfeld[2][2].belegtGeben();
-        } else {
-            return null;
-        }   
-
-    }
-
-    String IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
-        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben()!=null){
-            return k1.belegtGeben();
-        } else {
-            return null; 
-        }
     }
 
     void Reset(){
@@ -57,6 +35,29 @@ public class TICTACTOE
             for (int j=0;j<3;j=j+1){
                 spielfeld[i][j]=new KÄSTCHEN();
             }
+        }
+    }
+
+    String HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
+    {
+
+        if (IstGleich(spielfeld[0][0], spielfeld[1][0], spielfeld[2][0]).equals("unbelegt")==false || IstGleich(spielfeld[0][0], spielfeld[0][1], spielfeld[0][2]).equals("unbelegt")==false || IstGleich(spielfeld[0][0], spielfeld[1][1], spielfeld[2][2]).equals("unbelegt")==false){
+            return spielfeld[0][0].belegtGeben();
+        }else if(IstGleich(spielfeld[1][0], spielfeld[1][1], spielfeld[1][2]).equals("unbelegt")==false ||IstGleich(spielfeld[0][1], spielfeld[1][1], spielfeld[2][1]).equals("unbelegt")==false || IstGleich(spielfeld[0][2], spielfeld[1][1], spielfeld[2][0]).equals("unbelegt")==false){
+            return spielfeld[1][1].belegtGeben();
+        } else if(IstGleich(spielfeld[2][0], spielfeld[2][1], spielfeld[2][2]).equals("unbelegt")==false || IstGleich(spielfeld[0][2], spielfeld[1][2], spielfeld[2][2]).equals("unbelegt")==false){
+            return spielfeld[2][2].belegtGeben();
+        } else {
+            return "unbelegt";
+        }   
+
+    }
+
+    String IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
+        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben().equals("unbelegt")==false){
+            return k1.belegtGeben();
+        } else {
+            return "unbelegt"; 
         }
     }
 

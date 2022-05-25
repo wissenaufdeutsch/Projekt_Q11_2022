@@ -3,11 +3,11 @@ public class KÄSTCHEN
 {
     String belegt;
     KÄSTCHEN(){
-        belegt=null; //null:nicht belegt, "Kreuz": Kreuz, "Kreis": Kreis
+        belegt="unbelegt"; //"unbelegt"/"Kreuz"/"Kreis"
     }
 
     void Belegen(String s){
-        if(belegt==null){
+        if(belegt=="unbelegt"){
             belegt=s; 
         } else {
             System.out.println("Schon belegt!");
