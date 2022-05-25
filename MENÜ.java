@@ -36,6 +36,8 @@ public class MENÜ
             TikTakToe.setSize(140,200);
             TikTakToe.setLocation(40,40);
             TikTakToe.setBackground(Color.white);
+            TikTakToe.setText("TikTakToe");
+            TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
             fenster.add(TikTakToe);
             
             
@@ -43,6 +45,7 @@ public class MENÜ
             try {
                 Image img = ImageIO.read(getClass().getResource("JumpNRunBild.jpg"));
                 img = img.getScaledInstance(100,100,Image.SCALE_DEFAULT);
+                
                 JumpNRun.setIcon(new ImageIcon(img));
               } catch (Exception ex) {
                 System.out.println(ex);
@@ -57,6 +60,8 @@ public class MENÜ
             JumpNRun.setSize(140,200);
             JumpNRun.setLocation(220,40);
             JumpNRun.setBackground(Color.white);
+            JumpNRun.setText("JumpNRun");
+            JumpNRun.setVerticalTextPosition(JButton.BOTTOM);
             fenster.add(JumpNRun);
             
             fenster.setVisible(true);
