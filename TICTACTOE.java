@@ -3,6 +3,7 @@ public class TICTACTOE
 {
     KÄSTCHEN[][] spielfeld;
     int SpielerAmZug;
+    TTTVIEW t;
 
     TICTACTOE(){
         spielfeld=new KÄSTCHEN[3][3];
@@ -24,8 +25,7 @@ public class TICTACTOE
         }
 
         if (HatGewonnen().equals("unbelegt")==false){
-            System.out.println("Sieger!");
-            //SiegerDarstellen(HatGewonnen()); Methode sol den Sieger darstellen, bekommt entweder String "Kreuz" oder "Kreis" als Übergabeparameter
+            t.SiegerDarstellen(HatGewonnen());
         }
 
     }
