@@ -8,5 +8,5 @@
 
 public interface TTTVIEW
 {
-    void SiegerDarstellen(String s); //bekommt "Kreis" oder "Kreuz"
+    public void SiegerDarstellen(TTTCONSTANTS.BELEGUNG s); //bekommt "Kreis" oder "Kreuz"
 }
