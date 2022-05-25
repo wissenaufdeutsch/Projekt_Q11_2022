@@ -2,8 +2,13 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public  class RECTANGULAROBJECT extends OBSTACLE
+
+
+
+ abstract public  class RECTANGULAROBJECT extends OBSTACLE
+
 {
+
 
     public RECTANGULAROBJECT()
     {
@@ -26,6 +31,7 @@ public  class RECTANGULAROBJECT extends OBSTACLE
     {
         g.drawRect(w,h,x,y);
 
+
     }
 
     void ChangeRectangle(RECTANGULAROBJECT r, int width, int height, int xpos, int ypos)
@@ -36,5 +42,8 @@ public  class RECTANGULAROBJECT extends OBSTACLE
         r.y = ypos;
     }
 
+
 }
+
+
 
