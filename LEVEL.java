@@ -9,7 +9,7 @@ public class LEVEL
         obstacles = new OBSTACLE [1000][1000];
         ende = 0;
         
-        RECHTECK r = new RECHTECK(10, 10, 0, 0);
+        RECTANGULAROBJECT r = new RECTANGULAROBJECT (10, 10, 0, 0);
     }
     
     public OBSTACLE GiveObstacle(int level, int obstacle)
