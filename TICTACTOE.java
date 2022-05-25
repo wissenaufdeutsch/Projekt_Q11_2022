@@ -1,71 +1,50 @@
 
-public class TICTACTOE
+public class TICTACTOE implements TTTCONSTANTS
 {
-    KÄSTCHEN[][] spielfeld;
-    int SpielerAmZug;
+    TTTVIEW t;
+    TTTMODEL m;
 
     TICTACTOE(){
-        spielfeld=new KÄSTCHEN[3][3];
-        for (int i=0;i<3;i=i+1){
-            for (int j=0;j<3;j=j+1){
-                spielfeld[i][j]=new KÄSTCHEN();
+        t=new TTTVIEW(){
+            public void SiegerDarstellen(BELEGUNG s)
+            {
+                System.out.println(s);
             }
-        }
-        SpielerAmZug=1; //1:Spieler 1 (Kreuz); 2: Spieler 2 (Kreis)
+        };
+        m=new TTTMODEL();
     }
 
     void Zug(int x, int y){
-        if(SpielerAmZug==1){
-            spielfeld[x][y].Belegen("Kreuz");
-            SpielerAmZug=2;
-        } else {
-            spielfeld[x][y].Belegen("Kreis");
-            SpielerAmZug=1;
-        }
+        m.Zug(x,y);
 
-        if (HatGewonnen()!=null){
-            //SiegerDarstellen(HatGewonnen()); Methode sol den Sieger darstellen, bekommt entweder String "Kreuz" oder "Kreis" als Übergabeparameter
+        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
+            t.SiegerDarstellen(HatGewonnen());
         }
 
     }
 
-    String HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst null
+        BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
     {
 
-        if (IstGleich(spielfeld[0][0], spielfeld[1][0], spielfeld[2][0])!=null || IstGleich(spielfeld[0][0], spielfeld[0][1], spielfeld[0][2])!=null || IstGleich(spielfeld[0][0], spielfeld[1][1], spielfeld[2][2])!=null){
-            return spielfeld[0][0].belegtGeben();
-        }else if(IstGleich(spielfeld[1][0], spielfeld[1][1], spielfeld[1][2])!=null ||IstGleich(spielfeld[0][1], spielfeld[1][1], spielfeld[2][1])!=null || IstGleich(spielfeld[0][2], spielfeld[1][1], spielfeld[2][0])!=null){
-            return spielfeld[1][1].belegtGeben();
-        } else if(IstGleich(spielfeld[2][0], spielfeld[2][1], spielfeld[2][2])!=null || IstGleich(spielfeld[0][2], spielfeld[1][2], spielfeld[2][2])!=null){
-            return spielfeld[2][2].belegtGeben();
+        if (IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,0), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(0,1), m.FeldGeben(0,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
+            return m.FeldGeben(0,0).belegtGeben();
+        }else if(IstGleich(m.FeldGeben(1,0), m.FeldGeben(1,1), m.FeldGeben(1,2)).equals(BELEGUNG.UNBELEGT)==false ||IstGleich(m.FeldGeben(0,1), m.FeldGeben(1,1), m.FeldGeben(2,1)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,2), m.FeldGeben(1,1), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false){
+            return m.FeldGeben(1,1).belegtGeben();
+        } else if(IstGleich(m.FeldGeben(2,0), m.FeldGeben(2,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,2), m.FeldGeben(1,2), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
+            return m.FeldGeben(2,2).belegtGeben();
         } else {
-            return null;
+            return BELEGUNG.UNBELEGT;
         }   
 
     }
 
-    String IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
-        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben()!=null){
+    BELEGUNG IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
+        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
             return k1.belegtGeben();
         } else {
-            return null; 
+            return BELEGUNG.UNBELEGT; 
         }
     }
 
-    void Reset(){
-        for (int i=0;i<3;i=i+1){
-            for (int j=0;j<3;j=j+1){
-                spielfeld[i][j]=new KÄSTCHEN();
-            }
-        }
-    }
-
-    int SpielerAmZugGeben(){
-        return SpielerAmZug;
-    }
-
-    KÄSTCHEN[][] SpielfeldGeben(){
-        return spielfeld; 
-    }
 }
 
