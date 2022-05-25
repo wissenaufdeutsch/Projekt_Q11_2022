@@ -3,16 +3,12 @@ import java.awt.*;
 import javax.swing.*;
 
 
-<<<<<<< HEAD
-
 
  abstract public  class RECTANGULAROBJECT extends OBSTACLE
 
-=======
- abstract public  class RECTANGULAROBJECT extends OBSTACLE
->>>>>>> 7da644591b6c7d67cc8cdfe3518ece5fb0247721
+
 {
-<<<<<<< HEAD
+
 
 
     public RECTANGULAROBJECT()
@@ -48,9 +44,7 @@ import javax.swing.*;
     }
 
 
-=======
-    
->>>>>>> 7da644591b6c7d67cc8cdfe3518ece5fb0247721
+
 }
 
 

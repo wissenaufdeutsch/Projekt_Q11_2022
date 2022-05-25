@@ -12,17 +12,17 @@ public class GRAFIK
         fenster.setSize(300,150);
         fenster.getContentPane().setLayout(null);
         fenster.setVisible(true);
-     panel = new Panel(nodes , windowWidth, windowHeight);
+     //panel = new Panel(nodes , windowWidth, windowHeight);
  
 
         SwingUtilities.invokeLater(new Runnable() 
         {
             public void run() 
             {
-                createAndShowGraph(); 
+                //createAndShowGraph(); 
             }
 
-       }      
+       });      
 
     }
 }
