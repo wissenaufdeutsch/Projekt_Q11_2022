@@ -1,9 +1,9 @@
 
 
- abstract public  class RECTANGULAROBJECT
+ abstract public  class RECTANGULAROBJECT extends OBSTACLE
 {
     
-    }
+}
 
 
 
