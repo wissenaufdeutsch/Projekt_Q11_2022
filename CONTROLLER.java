@@ -4,7 +4,7 @@
 public class CONTROLLER
 {
     boolean done;
-    ENVIROMENT environment;
+    ENVIRONMENT environment;
     String mode;
     
     public CONTROLLER(String mode) {

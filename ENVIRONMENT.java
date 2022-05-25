@@ -1,9 +1,9 @@
 
 import java.util.ArrayList;
 
-public class ENVIROMENT
+public class ENVIRONMENT
 {
-  public ENVIROMENT()
+  public ENVIRONMENT()
   {
      ArrayList<OBSTACLE> obstacles = new ArrayList<OBSTACLE>();
   }
