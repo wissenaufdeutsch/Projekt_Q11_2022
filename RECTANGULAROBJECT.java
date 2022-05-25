@@ -3,11 +3,16 @@ import java.awt.*;
 import javax.swing.*;
 
 
+<<<<<<< HEAD
 public class RECTANGULAROBJECT extends OBSTACLE
 
  abstract public  class RECTANGULAROBJECT
 
+=======
+ abstract public  class RECTANGULAROBJECT extends OBSTACLE
+>>>>>>> 8dd55383fe49744be52f4c32bf0d25ccc17f2a8f
 {
+<<<<<<< HEAD
 
     private int w;
     private int h;
@@ -27,7 +32,10 @@ public class RECTANGULAROBJECT extends OBSTACLE
         g.drawRect(w,h,x,y);
 
 
+=======
+>>>>>>> 8dd55383fe49744be52f4c32bf0d25ccc17f2a8f
     
+<<<<<<< HEAD
 
     }
 
@@ -41,6 +49,12 @@ public class RECTANGULAROBJECT extends OBSTACLE
         r.y = ypos;
     }
 
+=======
+>>>>>>> 8dd55383fe49744be52f4c32bf0d25ccc17f2a8f
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8dd55383fe49744be52f4c32bf0d25ccc17f2a8f

@@ -4,7 +4,11 @@ import java.util.LinkedList;
 import javafx.scene.Node;
 
 
+<<<<<<< HEAD
 public class RECHTECK extends JPanel 
+=======
+public class RECHTECK extends JPanel
+>>>>>>> 8dd55383fe49744be52f4c32bf0d25ccc17f2a8f
 { private int w;
     private int h;
     private int x;
