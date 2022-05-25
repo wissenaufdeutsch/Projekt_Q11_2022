@@ -1,20 +1,21 @@
 
-public class KÄSTCHEN
+public class KÄSTCHEN implements TTTCONSTANTS
 {
-    String belegt;
+    BELEGUNG belegt;
     KÄSTCHEN(){
-        belegt="unbelegt"; //"unbelegt"/"Kreuz"/"Kreis"
+        belegt=BELEGUNG.UNBELEGT; //"unbelegt"/"Kreuz"/"Kreis"
     }
 
-    void Belegen(String s){
-        if(belegt=="unbelegt"){
+    boolean Belegen(BELEGUNG s){
+        if(belegt==BELEGUNG.UNBELEGT){
             belegt=s; 
+            return true;
         } else {
-            System.out.println("Schon belegt!");
+            return false;
         }
     }
-
-    String belegtGeben(){
+    
+    BELEGUNG belegtGeben(){
         return belegt;
     }
 }

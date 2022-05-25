@@ -1,72 +1,72 @@
 
-public class TICTACTOE
+public class TICTACTOE implements TTTCONSTANTS
 {
-    KÄSTCHEN[][] spielfeld;
-    int SpielerAmZug;
     TTTVIEW t;
+    TTTMODEL m;
 
     TICTACTOE(){
-        spielfeld=new KÄSTCHEN[3][3];
-        for (int i=0;i<3;i=i+1){
-            for (int j=0;j<3;j=j+1){
-                spielfeld[i][j]=new KÄSTCHEN();
+        t=new TTTVIEW(){
+            public void SiegerDarstellen(BELEGUNG s)
+            {
+                System.out.println(s);
             }
-        }
-        SpielerAmZug=1; //1:Spieler 1 (Kreuz); 2: Spieler 2 (Kreis)
+
+            public void UnentschiedenDarstellen()
+            {
+                System.out.println("Unentschieden!");
+            }
+        };
+        m=new TTTMODEL();
     }
 
     void Zug(int x, int y){
-        if(SpielerAmZug==1){
-            spielfeld[x][y].Belegen("Kreuz");
-            SpielerAmZug=2;
-        } else {
-            spielfeld[x][y].Belegen("Kreis");
-            SpielerAmZug=1;
-        }
-
-        if (HatGewonnen().equals("unbelegt")==false){
+        m.Zug(x,y);
+        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
             t.SiegerDarstellen(HatGewonnen());
+        } else if(IstUnentschieden()==true){
+            t.UnentschiedenDarstellen(); 
         }
-
+    }
+    
+    void Reset(){
+        m.Reset();
     }
 
-    void Reset(){
+    boolean IstUnentschieden(){
+        KÄSTCHEN[][]k=m.SpielfeldGeben();        
         for (int i=0;i<3;i=i+1){
             for (int j=0;j<3;j=j+1){
-                spielfeld[i][j]=new KÄSTCHEN();
+                if(k[i][j].belegtGeben().equals(BELEGUNG.UNBELEGT)==true)
+                {
+                    return false;
+                }
             }
         }
+        return true; 
     }
 
-    String HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
+    BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
     {
 
-        if (IstGleich(spielfeld[0][0], spielfeld[1][0], spielfeld[2][0]).equals("unbelegt")==false || IstGleich(spielfeld[0][0], spielfeld[0][1], spielfeld[0][2]).equals("unbelegt")==false || IstGleich(spielfeld[0][0], spielfeld[1][1], spielfeld[2][2]).equals("unbelegt")==false){
-            return spielfeld[0][0].belegtGeben();
-        }else if(IstGleich(spielfeld[1][0], spielfeld[1][1], spielfeld[1][2]).equals("unbelegt")==false ||IstGleich(spielfeld[0][1], spielfeld[1][1], spielfeld[2][1]).equals("unbelegt")==false || IstGleich(spielfeld[0][2], spielfeld[1][1], spielfeld[2][0]).equals("unbelegt")==false){
-            return spielfeld[1][1].belegtGeben();
-        } else if(IstGleich(spielfeld[2][0], spielfeld[2][1], spielfeld[2][2]).equals("unbelegt")==false || IstGleich(spielfeld[0][2], spielfeld[1][2], spielfeld[2][2]).equals("unbelegt")==false){
-            return spielfeld[2][2].belegtGeben();
+        if (IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,0), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(0,1), m.FeldGeben(0,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
+            return m.FeldGeben(0,0).belegtGeben();
+        }else if(IstGleich(m.FeldGeben(1,0), m.FeldGeben(1,1), m.FeldGeben(1,2)).equals(BELEGUNG.UNBELEGT)==false ||IstGleich(m.FeldGeben(0,1), m.FeldGeben(1,1), m.FeldGeben(2,1)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,2), m.FeldGeben(1,1), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false){
+            return m.FeldGeben(1,1).belegtGeben();
+        } else if(IstGleich(m.FeldGeben(2,0), m.FeldGeben(2,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,2), m.FeldGeben(1,2), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
+            return m.FeldGeben(2,2).belegtGeben();
         } else {
-            return "unbelegt";
+            return BELEGUNG.UNBELEGT;
         }   
 
     }
 
-    String IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
-        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben().equals("unbelegt")==false){
+    BELEGUNG IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
+        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
             return k1.belegtGeben();
         } else {
-            return "unbelegt"; 
+            return BELEGUNG.UNBELEGT; 
         }
     }
 
-    int SpielerAmZugGeben(){
-        return SpielerAmZug;
-    }
-
-    KÄSTCHEN[][] SpielfeldGeben(){
-        return spielfeld; 
-    }
 }
 
