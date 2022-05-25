@@ -27,6 +27,10 @@ public class TICTACTOE implements TTTCONSTANTS
             t.UnentschiedenDarstellen(); 
         }
     }
+    
+    void Reset(){
+        m.Reset();
+    }
 
     boolean IstUnentschieden(){
         KÄSTCHEN[][]k=m.SpielfeldGeben();        
