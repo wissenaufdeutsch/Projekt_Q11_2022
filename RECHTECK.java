@@ -8,7 +8,7 @@ public class RECHTECK
     {
         RECHTECK objekt = new RECHTECK(5,5,10,12);
 
- 
+  
 
     }
 }
