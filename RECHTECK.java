@@ -1,14 +1,26 @@
 
 
 public class RECHTECK 
-{ public RECHTECK(int width, int height,int xpos, int ypos)
-    {} 
-
-    void CreateRectangle()
+{ 
+    private int w;
+    private int h;
+    private int x;
+    private int y;
+    public RECHTECK(int width, int height,int xpos, int ypos)
     {
-        RECHTECK objekt = new RECHTECK(5,5,10,12);
+        w = width;
+        h = height;
+        x = xpos;
+        y = ypos;
+        
+        
+    } 
 
- 
-
+    void ChangeRectangle(RECHTECK r, int width, int height, int xpos, int ypos)
+    {
+        r.w = width;
+        r.h = height;
+        r.x = xpos;
+        r.y = ypos;
     }
 }
