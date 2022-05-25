@@ -17,6 +17,12 @@ public class LEVEL
         return obstacles[level][obstacle];
     }
     
-
+    public void Level1()
+    {
+        OBSTACLE o = new RECTANGULAROBJECT();
+        
+        obstacles[0][0] = o;
+    }
+    
     }
 

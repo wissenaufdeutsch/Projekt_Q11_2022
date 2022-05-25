@@ -9,7 +9,7 @@ public abstract class RECTANGULAROBJECT extends OBSTACLE
  {
     
     
-    }
+ }
 
 
  
