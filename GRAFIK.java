@@ -11,10 +11,16 @@ public class GRAFIK
 
 
     
+
         fenster = new JFrame("Das steht im Titel");
+
+
+     fenster = new JFrame("Das steht im Titel");
+
         fenster.setSize(300,150);
         fenster.getContentPane().setLayout(null);
         fenster.setVisible(true);
+
 
         //panel = new Panel(nodes , windowWidth, windowHeight);
 
@@ -35,3 +41,6 @@ public class GRAFIK
     }    
 
 }
+
+
+

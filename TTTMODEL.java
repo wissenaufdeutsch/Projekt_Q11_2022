@@ -58,5 +58,12 @@ public class TTTMODEL implements TTTCONSTANTS
             } 
         }
 
+    KÄSTCHEN[][]SpielfeldGeben();
+    {
+        return spielfeld;
+
+    }
+
+
     } 
 }

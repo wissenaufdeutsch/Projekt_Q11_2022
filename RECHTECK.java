@@ -6,12 +6,13 @@ import javafx.scene.Node;
 
 
 
-public class RECHTECK extends JPanel
 
- { 
- 
 
-   private int w;
+
+
+public class RECHTECK extends JPanel 
+
+{  private int w;
 
     private int h;
     private int x;
@@ -45,9 +46,10 @@ public class RECHTECK extends JPanel
             RenderingHints.KEY_TEXT_ANTIALIASING,
             RenderingHints.VALUE_TEXT_ANTIALIAS_ON); 
 
+
         g2d.drawRect(30, 50, 420, 120);
-       
-        }
+
+         }
 
 
   }

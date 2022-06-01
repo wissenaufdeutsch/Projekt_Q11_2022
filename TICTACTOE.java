@@ -27,7 +27,6 @@ public class TICTACTOE implements TTTCONSTANTS
 
 
 
-
         if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
             t.SiegerDarstellen(HatGewonnen());
         } else if(IstUnentschieden()==true){
