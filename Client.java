@@ -78,16 +78,24 @@ public class Client extends Thread{
         }
         // hier modifizieren
         try {//may fail pls catch me if you can
+            String oldmessage= "";
             while(conn.isOpen()) {//i can do whatever i want now over the freaking channel if it is open... nice!
-                String message = conn.read();//read from channel
+                
+                //String message = conn.read();//read from channel
+                String message = test.give_data();
                 if(message == null) {
                     break; // Disconnected.
     
                 
                 }
                 //CLIENT HAS TO CHECK IF NEW MESSAGE
-                System.out.println(message);
-                conn.send(test.give_data());
+                if(!message.equals(oldmessage)){
+                    System.out.println("Client: "+message);
+                    conn.send(message);
+                    oldmessage = message;
+                }
+                
+                
                 //System.out.println(test.give_data());//send something blabla ...
             }
         }

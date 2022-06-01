@@ -113,24 +113,21 @@ public class Server extends Thread {
         public void run() {
             // String remotename = conn.getInfo();
             // fireConnected(remotename, conn);
-            String oldMessage = null;
+            
             try {
                 while(conn.isOpen()) {
                     String message = conn.read();
                 if(message == null){
                         break; // Disconnected.
                     }
-                if(!message.equals(oldMessage)) {
-                    System.out.println(message);
+                
+                    System.out.println("Server: " +message);
                     conn.send(message);
-                    oldMessage = message;
+                   
                     //fireReceived(conn, message);
                 }
-                else{
-                    conn.send("no new data");
-                }
             }
-            }
+            
             catch(IOException e) {
                 e.printStackTrace();
             }
