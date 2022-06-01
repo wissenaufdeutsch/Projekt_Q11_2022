@@ -7,9 +7,17 @@ public class JUMPNRUNPANEL extends JPanel
       
     public JUMPNRUNPANEL()
     {
-        setVisible(true);
-        setSize(100,100);
-        setLocation(500,160);
+        Dimension size
+            = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // width will store the width of the screen
+        int width = (int)size.getWidth();
+        
+        // height will store the height of the screen
+        int height = (int)size.getHeight();
+        
+        setSize(width,height);
+        setLocation(0,0);
         setVisible(true);
     }
     
