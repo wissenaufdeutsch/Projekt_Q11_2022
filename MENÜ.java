@@ -37,6 +37,11 @@ public class MENÜ
             TikTakToe.setLocation(40,40);
             TikTakToe.setBackground(Color.white);
 
+<<<<<<< HEAD
+            TikTakToe.setText("TikTakToe");
+            TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
+=======
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
 
             fenster.add(TikTakToe);
             
@@ -60,6 +65,34 @@ public class MENÜ
             JumpNRun.setLocation(220,40);
             JumpNRun.setBackground(Color.white);
 
+<<<<<<< HEAD
+
+            TikTakToe.setText("TikTakToe");
+            TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
+            fenster.add(TikTakToe);
+            
+            
+            JumpNRun = new JButton();
+            try {
+                Image img = ImageIO.read(getClass().getResource("JumpNRunBild.jpg"));
+                img = img.getScaledInstance(100,100,Image.SCALE_DEFAULT);
+                
+                JumpNRun.setIcon(new ImageIcon(img));
+              } catch (Exception ex) {
+                System.out.println(ex);
+              }
+            JumpNRun.addActionListener(new ActionListener()
+            { 
+                public void actionPerformed(ActionEvent e) { 
+                    JumpNRun.setText("");
+                } 
+            } );
+            JumpNRun.setVisible(true);
+            JumpNRun.setSize(140,200);
+            JumpNRun.setLocation(220,40);
+            JumpNRun.setBackground(Color.white);
+
+=======
             TikTakToe.setText("TikTakToe");
             TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
             fenster.add(TikTakToe);
@@ -83,6 +116,7 @@ public class MENÜ
             JumpNRun.setSize(140,200);
             JumpNRun.setLocation(220,40);
             JumpNRun.setBackground(Color.white);
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
             JumpNRun.setText("JumpNRun");
             JumpNRun.setVerticalTextPosition(JButton.BOTTOM);
 

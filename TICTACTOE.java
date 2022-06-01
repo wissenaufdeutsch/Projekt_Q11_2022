@@ -12,10 +12,15 @@ public class TICTACTOE implements TTTCONSTANTS
             }
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
             public void UnentschiedenDarstellen()
             {
                 System.out.println("Unentschieden!");
             }
+
         };
         m=new TTTMODEL();
     }
@@ -24,6 +29,10 @@ public class TICTACTOE implements TTTCONSTANTS
         m.Zug(x,y);
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
         if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
             t.SiegerDarstellen(HatGewonnen());
         } else if(IstUnentschieden()==true){
@@ -34,6 +43,9 @@ public class TICTACTOE implements TTTCONSTANTS
     void Reset(){
         m.Reset();
     }
+
+
+        BELEGUNG HatGewonnen() ;//gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
 
     boolean IstUnentschieden(){
         KÄSTCHEN[][]k=m.SpielfeldGeben();        
@@ -51,10 +63,13 @@ public class TICTACTOE implements TTTCONSTANTS
 
     BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
 
+<<<<<<< HEAD
+=======
 
     BELEGUNG HatGewonnen_old() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
    
 
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
     {
 
         if (IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,0), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(0,1), m.FeldGeben(0,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
