@@ -34,6 +34,7 @@ public class TTTMODEL implements TTTCONSTANTS
     } 
 
     void Reset(){
+        SpielerAmZug=1;
         for (int i=0;i<3;i=i+1){
             for (int j=0;j<3;j=j+1){
                 spielfeld[i][j]=new KÄSTCHEN();
