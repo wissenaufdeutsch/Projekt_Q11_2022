@@ -36,7 +36,6 @@ public class MENÜ
             TikTakToe.setSize(140,200);
             TikTakToe.setLocation(40,40);
             TikTakToe.setBackground(Color.white);
-<<<<<<< HEAD
             fenster.add(TikTakToe);
             
             
@@ -58,7 +57,7 @@ public class MENÜ
             JumpNRun.setSize(140,200);
             JumpNRun.setLocation(220,40);
             JumpNRun.setBackground(Color.white);
-=======
+            
             TikTakToe.setText("TikTakToe");
             TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
             fenster.add(TikTakToe);
@@ -85,7 +84,7 @@ public class MENÜ
             JumpNRun.setBackground(Color.white);
             JumpNRun.setText("JumpNRun");
             JumpNRun.setVerticalTextPosition(JButton.BOTTOM);
->>>>>>> 8dd55383fe49744be52f4c32bf0d25ccc17f2a8f
+
             fenster.add(JumpNRun);
             
             fenster.setVisible(true);

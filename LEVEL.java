@@ -8,11 +8,8 @@ public class LEVEL
     {
         obstacles = new OBSTACLE [1000][1000];
         ende = 0;
-<<<<<<< HEAD
-=======
         
         RECTANGULAROBJECT r = new RECTANGULAROBJECT (10, 10, 0, 0);
->>>>>>> 8dd55383fe49744be52f4c32bf0d25ccc17f2a8f
     }
     
     public OBSTACLE[] GiveLevel(int level)
