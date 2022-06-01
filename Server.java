@@ -65,7 +65,7 @@ public class Server extends Thread {
         } catch (IOException e1) {//You need the Port to send it to your Clients! (btw. another catch...)
             e1.printStackTrace();//Stack blaaaa: You can do this better!
         }
-        int x = 1;
+        int x = 0;
         while(x!=2 && !shutdown) {//as long as nobody wants to kill the server real badly
             try {// Wait for a new connection.
                 System.out.println("im here");//test sysout
@@ -145,6 +145,7 @@ public class Server extends Thread {
                    
                     //fireReceived(conn, message);
                 }
+                System.out.println("failed");
             }
             
             catch(IOException e) {
