@@ -10,6 +10,22 @@ public class LEVEL
     {
         obstacles = new OBSTACLE [1000][1000];
         ende = 0;
+<<<<<<< HEAD
+=======
+
+        
+        obstacles[0][0] = new RECHTECK(10, 10, 0, 0);
+        obstacles[0][1] = new RECHTECK(50, 100, 500, 600);
+
+        //RECTANGULAROBJECT r = new RECTANGULAROBJECT (10, 10, 0, 0);
+
+    }
+    
+    public OBSTACLE[] GiveLevel(int level)
+    {
+        return obstacles[level];
+    }
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
 
 
         //RECTANGULAROBJECT r = new RECTANGULAROBJECT (10, 10, 0, 0);
