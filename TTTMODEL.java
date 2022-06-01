@@ -17,13 +17,11 @@ public class TTTMODEL implements TTTCONSTANTS
 
     void Zug(int x, int y){
         if(SpielerAmZug==1){
-            if (spielfeld[x][y].Belegen(BELEGUNG.KREUZ)){;
-                SpielerAmZug=2;
-            } 
+            spielfeld[x][y].Belegen(BELEGUNG.KREUZ);
+            SpielerAmZug=2;
         } else {
-            if(spielfeld[x][y].Belegen(BELEGUNG.KREIS)){
-                SpielerAmZug=1;
-            } 
+            spielfeld[x][y].Belegen(BELEGUNG.KREIS);
+            SpielerAmZug=1;
         }
 
     } 
@@ -42,10 +40,14 @@ public class TTTMODEL implements TTTCONSTANTS
 
     KÄSTCHEN FeldGeben(int x, int y){
         return spielfeld[x][y]; 
-    }
+
+    } 
+
+   
 
     KÄSTCHEN[][]SpielfeldGeben(){
         return spielfeld;
+
     }
 
 }

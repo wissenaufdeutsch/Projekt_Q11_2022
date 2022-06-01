@@ -11,6 +11,7 @@ public class TICTACTOE implements TTTCONSTANTS
                 System.out.println(s);
             }
 
+
             public void UnentschiedenDarstellen()
             {
                 System.out.println("Unentschieden!");
@@ -21,6 +22,8 @@ public class TICTACTOE implements TTTCONSTANTS
 
     void Zug(int x, int y){
         m.Zug(x,y);
+
+
         if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
             t.SiegerDarstellen(HatGewonnen());
         } else if(IstUnentschieden()==true){
@@ -45,7 +48,10 @@ public class TICTACTOE implements TTTCONSTANTS
         return true; 
     }
 
+
     BELEGUNG HatGewonnen_old() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
+
+   
     {
 
         if (IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,0), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(0,1), m.FeldGeben(0,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
