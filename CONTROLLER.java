@@ -12,7 +12,7 @@ public class CONTROLLER
         this.done = false;
         LEVEL level = chooseLevel();
         //create env
-        
+        environment = new ENVIRONMENT();
     }
     
     public LEVEL chooseLevel() {
@@ -23,6 +23,17 @@ public class CONTROLLER
     public void run() {
         while(!done) {
             //update everything
+        }
+    }
+    
+    public void Level0()
+    {
+        LEVEL level = new LEVEL();
+        
+        OBSTACLE[] obstaclesLevel0 = level.GiveLevel(0);
+        for (OBSTACLE obstacle: obstaclesLevel0)
+        {
+          environment.obstacles.add(obstacle);
         }
     }
 }

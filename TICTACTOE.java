@@ -12,10 +12,15 @@ public class TICTACTOE implements TTTCONSTANTS
             }
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
             public void UnentschiedenDarstellen()
             {
                 System.out.println("Unentschieden!");
             }
+
         };
         m=new TTTMODEL();
     }
@@ -24,16 +29,23 @@ public class TICTACTOE implements TTTCONSTANTS
         m.Zug(x,y);
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
         if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
             t.SiegerDarstellen(HatGewonnen());
         } else if(IstUnentschieden()==true){
             t.UnentschiedenDarstellen(); 
         }
     }
-    
+
     void Reset(){
         m.Reset();
     }
+
+
+        BELEGUNG HatGewonnen() ;//gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
 
     boolean IstUnentschieden(){
         KÄSTCHEN[][]k=m.SpielfeldGeben();        
@@ -48,8 +60,16 @@ public class TICTACTOE implements TTTCONSTANTS
         return true; 
     }
 
+
     BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
 
+<<<<<<< HEAD
+=======
+
+    BELEGUNG HatGewonnen_old() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
+   
+
+>>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
     {
 
         if (IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,0), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(0,1), m.FeldGeben(0,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
@@ -60,8 +80,29 @@ public class TICTACTOE implements TTTCONSTANTS
             return m.FeldGeben(2,2).belegtGeben();
         } else {
             return BELEGUNG.UNBELEGT;
-        }   
+        }  
 
+    }
+
+    BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
+    {
+
+        for(int a=0;a<3;a=a+1){
+            if (IstGleich(m.FeldGeben(a,0),m.FeldGeben(a,1),m.FeldGeben(a,2)).equals(BELEGUNG.UNBELEGT)==false){
+                return m.FeldGeben(a,0).belegtGeben();
+            }
+        }
+        for(int b=0;b<3;b=b+1){
+            if (IstGleich(m.FeldGeben(0,b),m.FeldGeben(1,b),m.FeldGeben(2,b)).equals(BELEGUNG.UNBELEGT)==false){
+                return m.FeldGeben(0,b).belegtGeben();
+            }
+        }        
+        for (int c=0;c>-3;c=c-2){
+            if(IstGleich(m.FeldGeben(Math.abs(c),0),m.FeldGeben(1,1),m.FeldGeben(c+2,2)).equals(BELEGUNG.UNBELEGT)==false){
+                return m.FeldGeben(1,1).belegtGeben();
+            }
+        }
+        return BELEGUNG.UNBELEGT;
     }
 
     BELEGUNG IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){

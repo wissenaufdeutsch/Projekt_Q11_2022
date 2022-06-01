@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Font;
+import java.awt.*;  
+
 public class TicTacToeView
 {
     private JFrame fenster;
@@ -11,13 +13,16 @@ public class TicTacToeView
 
     private JLabel label;
     
+    private JInternalFrame Wasistdas;
+
+    
     static String[] board;
     static String turn;
 
 
 public TicTacToeView()
 {
-    fenster = new JFrame("TICTACTOE");
+    fenster = new JFrame("TICTACTOE - Ein Spiel für Gewinner");
     fenster.setSize(300,150);
     fenster.getContentPane().setLayout(null);
     
@@ -27,8 +32,18 @@ public TicTacToeView()
         
     button.setVisible(true);
     button. setSize(15,10); 
-    button. setLocation (290, 240);
+    button. setLocation (386, 250);
     button. setText ("");
+    button. setVisible (true);
+    fenster. add (button);
+    fenster.setVisible(true);
+    
+    button = new JButton();
+        
+    button.setVisible(true);
+    button. setSize(50,50); 
+    button. setLocation (750, 260);
+    button. setText ("nd");
     button. setVisible (true);
     fenster. add (button);
     fenster.setVisible(true);
@@ -37,7 +52,7 @@ public TicTacToeView()
         
     label.setVisible(true);
     label.setSize(1000,1000);
-    label.setLocation(0,-250);
+    label.setLocation(100,-250);
     label.setText("TICTACTOE");
     label.setVisible(true);
     fenster.add(label);
@@ -49,14 +64,17 @@ public TicTacToeView()
         
     panel.setVisible(true);
     panel.setSize(100,100);
-    panel.setLocation(500,160);
+    panel.setLocation(600,160);
     panel.setVisible(true);
-    fenster.add(panel);
-    fenster.setVisible(true);
-    fenster = new JFrame("TicTacToe");
-    fenster.setSize(300,150);
-    fenster.getContentPane().setLayout(null);
+
+    Wasistdas = new JInternalFrame();
     
+    Wasistdas.setVisible(true);
+    Wasistdas.setSize(900,500);
+    Wasistdas.setLocation(10,0);
+    Wasistdas.setVisible(true);
+    fenster.add(Wasistdas);
+    fenster.setVisible(true);
 }
   /*  static void printBoard()
     {
@@ -149,6 +167,35 @@ public TicTacToeView()
                 + "'s have won! Thanks for playing.");
         }
     }*/
+ 
+/*
+import java.awt.*;  
+import javax.swing.JFrame;  
+  
+public class DisplayGraphics extends Canvas{  
+      
+    public void paint(Graphics g) {  
+        g.drawString("Hello",40,40);  
+        setBackground(Color.WHITE);  
+        g.fillRect(130, 30,100, 80);  
+        g.drawOval(30,130,50, 60);  
+        setForeground(Color.RED);  
+        g.fillOval(130,130,50, 60);  
+        g.drawArc(30, 200, 40,50,90,60);  
+        g.fillArc(30, 130, 40,50,180,40);  
+          
+    }  
+        public static void main(String[] args) {  
+        DisplayGraphics m=new DisplayGraphics();  
+        JFrame f=new JFrame();  
+        f.add(m);  
+        f.setSize(400,400);  
+        //f.setLayout(null);  
+        f.setVisible(true);  
+    }  
+  
+}  
+*/
 }
 
 

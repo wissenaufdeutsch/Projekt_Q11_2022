@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.awt.Rectangle;
+
 public class LEVEL
 {
     private OBSTACLE [][] obstacles;
@@ -8,8 +10,13 @@ public class LEVEL
     {
         obstacles = new OBSTACLE [1000][1000];
         ende = 0;
-        //RECTANGULAROBJECT r = new RECTANGULAROBJECT (10, 10, 0, 0);
 
+
+        obstacles[0][0] = new RECHTECK(10, 10, 0, 0);
+        ende = ende+1;
+        
+        obstacles[0][1] = new RECHTECK(50, 100, 500, 600);
+        ende = ende+1;
     }
     
     public OBSTACLE[] GiveLevel(int level)
@@ -17,28 +24,12 @@ public class LEVEL
         return obstacles[level];
     }
     
-    public void Level1()
+    public OBSTACLE[] GiveLevel(int level)
     {
-        int anzahl = 0;
-        
-        // OBSTACLE o = new RECHTECK(50, 50, 0, 0);
-        // obstacles[0][0] = o;
-        // anzahl = anzahl+1;
-        
-        // OBSTACLE a = new RECHTECK(150, 100, 400, 1000);
-        // obstacles[0][1] = a;
-        // anzahl = anzahl+1;
-        
-        // OBSTACLE b = new RECHTECK(150, 100, 400, 500);
-        // obstacles[0][2] = b;
-        // anzahl = anzahl+1;
-        
-        // OBSTACLE c = new RECHTECK(500, 100, 900, 700);
-        // for(int i=0; i<anzahl; i++)
-        // {
-            // obstacles[0][i].PaintComponent();
-        // }
+        return obstacles[level];
     }
     
     }
+    
+    
 
