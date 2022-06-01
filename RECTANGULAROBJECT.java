@@ -1,33 +1,24 @@
 import java.awt.*;
 
+
 import javax.swing.*;
 
+
 public abstract class RECTANGULAROBJECT extends OBSTACLE
+
 {
     private int w;
     private int h;
     private int x;
     private int y;
-
-
-
-    
-
-    void zeichnen(Graphics g)
+    public RECTANGULAROBJECT (int width, int height,int xpos, int ypos)
     {
-        g.drawRect(w,h,x,y);
+        w = width;
+        h = height;
+        x = xpos;
+        y = ypos;
 
-    }
-
-
-
-    void ChangeRectangle(RECTANGULAROBJECT r, int width, int height, int xpos, int ypos)
-    {
-        r.w = width;
-        r.h = height;
-        r.x = xpos;
-        r.y = ypos;
-    }
+    } 
 
 
 }
