@@ -4,17 +4,11 @@ import javax.swing.*;
 
 
 
- abstract public  class RECTANGULAROBJECT extends OBSTACLE
 
+ abstract public  class RECTANGULAROBJECT extends OBSTACLE
 
 {
 
-
-
-    public RECTANGULAROBJECT()
-    {
-
-    }
     private int w;
     private int h;
     private int x;
@@ -43,6 +37,16 @@ import javax.swing.*;
         r.y = ypos;
     }
 
+
+
+
+
+    
+    
+
+
+
+    
 
 
 }

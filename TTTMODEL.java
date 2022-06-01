@@ -4,7 +4,8 @@ public class TTTMODEL implements TTTCONSTANTS
     private KÄSTCHEN[][] spielfeld;
     int SpielerAmZug;
 
-    TTTMODEL(){
+    TTTMODEL()
+    {
         spielfeld=new KÄSTCHEN[3][3];
         for (int i=0;i<3;i=i+1){
             for (int j=0;j<3;j=j+1){
@@ -15,20 +16,21 @@ public class TTTMODEL implements TTTCONSTANTS
 
     }
 
-    void Zug(int x, int y){
+    void Zug(int x, int y)
+    {
         if(SpielerAmZug==1){
-            if (spielfeld[x][y].Belegen(BELEGUNG.KREUZ)){;
-                SpielerAmZug=2;
-            } 
+
+            spielfeld[x][y].Belegen(BELEGUNG.KREUZ);
+            SpielerAmZug=2;
         } else {
-            if(spielfeld[x][y].Belegen(BELEGUNG.KREIS)){
-                SpielerAmZug=1;
-            } 
+            spielfeld[x][y].Belegen(BELEGUNG.KREIS);
+            SpielerAmZug=1;
         }
 
     } 
 
-    void Reset(){
+    void Reset()
+    {
         for (int i=0;i<3;i=i+1){
             for (int j=0;j<3;j=j+1){
                 spielfeld[i][j]=new KÄSTCHEN();
@@ -36,16 +38,25 @@ public class TTTMODEL implements TTTCONSTANTS
         }
     }
 
-    int SpielerAmZugGeben(){
+    int SpielerAmZugGeben()
+    {
         return SpielerAmZug;
     }
 
-    KÄSTCHEN FeldGeben(int x, int y){
+    KÄSTCHEN FeldGeben(int x, int y)
+    {
         return spielfeld[x][y]; 
-    }
 
-    KÄSTCHEN[][]SpielfeldGeben(){
-        return spielfeld;
-    }
+        if (spielfeld[x][y].Belegen(BELEGUNG.KREUZ))
+        {
+            SpielerAmZug=2;
+        } 
+        else 
+        {
+            if(spielfeld[x][y].Belegen(BELEGUNG.KREIS)){
+                SpielerAmZug=1;
+            } 
+        }
 
+    } 
 }
