@@ -1,5 +1,5 @@
 
-
+import java.util.ArrayList;
 import java.awt.desktop.SystemSleepEvent;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -21,7 +21,8 @@ public class Server extends Thread {
 
     private boolean shutdown = false;//Some Random Boolean for shutdown of the Server
 
-    private Collection<ConnectionThread> threads = new LinkedList<>();//Every f****** Client needs new Thread so we give you a collection here 
+    private ArrayList<ConnectionThread> threads = new ArrayList<ConnectionThread>();//Every f****** Client needs new Thread so we give you a collection here 
+   //Every f****** Client needs new Thread so we give you a collection here 
 
     public Server(){//Constructor
         super();//needs to be cast, because of "extends Thread"
@@ -64,8 +65,8 @@ public class Server extends Thread {
         } catch (IOException e1) {//You need the Port to send it to your Clients! (btw. another catch...)
             e1.printStackTrace();//Stack blaaaa: You can do this better!
         }
-        boolean x = true;
-        while(x && !shutdown) {//as long as nobody wants to kill the server real badly
+        int x = 1;
+        while(x!=2 && !shutdown) {//as long as nobody wants to kill the server real badly
             try {// Wait for a new connection.
                 System.out.println("im here");//test sysout
                 SocketChannel chan = ssc.accept();//try to accept an incoming connection
@@ -73,13 +74,13 @@ public class Server extends Thread {
                 String remotename = chan.getRemoteAddress().toString();//Get the RemoteName because the TextSocketChannel from Erich Schubert wants it
                 TextSocketChannel conn = new TextSocketChannel(chan, Charset.forName("UTF-8"), remotename);//new Textsocketchannel holds basically all the 
                 synchronized(this) {//synchronize it to make sure we don't get in trouble with some random other Threads
-                    ConnectionThread t = new ConnectionThread(conn);//we have to open a new Thread for every connection
+                    ConnectionThread t = new ConnectionThread(conn,this);//we have to open a new Thread for every connection
                     t.start();//start the new Thread
                     threads.add(t);//add it to the Collection!
                     t.conn.send("Hello Client, are you there?");
                     System.out.print("connected");
                 }    
-                x = false;
+                x = x+1;
             }
             catch(IOException e) {//in case something went wrong
                 e.printStackTrace();//random catch thing
@@ -88,7 +89,19 @@ public class Server extends Thread {
             }
         }
     }
-
+    
+    void sendmessanges(String m){
+        for(int i=0; i<threads.size(); i++){
+            try{
+                threads.get(i).conn.send(m);
+            }
+        catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+        
+    
     //IGNORE ALL BELOW!! YOU DONT HAVE TO KNOW ANYTHING ABOUT IT
 
     /**
@@ -99,14 +112,15 @@ public class Server extends Thread {
     public class ConnectionThread extends Thread {
         /** Connection channel */
         public TextSocketChannel conn;
-
+        Server s;
         /**
          * Constructor.
          * 
          * @param conn Connection
          */
-        public ConnectionThread(TextSocketChannel conn) {
+        public ConnectionThread(TextSocketChannel conn,Server se) {
             this.conn = conn;
+            this.s=se;
         }
 
         @Override
@@ -117,12 +131,17 @@ public class Server extends Thread {
             try {
                 while(conn.isOpen()) {
                     String message = conn.read();
-                if(message == null){
+                    if(message == null){
                         break; // Disconnected.
                     }
-                
+        
                     System.out.println("Server: " +message);
-                    conn.send(message);
+                    
+                    s.sendmessanges(message);
+                    //for(int i=0; i<threads.size();i++){
+                    //    threads.conn.send(message);
+                    //}
+                    //conn.send(message);
                    
                     //fireReceived(conn, message);
                 }
@@ -133,8 +152,9 @@ public class Server extends Thread {
             }
             // fireDisconnected(remotename);
         }
-    }
     
+    }
+
     public static void main(String[] args) {
         new Server();
     }
