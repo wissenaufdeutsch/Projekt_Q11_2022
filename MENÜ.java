@@ -37,6 +37,7 @@ public class MENÜ
             TikTakToe.setLocation(40,40);
             TikTakToe.setBackground(Color.white);
 
+
             fenster.add(TikTakToe);
             
             

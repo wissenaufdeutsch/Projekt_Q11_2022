@@ -27,8 +27,18 @@ public TicTacToeView()
         
     button.setVisible(true);
     button. setSize(15,10); 
-    button. setLocation (290, 240);
+    button. setLocation (286, 250);
     button. setText ("");
+    button. setVisible (true);
+    fenster. add (button);
+    fenster.setVisible(true);
+    
+    button = new JButton();
+        
+    button.setVisible(true);
+    button. setSize(50,50); 
+    button. setLocation (650, 260);
+    button. setText ("nd");
     button. setVisible (true);
     fenster. add (button);
     fenster.setVisible(true);
