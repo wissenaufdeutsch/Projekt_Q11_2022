@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Font;
+
 public class TicTacToeView
 {
     private JFrame fenster;
@@ -17,7 +18,7 @@ public class TicTacToeView
 
 public TicTacToeView()
 {
-    fenster = new JFrame("TICTACTOE");
+    fenster = new JFrame("TICTACTOE - Ein Spiel für Gewinner");
     fenster.setSize(300,150);
     fenster.getContentPane().setLayout(null);
     
@@ -27,7 +28,7 @@ public TicTacToeView()
         
     button.setVisible(true);
     button. setSize(15,10); 
-    button. setLocation (286, 250);
+    button. setLocation (386, 250);
     button. setText ("");
     button. setVisible (true);
     fenster. add (button);
@@ -37,7 +38,7 @@ public TicTacToeView()
         
     button.setVisible(true);
     button. setSize(50,50); 
-    button. setLocation (650, 260);
+    button. setLocation (750, 260);
     button. setText ("nd");
     button. setVisible (true);
     fenster. add (button);
@@ -47,7 +48,7 @@ public TicTacToeView()
         
     label.setVisible(true);
     label.setSize(1000,1000);
-    label.setLocation(0,-250);
+    label.setLocation(100,-250);
     label.setText("TICTACTOE");
     label.setVisible(true);
     fenster.add(label);
@@ -59,7 +60,7 @@ public TicTacToeView()
         
     panel.setVisible(true);
     panel.setSize(100,100);
-    panel.setLocation(500,160);
+    panel.setLocation(600,160);
     panel.setVisible(true);
     fenster.add(panel);
     fenster.setVisible(true);
