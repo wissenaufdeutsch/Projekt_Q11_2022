@@ -8,8 +8,8 @@
 
 public interface TTTVIEW
 {
-    public void SiegerDarstellen(TTTCONSTANTS.BELEGUNG s); //bekommt "Kreis" oder "Kreuz"
+    public void SiegerDarstellen(TTTCONSTANTS.BELEGUNG s); //stellt den Sieger dar, zu dem die passende Belegung passt (Kreuz: Spieler 1, Kreis: Spieler 2)
 
-    public void UnentschiedenDarstellen();
+    public void UnentschiedenDarstellen(); //Spiel ist vorbei, Ergebnis: Unentschieden
 
 }
