@@ -4,11 +4,9 @@ import java.util.LinkedList;
 import javafx.scene.Node;
 
 
-<<<<<<< HEAD
+
 public class RECHTECK extends JPanel 
-=======
-public class RECHTECK extends JPanel
->>>>>>> 8dd55383fe49744be52f4c32bf0d25ccc17f2a8f
+
 { private int w;
     private int h;
     private int x;
@@ -40,12 +38,7 @@ public class RECHTECK extends JPanel
             RenderingHints.KEY_TEXT_ANTIALIASING,
             RenderingHints.VALUE_TEXT_ANTIALIAS_ON); 
 
-        for (Node node : nodes) {
-            for (Node edge : node.edges.values()){
-                drawEdge(g2d, node, edge);
-            }
-            
-        }
+       
        
         }
 
