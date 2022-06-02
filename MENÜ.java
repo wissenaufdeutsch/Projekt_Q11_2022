@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import javax.imageio.ImageIO;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
 
 
@@ -17,14 +19,21 @@ public class MENÜ
     private JButton HighscoreJ;
     private JLabel Benutzer;
     
+    
+    
     private int asdf;
     public MENÜ()
         
     {
             fenster = new JFrame("Spielmenü");
-            fenster.setSize(800, 700);
+            fenster.setSize(3000, 1200);
             fenster.getContentPane().setLayout(null);
             fenster.getContentPane().setBackground(Color.black);
+            GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsDevice device = graphics.getDefaultScreenDevice();
+            fenster.setUndecorated(true);
+            fenster.setResizable(false);
+            device.setFullScreenWindow(fenster);
             
             TikTakToe = new JButton();
             try {
