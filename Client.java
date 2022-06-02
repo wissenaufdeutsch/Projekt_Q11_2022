@@ -88,7 +88,7 @@ public class Client extends Thread{
     
                 
                 }
-                System.out.println(conn.read());
+                //System.out.println(conn.read());
                 //CLIENT HAS TO CHECK IF NEW MESSAGE
                 if(!message.equals(oldmessage)){
                     //System.out.println("Client: "+message);
