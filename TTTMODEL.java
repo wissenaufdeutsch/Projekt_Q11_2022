@@ -46,6 +46,8 @@ public class TTTMODEL implements TTTCONSTANTS
     KÄSTCHEN FeldGeben(int x, int y)
     {
         return spielfeld[x][y]; 
+        
+    }   
 
     KÄSTCHEN[][]SpielfeldGeben(){
 
@@ -55,4 +57,4 @@ public class TTTMODEL implements TTTCONSTANTS
 
 
     } 
-}
+
