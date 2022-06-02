@@ -42,7 +42,7 @@ public class MENÜ
             } );
             TikTakToe.setVisible(true);
             TikTakToe.setSize(140,200);
-            TikTakToe.setLocation(40,40);
+            TikTakToe.setLocation(40,80);
             TikTakToe.setBackground(Color.white);
             TikTakToe.setText("TikTakToe");
             TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
@@ -64,7 +64,7 @@ public class MENÜ
             } );
             JumpNRun.setVisible(true);
             JumpNRun.setSize(140,200);
-            JumpNRun.setLocation(220,40);
+            JumpNRun.setLocation(220,80);
             JumpNRun.setBackground(Color.white);
             JumpNRun.setText("JumpNRun");
             JumpNRun.setVerticalTextPosition(JButton.BOTTOM);
@@ -79,7 +79,7 @@ public class MENÜ
             } );
             HighscoreT.setVisible(true);
             HighscoreT.setSize(140,40);
-            HighscoreT.setLocation(40,260);
+            HighscoreT.setLocation(40,300);
             HighscoreT.setBackground(Color.white);
             HighscoreT.setText("Highscoreliste");
             HighscoreT.setVerticalTextPosition(JButton.BOTTOM);
@@ -94,7 +94,7 @@ public class MENÜ
             } );
             HighscoreJ.setVisible(true);
             HighscoreJ.setSize(140,40);
-            HighscoreJ.setLocation(220,260);
+            HighscoreJ.setLocation(220,300);
             HighscoreJ.setBackground(Color.white);
             HighscoreJ.setText("Highscoreliste");
             HighscoreJ.setVerticalTextPosition(JButton.BOTTOM);
@@ -104,7 +104,8 @@ public class MENÜ
             Benutzer.setVisible(true);
             Benutzer.setSize(700,700);
             Benutzer.setText("Name, Klasse");
-            Benutzer.setLocation(0,0);
+            Benutzer.setLocation(650,-310);
+            Benutzer.setForeground(Color.white);
             
             fenster.add(Benutzer);
             
