@@ -3,6 +3,7 @@ public class TICTACTOE implements TTTCONSTANTS
 {
     TTTVIEW t;
     TTTMODEL m;
+    private KÄSTCHEN[][] Gewinnbedingung;
 
     TICTACTOE(){
         t=new TTTVIEW(){
@@ -18,6 +19,28 @@ public class TICTACTOE implements TTTCONSTANTS
 
         };
         m=new TTTMODEL();
+        Gewinnbedingung= new KÄSTCHEN[8][3];
+
+        for(int i=0;i<3;i=i+1){
+            for(int a=0;a<3;a=a+1){
+                Gewinnbedingung[i][a]=m.FeldGeben(i,a);
+            }
+        }
+        
+        for(int i=0;i<3;i=i+1){
+            for(int b=0;b<3;b=b+1){
+                Gewinnbedingung[i+3][b]=m.FeldGeben(b,i);
+            }
+        }
+
+        Gewinnbedingung[6][0]=m.FeldGeben(0,0);
+        Gewinnbedingung[6][1]=m.FeldGeben(1,1);
+        Gewinnbedingung[6][2]=m.FeldGeben(2,2);
+        Gewinnbedingung[7][0]=m.FeldGeben(0,2);
+        Gewinnbedingung[7][1]=m.FeldGeben(1,1);
+        Gewinnbedingung[7][2]=m.FeldGeben(2,0);
+
+        
     }
 
     void Zug(int x, int y){
@@ -29,10 +52,26 @@ public class TICTACTOE implements TTTCONSTANTS
         }
     }
 
+    void ZugPC(){
+        KÄSTCHEN k=WirdGewinnen();
+        if(k.belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
+            k.Belegen(BELEGUNG.KREIS); 
+        } else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            Zug(1,1);
+        } else {
+            //Ecke belegen; sonst freies Feld
+        }
+
+    }
+
     void Reset(){
         m.Reset();
     }
-    
+
+    KÄSTCHEN WirdGewinnen(){
+        return null;
+    }
+
     boolean IstUnentschieden(){
         KÄSTCHEN[][]k=m.SpielfeldGeben();        
         for (int i=0;i<3;i=i+1){
@@ -46,7 +85,7 @@ public class TICTACTOE implements TTTCONSTANTS
         return true; 
     }
 
-        BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
+    BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
     {
 
         for(int a=0;a<3;a=a+1){
