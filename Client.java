@@ -93,9 +93,11 @@ public class Client extends Thread{
         // hier modifizieren
         try {//may fail pls catch me if you can
             String oldmessage= "";
-            while(conn.isOpen()) {//i can do whatever i want now over the freaking channel if it is open... nice!
+            
+            while(conn.isOpen()) {
+                //i can do whatever i want now over the freaking channel if it is open... nice!
                 String message = conn.read();//read from channel
-                
+                System.out.println("done");
                 if(message == null) {
                     break; // Disconnected.
     
