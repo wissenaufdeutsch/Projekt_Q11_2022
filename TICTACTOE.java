@@ -46,22 +46,7 @@ public class TICTACTOE implements TTTCONSTANTS
         return true; 
     }
 
-    BELEGUNG HatGewonnen_old() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
-    {
-
-        if (IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,0), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(0,1), m.FeldGeben(0,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,0), m.FeldGeben(1,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
-            return m.FeldGeben(0,0).belegtGeben();
-        }else if(IstGleich(m.FeldGeben(1,0), m.FeldGeben(1,1), m.FeldGeben(1,2)).equals(BELEGUNG.UNBELEGT)==false ||IstGleich(m.FeldGeben(0,1), m.FeldGeben(1,1), m.FeldGeben(2,1)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,2), m.FeldGeben(1,1), m.FeldGeben(2,0)).equals(BELEGUNG.UNBELEGT)==false){
-            return m.FeldGeben(1,1).belegtGeben();
-        } else if(IstGleich(m.FeldGeben(2,0), m.FeldGeben(2,1), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false || IstGleich(m.FeldGeben(0,2), m.FeldGeben(1,2), m.FeldGeben(2,2)).equals(BELEGUNG.UNBELEGT)==false){
-            return m.FeldGeben(2,2).belegtGeben();
-        } else {
-            return BELEGUNG.UNBELEGT;
-        }  
-
-    }
-
-    BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
+        BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
     {
 
         for(int a=0;a<3;a=a+1){
