@@ -91,12 +91,12 @@ public class Client extends Thread{
             e1.printStackTrace();//random print
         }
         // hier modifizieren
-        try {//may fail pls catch me if you can
+        //try {//may fail pls catch me if you can
             String oldmessage= "";
             System.out.println("done");
             while(conn.isOpen()) {
                 //i can do whatever i want now over the freaking channel if it is open... nice!
-                String message = conn.read();//read from channel
+                String message = "hi";// conn.read();//read from channel
                 
                 if(message == null) {
                     break; // Disconnected.
@@ -106,11 +106,11 @@ public class Client extends Thread{
                 //CLIENT HAS TO CHECK IF NEW MESSAGE
                 //System.out.println(test.give_data());//send something blabla ...
             }
-        }
+        //}
 
-        catch(IOException e) {
-            e.printStackTrace();
-        }
+       // catch(IOException e) {
+         //   e.printStackTrace();
+        //}
         System.out.println("I wanted the divorce!");//after 7 years pls....
     }
 
