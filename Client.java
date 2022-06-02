@@ -8,11 +8,11 @@ public class Client extends Thread{
     private UDPManager udpThing;//Everyone needs a UDPthing! so we can shout to the World!
     private int port = 30303;//UDP Port nothing special yet
     private TextSocketChannel conn;//this thing can send and recieve over a TCP Connection
-    NOTIMPORTANTFORYOU test;
+    
     //private static InetSocketAddress serverIP; We dont need this at the moment maybe when my code gets better!
     public Client(){//new Client new luck!
         super();//have to invoke this because of extends Thread!
-        test = new NOTIMPORTANTFORYOU();
+        
         this.udpThing = new UDPManager() {//have to make the UDP Thing concrete! looks complicated but its usefull here
             //Now we have all methods that belong to a Client in one class. And we don't need this concrete implementation anywhere else.
             @Override
@@ -31,6 +31,10 @@ public class Client extends Thread{
                          * Same thing here!
                          */
                         tcpConnection(udpThing.serverIP);//Hurayyy we can connect now
+                    
+                    
+                    
+                    
                     }
                 }
 
@@ -56,6 +60,16 @@ public class Client extends Thread{
         //tcpConnection(udpThing.serverIP);//Hurayyy we can connect now
     }// this is just ... a Bracket... a Bracket!
 
+    public void send(String a)
+    {   
+        try{
+            conn.send(a);
+        }
+        catch (IOException e1) {//random catch
+            e1.printStackTrace();//random print
+        }
+    }
+    
     private void tcpConnection(InetSocketAddress remote){//Has everything you need to initiate a TCP connection
         SocketChannel channel;//ok so we need a Channel!
         System.out.println("Trying to init tcpConnection");//I was here!
@@ -79,24 +93,17 @@ public class Client extends Thread{
         // hier modifizieren
         try {//may fail pls catch me if you can
             String oldmessage= "";
-            while(conn.isOpen()) {//i can do whatever i want now over the freaking channel if it is open... nice!
+            System.out.println("done");
+            while(conn.isOpen()) {
+                //i can do whatever i want now over the freaking channel if it is open... nice!
+                String message = conn.read();//read from channel
                 
-                //String message = conn.read();//read from channel
-                String message = test.give_data();
                 if(message == null) {
                     break; // Disconnected.
     
-                
                 }
-                //System.out.println(conn.read());
+                System.out.println(message);
                 //CLIENT HAS TO CHECK IF NEW MESSAGE
-                if(!message.equals(oldmessage)){
-                    //System.out.println("Client: "+message);
-                    conn.send(message);
-                    oldmessage = message;
-                }
-                
-                
                 //System.out.println(test.give_data());//send something blabla ...
             }
         }

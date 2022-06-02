@@ -66,7 +66,7 @@ public class Server extends Thread {
             e1.printStackTrace();//Stack blaaaa: You can do this better!
         }
         int x = 0;
-        while(x!=2 && !shutdown) {//as long as nobody wants to kill the server real badly
+        while(x!=3 && !shutdown) {//as long as nobody wants to kill the server real badly
             try {// Wait for a new connection.
                 System.out.println("im here");//test sysout
                 SocketChannel chan = ssc.accept();//try to accept an incoming connection

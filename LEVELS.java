@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.awt.Rectangle;
 
-public class LEVEL
+public class LEVELS
 {
     private OBSTACLE [][] obstacles;
     private int ende;
     
-    public LEVEL()
+    public LEVELS()
     {
         obstacles = new OBSTACLE [1000][1000];
         ende = 0;

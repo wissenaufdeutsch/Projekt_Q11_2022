@@ -4,11 +4,11 @@
 public class ENVIRONMENTHANDLER
 {
     ENVIRONMENT environment;
-    
-    public ENVIRONMENTHANDLER(String mode) 
+    LEVELS levels;
+    public ENVIRONMENTHANDLER() 
     {
-        int level = chooseLevel();
         environment = new ENVIRONMENT();
+        levels = new LEVELS();
     }
 
     public int chooseLevel()
@@ -18,9 +18,10 @@ public class ENVIRONMENTHANDLER
     
     public void AddLevel()
     {
-        LEVEL level = new LEVEL();
+
+        int level = chooseLevel();
         
-        OBSTACLE[] obstaclesLevel = level.GiveLevel(0);
+        OBSTACLE[] obstaclesLevel = levels.GiveLevel(0);
         for (OBSTACLE obstacle: obstaclesLevel)
         {
           environment.obstacles.add(obstacle);

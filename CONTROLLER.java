@@ -4,17 +4,20 @@
 public class CONTROLLER
 {
     boolean done;
+    ENVIRONMENTHANDLER envHand;
     
-    String mode;
     
-    public CONTROLLER(String mode) 
+    public CONTROLLER() 
     {
-        this.mode = mode;
         this.done = false;
+        envHand = new ENVIRONMENTHANDLER();
     }
     
-    public void run() {
-        while(!done) {
+    public void run() 
+    {
+        envHand.AddLevel();
+        while(!done)
+        {
             //update everything
         }
     }
