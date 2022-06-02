@@ -24,11 +24,6 @@ public class LEVEL
         return obstacles[level];
     }
     
-    public OBSTACLE[] GiveLevel(int level)
-    {
-        return obstacles[level];
-    }
-    
     }
     
     

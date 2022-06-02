@@ -4,13 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import javax.imageio.ImageIO;
+
+
+
 public class MENÜ
   
 {
     private JFrame fenster;
     private JButton TikTakToe;
     private JButton JumpNRun;
+    private JButton HighscoreT;
+    private JButton HighscoreJ;
+    private JLabel Benutzer;
     
+    private int asdf;
     public MENÜ()
         
     {
@@ -18,6 +25,7 @@ public class MENÜ
             fenster.setSize(800, 700);
             fenster.getContentPane().setLayout(null);
             fenster.getContentPane().setBackground(Color.black);
+            
             TikTakToe = new JButton();
             try {
                 Image img = ImageIO.read(getClass().getResource("TikTakToeBild.png"));
@@ -36,16 +44,10 @@ public class MENÜ
             TikTakToe.setSize(140,200);
             TikTakToe.setLocation(40,40);
             TikTakToe.setBackground(Color.white);
-
-<<<<<<< HEAD
             TikTakToe.setText("TikTakToe");
             TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
-=======
->>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
-
             fenster.add(TikTakToe);
-            
-            
+           
             JumpNRun = new JButton();
             try {
                 Image img = ImageIO.read(getClass().getResource("JumpNRunBild.jpg"));
@@ -64,67 +66,51 @@ public class MENÜ
             JumpNRun.setSize(140,200);
             JumpNRun.setLocation(220,40);
             JumpNRun.setBackground(Color.white);
-
-<<<<<<< HEAD
-
-            TikTakToe.setText("TikTakToe");
-            TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
-            fenster.add(TikTakToe);
-            
-            
-            JumpNRun = new JButton();
-            try {
-                Image img = ImageIO.read(getClass().getResource("JumpNRunBild.jpg"));
-                img = img.getScaledInstance(100,100,Image.SCALE_DEFAULT);
-                
-                JumpNRun.setIcon(new ImageIcon(img));
-              } catch (Exception ex) {
-                System.out.println(ex);
-              }
-            JumpNRun.addActionListener(new ActionListener()
-            { 
-                public void actionPerformed(ActionEvent e) { 
-                    JumpNRun.setText("");
-                } 
-            } );
-            JumpNRun.setVisible(true);
-            JumpNRun.setSize(140,200);
-            JumpNRun.setLocation(220,40);
-            JumpNRun.setBackground(Color.white);
-
-=======
-            TikTakToe.setText("TikTakToe");
-            TikTakToe.setVerticalTextPosition(JButton.BOTTOM);
-            fenster.add(TikTakToe);
-            
-            
-            JumpNRun = new JButton();
-            try {
-                Image img = ImageIO.read(getClass().getResource("JumpNRunBild.jpg"));
-                img = img.getScaledInstance(100,100,Image.SCALE_DEFAULT);
-                JumpNRun.setIcon(new ImageIcon(img));
-              } catch (Exception ex) {
-                System.out.println(ex);
-              }
-            JumpNRun.addActionListener(new ActionListener()
-            { 
-                public void actionPerformed(ActionEvent e) { 
-                    JumpNRun.setText("");
-                } 
-            } );
-            JumpNRun.setVisible(true);
-            JumpNRun.setSize(140,200);
-            JumpNRun.setLocation(220,40);
-            JumpNRun.setBackground(Color.white);
->>>>>>> 2b35a420505d0d28916a9e671be0a86311039026
             JumpNRun.setText("JumpNRun");
             JumpNRun.setVerticalTextPosition(JButton.BOTTOM);
-
             fenster.add(JumpNRun);
+                      
+            HighscoreT = new JButton();
+            HighscoreT.addActionListener(new ActionListener()
+            { 
+                public void actionPerformed(ActionEvent e) { 
+                    HighscoreT.setText("");
+                } 
+            } );
+            HighscoreT.setVisible(true);
+            HighscoreT.setSize(140,40);
+            HighscoreT.setLocation(40,260);
+            HighscoreT.setBackground(Color.white);
+            HighscoreT.setText("Highscoreliste");
+            HighscoreT.setVerticalTextPosition(JButton.BOTTOM);
+            fenster.add(HighscoreT);
+            
+            HighscoreJ = new JButton();
+            HighscoreJ.addActionListener(new ActionListener()
+            { 
+                public void actionPerformed(ActionEvent e) { 
+                    HighscoreJ.setText("");
+                } 
+            } );
+            HighscoreJ.setVisible(true);
+            HighscoreJ.setSize(140,40);
+            HighscoreJ.setLocation(220,260);
+            HighscoreJ.setBackground(Color.white);
+            HighscoreJ.setText("Highscoreliste");
+            HighscoreJ.setVerticalTextPosition(JButton.BOTTOM);
+            fenster.add(HighscoreJ);
+            
+            Benutzer = new JLabel();
+            Benutzer.setVisible(true);
+            Benutzer.setSize(700,700);
+            Benutzer.setText("Name, Klasse");
+            Benutzer.setLocation(0,0);
+            
+            fenster.add(Benutzer);
             
             fenster.setVisible(true);
     }
-
+    
+    
+    
 }
-
-
