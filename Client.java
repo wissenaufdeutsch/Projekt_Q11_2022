@@ -102,12 +102,12 @@ public class Client extends Thread{
                     break; // Disconnected.
     
                 }
-                System.out.println(message);
+                //System.out.println(message);
                 //CLIENT HAS TO CHECK IF NEW MESSAGE
                 //System.out.println(test.give_data());//send something blabla ...
             }
         //}
-
+//7ffwdf
        // catch(IOException e) {
          //   e.printStackTrace();
         //}

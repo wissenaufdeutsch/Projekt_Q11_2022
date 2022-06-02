@@ -155,7 +155,10 @@ public class Server extends Thread {
         }
     
     }
-
+    public static void wdawd(String[] args) {
+        //
+    }
+    
     public static void main(String[] args) {
         new Server();
     }
