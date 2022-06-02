@@ -56,7 +56,7 @@ public class TTTViewSkin
         
     button.setVisible(true);
     button. setSize(200,50); 
-    button. setLocation (400, 250);
+    button. setLocation (500, 215);
     button. setText ("Standard");
     button. setVisible (true);
     fenster. add (button);
@@ -66,8 +66,28 @@ public class TTTViewSkin
         
     button.setVisible(true);
     button. setSize(200,50); 
-    button. setLocation (400, 300);
+    button. setLocation (500, 275);
     button. setText ("Dreieck__Rechteck");
+    button. setVisible (true);
+    fenster. add (button);
+    fenster.setVisible(true);
+    
+     button = new JButton();
+        
+    button.setVisible(true);
+    button. setSize(200,50); 
+    button. setLocation (500, 335);
+    button. setText ("XBox__PS4");
+    button. setVisible (true);
+    fenster. add (button);
+    fenster.setVisible(true);
+    
+     button = new JButton();
+        
+    button.setVisible(true);
+    button. setSize(200,50); 
+    button. setLocation (500, 395);
+    button. setText ("Team Rocket__Pikachu");
     button. setVisible (true);
     fenster. add (button);
     fenster.setVisible(true);
