@@ -26,7 +26,7 @@ public class TICTACTOE implements TTTCONSTANTS
                 Gewinnbedingung[i][a]=m.FeldGeben(i,a);
             }
         }
-        
+
         for(int i=0;i<3;i=i+1){
             for(int b=0;b<3;b=b+1){
                 Gewinnbedingung[i+3][b]=m.FeldGeben(b,i);
@@ -40,7 +40,17 @@ public class TICTACTOE implements TTTCONSTANTS
         Gewinnbedingung[7][1]=m.FeldGeben(1,1);
         Gewinnbedingung[7][2]=m.FeldGeben(2,0);
 
-        
+    }
+
+    void ZugGegenPC(int wer, int x, int y){ //wer willst du sein
+               
+        if(wer==1){
+            Zug(x,y);
+            ZugPC(BELEGUNG.KREIS);
+        } else {
+            ZugPC(BELEGUNG.KREUZ);
+            Zug(x,y);
+        }
     }
 
     void Zug(int x, int y){
@@ -52,23 +62,72 @@ public class TICTACTOE implements TTTCONSTANTS
         }
     }
 
-    void ZugPC(){
-        KÄSTCHEN k=WirdGewinnen();
-        if(k.belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
-            k.Belegen(BELEGUNG.KREIS); 
+    void ZugPC(BELEGUNG s){ //wer is PC
+        KÄSTCHEN k=WirdGewinnen(s);
+        KÄSTCHEN k1=InEcke();
+        KÄSTCHEN k2=AnRand();
+        if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            k.Belegen(s); 
         } else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            Zug(1,1);
-        } else {
-            //Ecke belegen; sonst freies Feld
+            m.FeldGeben(1,1).Belegen(s);
+        } else if(k1!= null){
+            k1.Belegen(s);
+        } else if(k2!=null){
+            k2.Belegen(s);
+        } 
+        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
+            t.SiegerDarstellen(HatGewonnen());
+        } else if(IstUnentschieden()==true){
+            t.UnentschiedenDarstellen(); 
         }
-
     }
 
     void Reset(){
         m.Reset();
     }
 
-    KÄSTCHEN WirdGewinnen(){
+    KÄSTCHEN AnRand(){
+        for(int i=0;i<3;i=i+2){
+            if(m.FeldGeben(i,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                return m.FeldGeben(i,1);
+            }
+            if(m.FeldGeben(1,i).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                return m.FeldGeben(1,i);
+            }
+        }
+        return null;
+    }
+
+    KÄSTCHEN InEcke(){
+        for(int i=0;i<3;i=i+2){
+            for(int j=0;j<3;j=j+2){
+                if(m.FeldGeben(i,j).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                    return m.FeldGeben(i,j);
+                }
+            }
+        }
+        return null;
+    }
+
+    KÄSTCHEN WirdGewinnen(BELEGUNG s){ //checkt, ob BELEGUNG s im nächsten Zug gewinnen kann
+        int a=0;
+        int wo=0;
+        for (int i=0;i<8;i=i+1){
+            for(int j=0;j<3;j=j+1){
+                if(Gewinnbedingung[i][j].belegtGeben().equals(s)){
+                    a=a+1;
+                    wo=i;
+                }
+                if(a==2){
+                    for(int b=0;b<3;b=b+1){
+                        if(Gewinnbedingung[wo][b].belegtGeben().equals(s)==false){
+                            return Gewinnbedingung[wo][b];
+                        }
+                    }
+                }
+            }
+            a=0;
+        }
         return null;
     }
 

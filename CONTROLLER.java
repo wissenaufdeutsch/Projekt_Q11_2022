@@ -1,6 +1,3 @@
-
-
-
 public class CONTROLLER
 {
     boolean done;
@@ -16,11 +13,6 @@ public class CONTROLLER
     public void run() 
     {
         envHand.AddLevel();
-        while(!done)
-        {
-            //update everything
-        }
+        //update everything
     }
-    
-    
 }
