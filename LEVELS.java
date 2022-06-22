@@ -3,7 +3,7 @@ import java.awt.Rectangle;
 
 
 public class LEVELS
-{
+{ 
     private OBSTACLE [][][] obstaclesColumnsLevels;
     
     public LEVELS()
