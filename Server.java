@@ -79,9 +79,9 @@ public class Server extends Thread {
                     threads.add(t);//add it to the Collection!
                     t.conn.send("Hello Client, are you there?");
                     System.out.print("connected");
-                    t.conn.send("");//leererSpielstand
+                    
                     if(x==0){
-                    t.conn.send("You're first");
+                        t.conn.send("You're first");
                     }
                 }    
                 x = x+1;
@@ -93,7 +93,7 @@ public class Server extends Thread {
             }
         }
         
-        
+        sendmessanges(""); //leererSpielstand       
         System.out.println("Server full");
     }
     
