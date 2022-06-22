@@ -4,7 +4,7 @@ import java.awt.Font;
 
 public class TTTViewStartbildschirm
 {
- private JFrame fenster;
+    private JFrame fenster;
 
     private JPanel panel;
 
@@ -12,8 +12,8 @@ public class TTTViewStartbildschirm
 
     private JLabel label;
 
- public TTTViewStartbildschirm()
- {
+    public TTTViewStartbildschirm()
+{
     fenster = new JFrame("TICTACTOE - Ein Spiel für Gewinner");
     fenster.setSize(300,150);
     fenster.getContentPane().setLayout(null);
@@ -34,11 +34,11 @@ public class TTTViewStartbildschirm
     button = new JButton();
     
     button.setVisible(true);
-    button. setSize(150,50); 
-    button. setLocation (150, 250);
-    button. setText ("Computer");
-    button. setVisible (true);
-    fenster. add (button);
+    button.setSize(150,50); 
+    button.setLocation (150, 250);
+    button.setText ("Computer");
+    button.setVisible (true);
+    fenster.add (button);
     fenster.setVisible(true);
     
     button = new JButton();
