@@ -42,6 +42,17 @@ public class TICTACTOE implements TTTCONSTANTS
 
     }
 
+    void ZugGegenPC(int wer, int x, int y){ //wer willst du sein
+               
+        if(wer==1){
+            Zug(x,y);
+            ZugPC(BELEGUNG.KREIS);
+        } else {
+            ZugPC(BELEGUNG.KREUZ);
+            Zug(x,y);
+        }
+    }
+
     void Zug(int x, int y){
         m.Zug(x,y);
         if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
@@ -64,7 +75,11 @@ public class TICTACTOE implements TTTCONSTANTS
         } else if(k2!=null){
             k2.Belegen(s);
         } 
-
+        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
+            t.SiegerDarstellen(HatGewonnen());
+        } else if(IstUnentschieden()==true){
+            t.UnentschiedenDarstellen(); 
+        }
     }
 
     void Reset(){
