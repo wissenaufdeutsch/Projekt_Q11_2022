@@ -27,6 +27,10 @@ public class TTTMODEL implements TTTCONSTANTS
         }
 
     } 
+    
+    void ZugAlleine(int x, int y, BELEGUNG s){
+        spielfeld[x][y].Belegen(s);
+    }
 
 
     void Reset(){

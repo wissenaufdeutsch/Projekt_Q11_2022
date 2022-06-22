@@ -66,7 +66,7 @@ public class Server extends Thread {
             e1.printStackTrace();//Stack blaaaa: You can do this better!
         }
         int x = 0;
-        while(x!=3 && !shutdown) {//as long as nobody wants to kill the server real badly
+        while(x!=2 && !shutdown) {//as long as nobody wants to kill the server real badly
             try {// Wait for a new connection.
                 System.out.println("im here");//test sysout
                 SocketChannel chan = ssc.accept();//try to accept an incoming connection
@@ -79,6 +79,10 @@ public class Server extends Thread {
                     threads.add(t);//add it to the Collection!
                     t.conn.send("Hello Client, are you there?");
                     System.out.print("connected");
+                    
+                    if(x==0){
+                        t.conn.send("You're first");
+                    }
                 }    
                 x = x+1;
             }
@@ -88,6 +92,9 @@ public class Server extends Thread {
                 break;
             }
         }
+        
+        sendmessanges(""); //leererSpielstand       
+        System.out.println("Server full");
     }
     
     void sendmessanges(String m){
@@ -121,6 +128,7 @@ public class Server extends Thread {
         public ConnectionThread(TextSocketChannel conn,Server se) {
             this.conn = conn;
             this.s=se;
+            
         }
 
         @Override

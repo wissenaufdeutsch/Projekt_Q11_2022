@@ -15,7 +15,6 @@ public class ENVIRONMENTHANDLER
     
     public void AddLevel()
     {
-
         int level = chooseLevel();
         
         OBSTACLE[][] obstacleColumnsLevel = levels.GiveLevel(0);

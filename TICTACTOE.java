@@ -4,6 +4,8 @@ public class TICTACTOE implements TTTCONSTANTS
     TTTVIEW t;
     TTTMODEL m;
     private KÄSTCHEN[][] Gewinnbedingung;
+    MODUS Spielmodus;
+    int Spieler_PC;
 
     TICTACTOE(){
         t=new TTTVIEW(){
@@ -20,6 +22,93 @@ public class TICTACTOE implements TTTCONSTANTS
         };
         m=new TTTMODEL();
         Gewinnbedingung= new KÄSTCHEN[8][3];
+        GewinnbedingungReset();
+        Spielmodus=MODUS.PLAYER;
+        Spieler_PC=2;
+    }
+
+    public void Zug(int x, int y){
+        if (Spielmodus==MODUS.PLAYER){
+            ZugPlayer(x,y);
+        } else {
+            ZugGegenPC(Spieler_PC,x,y);
+        }
+
+    }
+
+    public void SpielerWechseln(){//wechselt den Spieler des PCs (1 zu 2; 2 zu 1)
+        if (Spieler_PC==1){
+            Spieler_PC=2;
+        } else {
+            Spieler_PC=1;
+        }
+
+    }
+
+    public void ModusWechseln(){
+        if (Spielmodus==MODUS.PLAYER){
+            Spielmodus=MODUS.PC;
+        } else {
+            Spielmodus=MODUS.PLAYER;
+        }
+
+    }
+
+    public void Reset(){
+        m.Reset();
+        GewinnbedingungReset();
+    }
+
+    private void ZugGegenPC(int wer, int x, int y){ 
+
+        if(wer==1){
+            ZugPC(BELEGUNG.KREUZ);
+            m.ZugAlleine(x,y, BELEGUNG.KREIS);
+        } else {
+            m.ZugAlleine(x,y,BELEGUNG.KREUZ);
+            ZugPC(BELEGUNG.KREIS);
+        }
+    }
+
+    private void ZugPlayer(int x, int y){
+        m.Zug(x,y);
+        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
+            t.SiegerDarstellen(HatGewonnen());
+        } else if(IstUnentschieden()==true){
+            t.UnentschiedenDarstellen(); 
+        }
+    }
+
+    private void ZugPC(BELEGUNG s){ //wer is PC
+        KÄSTCHEN k=WirdGewinnen(s);
+        BELEGUNG s1;
+        if(s==BELEGUNG.KREIS){
+            s1=BELEGUNG.KREUZ;
+        }else {
+            s1=BELEGUNG.KREIS;
+        }
+        KÄSTCHEN k0=WirdGewinnen(s1);
+        KÄSTCHEN k1=InEcke();
+        KÄSTCHEN k2=AnRand();
+        if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            k.Belegen(s); 
+        } else if(k0!=null && k0.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            k0.Belegen(s1);
+        }else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            m.FeldGeben(1,1).Belegen(s);
+        } else if(k1!= null){
+            k1.Belegen(s);
+        } else if(k2!=null){
+            k2.Belegen(s);
+        } 
+        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
+            t.SiegerDarstellen(HatGewonnen());
+        } else if(IstUnentschieden()==true){
+            t.UnentschiedenDarstellen(); 
+        }
+    }
+
+    private void GewinnbedingungReset(){
 
         for(int i=0;i<3;i=i+1){
             for(int a=0;a<3;a=a+1){
@@ -39,54 +128,9 @@ public class TICTACTOE implements TTTCONSTANTS
         Gewinnbedingung[7][0]=m.FeldGeben(0,2);
         Gewinnbedingung[7][1]=m.FeldGeben(1,1);
         Gewinnbedingung[7][2]=m.FeldGeben(2,0);
-
     }
 
-    void ZugGegenPC(int wer, int x, int y){ //wer willst du sein
-               
-        if(wer==1){
-            Zug(x,y);
-            ZugPC(BELEGUNG.KREIS);
-        } else {
-            ZugPC(BELEGUNG.KREUZ);
-            Zug(x,y);
-        }
-    }
-
-    void Zug(int x, int y){
-        m.Zug(x,y);
-        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
-            t.SiegerDarstellen(HatGewonnen());
-        } else if(IstUnentschieden()==true){
-            t.UnentschiedenDarstellen(); 
-        }
-    }
-
-    void ZugPC(BELEGUNG s){ //wer is PC
-        KÄSTCHEN k=WirdGewinnen(s);
-        KÄSTCHEN k1=InEcke();
-        KÄSTCHEN k2=AnRand();
-        if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            k.Belegen(s); 
-        } else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            m.FeldGeben(1,1).Belegen(s);
-        } else if(k1!= null){
-            k1.Belegen(s);
-        } else if(k2!=null){
-            k2.Belegen(s);
-        } 
-        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
-            t.SiegerDarstellen(HatGewonnen());
-        } else if(IstUnentschieden()==true){
-            t.UnentschiedenDarstellen(); 
-        }
-    }
-
-    void Reset(){
-        m.Reset();
-    }
-
-    KÄSTCHEN AnRand(){
+    private KÄSTCHEN AnRand(){
         for(int i=0;i<3;i=i+2){
             if(m.FeldGeben(i,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
                 return m.FeldGeben(i,1);
@@ -98,7 +142,7 @@ public class TICTACTOE implements TTTCONSTANTS
         return null;
     }
 
-    KÄSTCHEN InEcke(){
+    private KÄSTCHEN InEcke(){
         for(int i=0;i<3;i=i+2){
             for(int j=0;j<3;j=j+2){
                 if(m.FeldGeben(i,j).belegtGeben().equals(BELEGUNG.UNBELEGT)){
@@ -109,7 +153,7 @@ public class TICTACTOE implements TTTCONSTANTS
         return null;
     }
 
-    KÄSTCHEN WirdGewinnen(BELEGUNG s){ //checkt, ob BELEGUNG s im nächsten Zug gewinnen kann
+    private KÄSTCHEN WirdGewinnen(BELEGUNG s){ //checkt, ob BELEGUNG s im nächsten Zug gewinnen kann
         int a=0;
         int wo=0;
         for (int i=0;i<8;i=i+1){
@@ -131,7 +175,7 @@ public class TICTACTOE implements TTTCONSTANTS
         return null;
     }
 
-    boolean IstUnentschieden(){
+    private boolean IstUnentschieden(){
         KÄSTCHEN[][]k=m.SpielfeldGeben();        
         for (int i=0;i<3;i=i+1){
             for (int j=0;j<3;j=j+1){
@@ -144,7 +188,7 @@ public class TICTACTOE implements TTTCONSTANTS
         return true; 
     }
 
-    BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
+    private BELEGUNG HatGewonnen() //gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
     {
 
         for(int a=0;a<3;a=a+1){
@@ -165,7 +209,7 @@ public class TICTACTOE implements TTTCONSTANTS
         return BELEGUNG.UNBELEGT;
     }
 
-    BELEGUNG IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
+    private BELEGUNG IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
         if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
             return k1.belegtGeben();
         } else {
