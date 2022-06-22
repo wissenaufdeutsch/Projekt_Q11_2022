@@ -9,7 +9,9 @@ public class LEVELS
     public LEVELS()
     {
         obstaclesColumnsLevels = new OBSTACLE [1000][1000][20];
+        obstaclesColumnsLevels[0][0][0] = new DEFAULTFLOOR();
     }
+    
     
     public OBSTACLE[][] GiveLevel(int level)
     {
