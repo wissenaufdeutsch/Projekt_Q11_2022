@@ -5,8 +5,7 @@ public class TTTViewSpielfeld
     
     public TTTViewSpielfeld()
     {
-        
-       
+       Spielfeld = new int[3][3];
     
 
     }
