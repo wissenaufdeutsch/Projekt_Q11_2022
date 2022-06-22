@@ -3,11 +3,11 @@ import java.util.ArrayList;
 
 public class ENVIRONMENT
 {
-    public ArrayList<OBSTACLE[]> obstacles;
+    public ArrayList<OBSTACLE[]> obstacleColumns;
   public ENVIRONMENT()
   {
 
-     obstacles = new ArrayList<OBSTACLE[]>();
+     obstacleColumns = new ArrayList<OBSTACLE[]>();
   }
 
   } 

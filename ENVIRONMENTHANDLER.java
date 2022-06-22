@@ -1,6 +1,3 @@
-
-
-
 public class ENVIRONMENTHANDLER
 {
     ENVIRONMENT environment;
@@ -21,10 +18,10 @@ public class ENVIRONMENTHANDLER
 
         int level = chooseLevel();
         
-        OBSTACLE[] obstacleLevel = levels.GiveLevel(0);
-        //for (OBSTACLE obstacleColumns: obstacleColumnsLevel)
-        //{
-        //  environment.obstacles.add(obstacleColumns);
-        //}
+        OBSTACLE[][] obstacleColumnsLevel = levels.GiveLevel(0);
+        for (OBSTACLE[] obstacleColumns: obstacleColumnsLevel)
+        {
+          environment.obstacleColumns.add(obstacleColumns);
+        }
     }
 }
