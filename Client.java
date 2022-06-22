@@ -8,11 +8,11 @@ public class Client extends Thread{
     private UDPManager udpThing;//Everyone needs a UDPthing! so we can shout to the World!
     private int port = 30303;//UDP Port nothing special yet
     private TextSocketChannel conn;//this thing can send and recieve over a TCP Connection
-    
+    String feedback;
     //private static InetSocketAddress serverIP; We dont need this at the moment maybe when my code gets better!
     public Client(){//new Client new luck!
         super();//have to invoke this because of extends Thread!
-        
+        feedback = "";
         this.udpThing = new UDPManager() {//have to make the UDP Thing concrete! looks complicated but its usefull here
             //Now we have all methods that belong to a Client in one class. And we don't need this concrete implementation anywhere else.
             @Override
@@ -31,10 +31,7 @@ public class Client extends Thread{
                          * Same thing here!
                          */
                         tcpConnection(udpThing.serverIP);//Hurayyy we can connect now
-                    
-                    
-                    
-                    
+
                     }
                 }
 
@@ -69,7 +66,7 @@ public class Client extends Thread{
             e1.printStackTrace();//random print
         }
     }
-    
+
     private void tcpConnection(InetSocketAddress remote){//Has everything you need to initiate a TCP connection
         SocketChannel channel;//ok so we need a Channel!
         System.out.println("Trying to init tcpConnection");//I was here!
@@ -92,32 +89,41 @@ public class Client extends Thread{
         }
         // hier modifizieren
         //try {//may fail pls catch me if you can
-            String oldmessage= "";
-            System.out.println("done");
-            while(conn.isOpen()) {
-                //i can do whatever i want now over the freaking channel if it is open... nice!
-                String message = "hi";// conn.read();//read from channel
-                
+
+        System.out.println("done");
+
+        while(conn.isOpen()) {
+            try{String message = conn.read();
+                System.out.println(message);
+                //send to view
+                //Controller check if game goes  on yes?
+                waituntilfeedback();
                 if(message == null) {
                     break; // Disconnected.
-    
+
                 }
-                //System.out.println(message);
-                //CLIENT HAS TO CHECK IF NEW MESSAGE
-                //System.out.println(test.give_data());//send something blabla ...
+                conn.send(feedback);
             }
-        //}
-//7ffwdf
-       // catch(IOException e) {
-         //   e.printStackTrace();
-        //}
+            catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println("I wanted the divorce!");//after 7 years pls....
     }
 
     //DONE!!!
-    
-    
-    
+    //Observer pattern
+    public void waituntilfeedback(){
+        feedback = "";
+        while (feedback !=""){
+
+        }
+    }
+
+    public void changefeedback(String s){
+        feedback = s;
+    }
+
     public static void main(String[] args) {
         new Client();
     }
