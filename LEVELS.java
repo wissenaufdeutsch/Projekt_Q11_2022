@@ -17,7 +17,17 @@ public class LEVELS
     {
         return obstaclesColumnsLevels[level];
     }
+
+    
+    public void AddObstacle(int width, int height, int xpos, int ypos, int level, OBSTACLE obstacletype)
+    {
+        for (int j = 0; j<height; j++)
+        {
+            for (int k = 0; k<width; k++)
+            {
+                obstaclesColumnsLevels[level][xpos+k][ypos+j] = obstacletype;
+            }
+        }
+    }
 }
-    
-    
 
