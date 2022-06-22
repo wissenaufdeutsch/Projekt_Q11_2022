@@ -12,13 +12,8 @@ public class LEVELS
         ende = 0;
 
 
-        obstacles[0][0] = new RECHTECK(10, 10, 0, 0);
-        ende = ende+1;
-        
-        obstacles[0][1] = new RECHTECK(50, 100, 500, 600);
-        ende = ende+1;
+
     }
-    
     public OBSTACLE[] GiveLevel(int level)
     {
         return obstacles[level];
