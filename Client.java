@@ -9,10 +9,12 @@ public class Client extends Thread{
     private int port = 30303;//UDP Port nothing special yet
     private TextSocketChannel conn;//this thing can send and recieve over a TCP Connection
     String feedback;
+    
     //private static InetSocketAddress serverIP; We dont need this at the moment maybe when my code gets better!
     public Client(){//new Client new luck!
         super();//have to invoke this because of extends Thread!
         feedback = "";
+        
         this.udpThing = new UDPManager() {//have to make the UDP Thing concrete! looks complicated but its usefull here
             //Now we have all methods that belong to a Client in one class. And we don't need this concrete implementation anywhere else.
             @Override
@@ -93,7 +95,11 @@ public class Client extends Thread{
         System.out.println("done");
 
         while(conn.isOpen()) {
-            try{String message = conn.read();
+            try{
+                String changes = conn.read();
+                // makwew view
+                //Controller check if game goes  on yes?
+                String message = conn.read();
                 System.out.println(message);
                 //send to view
                 //Controller check if game goes  on yes?
