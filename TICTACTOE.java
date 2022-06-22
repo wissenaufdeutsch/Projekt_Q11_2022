@@ -24,7 +24,7 @@ public class TICTACTOE implements TTTCONSTANTS
         Gewinnbedingung= new KÄSTCHEN[8][3];
         GewinnbedingungReset();
         Spielmodus=MODUS.PLAYER;
-        Spieler_PC=1;
+        Spieler_PC=2;
     }
 
     public void Zug(int x, int y){
@@ -36,7 +36,7 @@ public class TICTACTOE implements TTTCONSTANTS
 
     }
 
-    public void SpielerWechseln(){//wechselt den Spieler des PLAYERS (1 zu 2; 2 zu 1)
+    public void SpielerWechseln(){//wechselt den Spieler des PCs (1 zu 2; 2 zu 1)
         if (Spieler_PC==1){
             Spieler_PC=2;
         } else {
@@ -59,14 +59,14 @@ public class TICTACTOE implements TTTCONSTANTS
         GewinnbedingungReset();
     }
 
-    private void ZugGegenPC(int wer, int x, int y){ //wer willst du sein
+    private void ZugGegenPC(int wer, int x, int y){ 
 
         if(wer==1){
-            m.ZugAlleine(x,y,BELEGUNG.KREUZ);
-            ZugPC(BELEGUNG.KREIS);
-        } else {
             ZugPC(BELEGUNG.KREUZ);
             m.ZugAlleine(x,y, BELEGUNG.KREIS);
+        } else {
+            m.ZugAlleine(x,y,BELEGUNG.KREUZ);
+            ZugPC(BELEGUNG.KREIS);
         }
     }
 
@@ -81,11 +81,20 @@ public class TICTACTOE implements TTTCONSTANTS
 
     private void ZugPC(BELEGUNG s){ //wer is PC
         KÄSTCHEN k=WirdGewinnen(s);
+        BELEGUNG s1;
+        if(s==BELEGUNG.KREIS){
+            s1=BELEGUNG.KREUZ;
+        }else {
+            s1=BELEGUNG.KREIS;
+        }
+        KÄSTCHEN k0=WirdGewinnen(s1);
         KÄSTCHEN k1=InEcke();
         KÄSTCHEN k2=AnRand();
         if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
             k.Belegen(s); 
-        } else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+        } else if(k0!=null && k0.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            k0.Belegen(s1);
+        }else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
             m.FeldGeben(1,1).Belegen(s);
         } else if(k1!= null){
             k1.Belegen(s);
