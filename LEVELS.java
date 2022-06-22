@@ -18,6 +18,3 @@ public class LEVELS
         return obstaclesColumnsLevels[level];
     }
 }
-    
-    
-
