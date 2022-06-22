@@ -82,13 +82,13 @@ public class Client extends Thread{
         }
         System.out.println("success!?");//nice we have someone who wants to talk!
         conn = new TextSocketChannel(channel, Charset.forName("UTF-8"), remote.toString());//use the Class from Erich because i am lazy now!
-        try {//time for try---al and error?
-            conn.send("Hello World Client is here!");//test send you will change this!
+        //try {//time for try---al and error?
+            //conn.send("Hello World Client is here!");//test send you will change this!
             //conn.send("hi my name is kili and i made it");
             //you can now send whatever you want!
-        } catch (IOException e1) {//random catch
-            e1.printStackTrace();//random print
-        }
+        //} catch (IOException e1) {//random catch
+            //e1.printStackTrace();//random print
+        //}
         // hier modifizieren
         //try {//may fail pls catch me if you can
 
@@ -96,7 +96,9 @@ public class Client extends Thread{
 
         while(conn.isOpen()) {
             try{
+                waituntilfeedback();
                 String changes = conn.read();
+                System.out.println(changes);
                 // makwew view
                 //Controller check if game goes  on yes?
                 String message = conn.read();
@@ -109,6 +111,7 @@ public class Client extends Thread{
 
                 }
                 conn.send(feedback);
+                feedback ="";
             }
             catch(IOException e) {
                 e.printStackTrace();
@@ -120,10 +123,12 @@ public class Client extends Thread{
     //DONE!!!
     //Observer pattern
     public void waituntilfeedback(){
-        feedback = "";
         while (feedback ==""){
             
         }
+        System.out.println("feedback received");
+        
+    
     }
 
     public void changefeedback(String s){
