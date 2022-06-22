@@ -17,6 +17,7 @@ public class LEVELS
     {
         return obstaclesColumnsLevels[level];
     }
+
     
     public void AddObstacle(int width, int height, int xpos, int ypos, int level, OBSTACLE obstacletype)
     {
@@ -29,6 +30,4 @@ public class LEVELS
         }
     }
 }
-    
-    
 

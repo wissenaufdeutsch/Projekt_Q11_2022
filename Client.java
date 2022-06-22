@@ -121,8 +121,8 @@ public class Client extends Thread{
     //Observer pattern
     public void waituntilfeedback(){
         feedback = "";
-        while (feedback !=""){
-
+        while (feedback ==""){
+            
         }
     }
 
