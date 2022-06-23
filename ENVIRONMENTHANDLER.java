@@ -30,7 +30,7 @@ public class ENVIRONMENTHANDLER
     public void draw() {
         for (OBSTACLE[] obstacleColumn : obstacleColumnsLevel) {
             for (OBSTACLE obstacle : obstacleColumn) {
-                view.drawImg(obstacleobstacle.image);
+                //view.drawImg(obstacle.image);
             }
         }
     }

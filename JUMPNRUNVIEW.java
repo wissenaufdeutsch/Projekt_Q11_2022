@@ -40,14 +40,20 @@ public class JUMPNRUNVIEW
         sizeBox = 10;        
         
         
+        
+     }
+     
+     public void FigurAnzeigen()
+     {
         try
         {
-            Image img = ImageIO.read(getClass().getResource("Kika.png"));
+            Image img = ImageIO.read(getClass().getResource("Kika2.png"));
             img = img.getScaledInstance(100,100,Image.SCALE_DEFAULT);
-            LogoHase = new JLabel(new ImageIcon("Kika.png"));
+            LogoHase = new JLabel(new ImageIcon("Kika2.png"));
             LogoHase.setSize(1000, 1000);
             LogoHase.setVisible(true);
             fenster.add(LogoHase); 
+            panel.setBackground(Color.YELLOW);
         }
         catch (java.io.IOException ioe)
         {
@@ -55,7 +61,7 @@ public class JUMPNRUNVIEW
         }
          fenster.setVisible(true);
      }
-    
+
      public void setzeLogo() 
     {
         panel.setVisible(true);
