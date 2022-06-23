@@ -59,5 +59,10 @@ public class JUMPNRUNVIEW
        
         panel.setVisible(true);
     }
+    
+    public void move()
+    {
+        
+    }
 }
 
