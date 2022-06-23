@@ -101,7 +101,6 @@ public class Server extends Thread {
         for(int i=0; i<threads.size(); i++){
             try{
                 threads.get(i).conn.send(m);
-                System.out.println("send");
             }
         catch(IOException e) {
                 e.printStackTrace();
