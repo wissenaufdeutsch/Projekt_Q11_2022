@@ -8,13 +8,11 @@ public class Client extends Thread{
     private UDPManager udpThing;//Everyone needs a UDPthing! so we can shout to the World!
     private int port = 30303;//UDP Port nothing special yet
     private TextSocketChannel conn;//this thing can send and recieve over a TCP Connection
-    String feedback;
-    
+
     //private static InetSocketAddress serverIP; We dont need this at the moment maybe when my code gets better!
     public Client(){//new Client new luck!
         super();//have to invoke this because of extends Thread!
-        feedback = "";
-        
+
         this.udpThing = new UDPManager() {//have to make the UDP Thing concrete! looks complicated but its usefull here
             //Now we have all methods that belong to a Client in one class. And we don't need this concrete implementation anywhere else.
             @Override
@@ -59,7 +57,7 @@ public class Client extends Thread{
         //tcpConnection(udpThing.serverIP);//Hurayyy we can connect now
     }// this is just ... a Bracket... a Bracket!
 
-    public void send(String a)
+    public void sendnewchoice(String a)
     {   
         try{
             conn.send(a);
@@ -83,11 +81,11 @@ public class Client extends Thread{
         System.out.println("success!?");//nice we have someone who wants to talk!
         conn = new TextSocketChannel(channel, Charset.forName("UTF-8"), remote.toString());//use the Class from Erich because i am lazy now!
         //try {//time for try---al and error?
-            //conn.send("Hello World Client is here!");//test send you will change this!
-            //conn.send("hi my name is kili and i made it");
-            //you can now send whatever you want!
+        //conn.send("Hello World Client is here!");//test send you will change this!
+        //conn.send("hi my name is kili and i made it");
+        //you can now send whatever you want!
         //} catch (IOException e1) {//random catch
-            //e1.printStackTrace();//random print
+        //e1.printStackTrace();//random print
         //}
         // hier modifizieren
         //try {//may fail pls catch me if you can
@@ -96,22 +94,14 @@ public class Client extends Thread{
 
         while(conn.isOpen()) {
             try{
-                waituntilfeedback();
-                String changes = conn.read();
-                System.out.println(changes);
-                // makwew view
-                //Controller check if game goes  on yes?
                 String message = conn.read();
-                System.out.println(message);
-                //send to view
-                //Controller check if game goes  on yes?
-                waituntilfeedback();
+                System.out.println("Client: "+message);
+
                 if(message == null) {
                     break; // Disconnected.
 
                 }
-                conn.send(feedback);
-                feedback ="";
+
             }
             catch(IOException e) {
                 e.printStackTrace();
@@ -122,21 +112,16 @@ public class Client extends Thread{
 
     //DONE!!!
     //Observer pattern
-    public void waituntilfeedback(){
-        while (feedback ==""){
-            
-        }
-        System.out.println("feedback received");
-        
-    
-    }
+    // public void waituntilfeedback(){
+    // while (feedback ==""){
 
-    public void changefeedback(String s){
-        feedback = s;
-    }
+    // }
+    // System.out.println("feedback received");
 
+    // }
+     
     public static void main(String[] args) {
-        new Client();
+    new Client();
     }
 
 }
