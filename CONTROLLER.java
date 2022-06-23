@@ -15,4 +15,22 @@ public class CONTROLLER
         envHand.AddLevel();
         //update everything
     }
+    
+    public void ReactToKeyboard(String wich, PLAYER p)
+    {
+        switch (wich)
+        {
+            case "space": 
+                p.jump();
+                break;
+                
+            case "left":
+                p.left();
+                break;
+                
+            case "right":
+                p.right();
+                break;
+        }
+    }
 }
