@@ -60,7 +60,7 @@ public class Client extends Thread{
     public void sendnewchoice(String a)
     {   
         try{
-            conn.send(a);
+             conn.send(a);
         }
         catch (IOException e1) {//random catch
             e1.printStackTrace();//random print
