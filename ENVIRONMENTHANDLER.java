@@ -2,6 +2,9 @@ public class ENVIRONMENTHANDLER
 {
     ENVIRONMENT environment;
     LEVELS levels;
+    OBSTACLE[][] obstacleColumnsLevel;
+    JUMPNRUNVIEW view;
+    
     public ENVIRONMENTHANDLER() 
     {
         environment = new ENVIRONMENT();
@@ -17,10 +20,18 @@ public class ENVIRONMENTHANDLER
     {
         int level = chooseLevel();
         
-        OBSTACLE[][] obstacleColumnsLevel = levels.GiveLevel(0);
+        obstacleColumnsLevel = levels.GiveLevel(0);
         for (OBSTACLE[] obstacleColumns: obstacleColumnsLevel)
         {
           environment.obstacleColumns.add(obstacleColumns);
+        }
+    }
+    
+    public void draw() {
+        for (OBSTACLE[] obstacleColumn : obstacleColumnsLevel) {
+            for (OBSTACLE obstacle : obstacleColumn) {
+                view.drawImg(obstacleobstacle.image);
+            }
         }
     }
 }

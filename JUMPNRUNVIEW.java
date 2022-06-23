@@ -13,6 +13,8 @@ public class JUMPNRUNVIEW
     private JUMPNRUNPANEL panel;
     
     private JLabel LogoHase;
+    
+    private int sizeBox;
   
     public JUMPNRUNVIEW()
     {
@@ -35,7 +37,7 @@ public class JUMPNRUNVIEW
         
         fenster.add(panel);
         
-        
+        sizeBox = 10;        
         
         
         try
@@ -56,8 +58,18 @@ public class JUMPNRUNVIEW
     
      public void setzeLogo() 
     {
-       
         panel.setVisible(true);
+    }
+        
+    public void drawObstacle(int xpos, int ypos) {
+        paintComponent(panel.getGraphics(), xpos, ypos);
+    }
+    
+    private void paintComponent(Graphics graphics, int xpos, int ypos) {
+        panel.paintComponents(graphics);
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.setColor(Color.YELLOW);
+        graphics2D.drawRect(xpos * sizeBox, ypos * sizeBox, sizeBox, sizeBox);
     }
 }
 

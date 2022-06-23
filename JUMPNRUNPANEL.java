@@ -26,5 +26,6 @@ public class JUMPNRUNPANEL extends JPanel
        g.setColor(Color.green);
        //g.fillRect(10,10,100,100);
     }
+
     }
 
