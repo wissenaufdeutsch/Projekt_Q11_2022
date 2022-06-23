@@ -101,7 +101,7 @@ public class TICTACTOE implements TTTCONSTANTS
         if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
             k.Belegen(s); 
         } else if(k0!=null && k0.belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            k0.Belegen(s1);
+            k0.Belegen(s);
         }else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
             m.FeldGeben(1,1).Belegen(s);
         } else if(k1!= null){
