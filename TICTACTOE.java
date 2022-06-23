@@ -74,8 +74,9 @@ public class TICTACTOE implements TTTCONSTANTS
     }
 
     private void Spielende(){
-        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
-            t.SiegerDarstellen(HatGewonnen());
+        BELEGUNG s=HatGewonnen();
+        if (s.equals(BELEGUNG.UNBELEGT)==false){
+            t.SiegerDarstellen(s);
         } else if(IstUnentschieden()==true){
             t.UnentschiedenDarstellen(); 
         }
