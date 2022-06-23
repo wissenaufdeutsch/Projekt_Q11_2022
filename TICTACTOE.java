@@ -31,9 +31,13 @@ public class TICTACTOE implements TTTCONSTANTS
         if (Spielmodus==MODUS.PLAYER){
             ZugPlayer(x,y);
         } else if(Spieler_PC==1){
-            m.ZugAlleine(x,y,BELEGUNG.KREIS); 
+            m.ZugAlleine(x,y,BELEGUNG.KREIS);
+            Spielende();
+            ZugComputer();
         } else {
             m.ZugAlleine(x,y,BELEGUNG.KREUZ);
+            Spielende();
+            ZugComputer();
         }
 
     }
@@ -61,7 +65,7 @@ public class TICTACTOE implements TTTCONSTANTS
         GewinnbedingungReset();
     }
 
-    public void Zug_PC(){
+    public void ZugComputer(){
         if(Spieler_PC==1){
             ZugPC(BELEGUNG.KREUZ);            
         } else {
@@ -69,17 +73,18 @@ public class TICTACTOE implements TTTCONSTANTS
         }
     }
 
-    private void ZugPlayer(int x, int y){
-        m.Zug(x,y);
-        Spielende();
-    }
-    
     private void Spielende(){
-        if (HatGewonnen().equals(BELEGUNG.UNBELEGT)==false){
-            t.SiegerDarstellen(HatGewonnen());
+        BELEGUNG s=HatGewonnen();
+        if (s.equals(BELEGUNG.UNBELEGT)==false){
+            t.SiegerDarstellen(s);
         } else if(IstUnentschieden()==true){
             t.UnentschiedenDarstellen(); 
         }
+    }
+
+    private void ZugPlayer(int x, int y){
+        m.Zug(x,y);
+        Spielende();
     }
 
     private void ZugPC(BELEGUNG s){ //wer is PC
@@ -127,11 +132,11 @@ public class TICTACTOE implements TTTCONSTANTS
         Gewinnbedingung[7][0]=m.FeldGeben(0,2);
         Gewinnbedingung[7][1]=m.FeldGeben(1,1);
         Gewinnbedingung[7][2]=m.FeldGeben(2,0);
-        
+
         //for (int c=0;c>-3;c=c-2){
-          //  if(IstGleich(m.FeldGeben(Math.abs(c),0),m.FeldGeben(1,1),m.FeldGeben(c+2,2)).equals(BELEGUNG.UNBELEGT)==false){
-            //    return m.FeldGeben(1,1).belegtGeben();
-            //}
+        //  if(IstGleich(m.FeldGeben(Math.abs(c),0),m.FeldGeben(1,1),m.FeldGeben(c+2,2)).equals(BELEGUNG.UNBELEGT)==false){
+        //    return m.FeldGeben(1,1).belegtGeben();
+        //}
         //}
     }
 
@@ -192,7 +197,7 @@ public class TICTACTOE implements TTTCONSTANTS
         }
         return true; 
     }
-    
+
     private BELEGUNG HatGewonnen()//gibt den Sieger zurück: "Kreuz" bzw "Kreis; sonst "unbelegt"
     {
         for (int i=0;i<8;i=i+1){
@@ -202,8 +207,6 @@ public class TICTACTOE implements TTTCONSTANTS
         }
         return BELEGUNG.UNBELEGT;
     }
-
-    
 
     private BELEGUNG IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
         if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben().equals(BELEGUNG.UNBELEGT)==false){

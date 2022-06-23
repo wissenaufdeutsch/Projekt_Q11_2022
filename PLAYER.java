@@ -14,5 +14,20 @@ public class PLAYER
         width = 40;
         height = 40;
     }
-
+    
+    public void jump()
+    {
+        ypos = ypos+1;
+    }
+    
+    public void left()
+    {
+        xpos = xpos+1;
+    }
+    
+    public void right()
+    {
+        xpos = xpos-1;
+    }
+    
 }
