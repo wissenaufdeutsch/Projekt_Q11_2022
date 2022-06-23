@@ -8,6 +8,8 @@ public class TTTViewSpielfeld
     private int Spielfeld[][];
     private JFrame fenster;
     
+    private JLabel label;
+    
     private JButton button1;
     private JButton button2;
     private JButton button3;
@@ -28,6 +30,18 @@ public class TTTViewSpielfeld
         fenster.setSize(300,150);
         fenster.getContentPane().setLayout(null);
         fenster.setVisible(true);
+        
+        Font font = new Font("Courier", Font.BOLD,115);
+        
+        label = new JLabel();
+        
+        label.setVisible(true);
+        label.setSize(800,800);
+        label.setLocation(225,-300);
+        label.setText("TICTACTOE");
+        label.setVisible(true);
+        label.setFont(font);
+        fenster.add(label);
         
         
         button1 = new JButton();

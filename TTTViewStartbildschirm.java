@@ -29,7 +29,9 @@ public class TTTViewStartbildschirm
     label.setVisible(true);
     fenster.add(label);
     fenster.setVisible(true);
-    label.setFont(font);button = new JButton();
+    label.setFont(font);
+    
+    button = new JButton();
        
     button = new JButton();
     
