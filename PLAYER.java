@@ -1,18 +1,17 @@
-
 public class PLAYER
 {
-    private int xpos;
-    private int ypos;
-    private int height;
-    private int width;
 
+    public int xpos;
+    public int ypos;
+    public int width;
+    public int height;
 
-    public PLAYER()
+    public PLAYER(int startX, int startY, int width, int height)
     {
-        xpos = 0;
-        ypos = 1000;
-        width = 40;
-        height = 40;
+        xpos = startX;
+        ypos = startY;
+        this.width = width;
+        this.height = height;
     }
     
     public void jump()
@@ -29,5 +28,4 @@ public class PLAYER
     {
         xpos = xpos-1;
     }
-    
 }

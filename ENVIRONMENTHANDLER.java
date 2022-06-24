@@ -1,14 +1,13 @@
 public class ENVIRONMENTHANDLER
 {
-    ENVIRONMENT environment;
+
+    ENVIRONMENT env;
     LEVELS levels;
-    OBSTACLE[][] obstacleColumnsLevel;
-    JUMPNRUNVIEW view;
-    
+
     public ENVIRONMENTHANDLER() 
     {
-        environment = new ENVIRONMENT();
         levels = new LEVELS();
+        env = new ENVIRONMENT(levels.boxesYDirection);
     }
 
     public int chooseLevel()
@@ -16,22 +15,18 @@ public class ENVIRONMENTHANDLER
         return 0;
     }
     
-    public void AddLevel()
+    public void addLevel()
     {
         int level = chooseLevel();
         
-        obstacleColumnsLevel = levels.GiveLevel(0);
+        OBSTACLE[][] obstacleColumnsLevel = levels.giveLevel(level);
         for (OBSTACLE[] obstacleColumns: obstacleColumnsLevel)
         {
-          environment.obstacleColumns.add(obstacleColumns);
+          env.obstacleColumns.add(obstacleColumns);
         }
     }
-    
-    public void draw() {
-        for (OBSTACLE[] obstacleColumn : obstacleColumnsLevel) {
-            for (OBSTACLE obstacle : obstacleColumn) {
-                //view.drawImg(obstacle.image);
-            }
-        }
+
+    public void update() {
+        env.draw();
     }
 }

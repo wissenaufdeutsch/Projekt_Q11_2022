@@ -1,37 +1,37 @@
-
-
 public class CONTROLLER
 {
+
     boolean done;
-    ENVIRONMENTHANDLER envHand;
-    
-    
+    ENVIRONMENTHANDLER envHandler;
+
     public CONTROLLER() 
     {
         this.done = false;
-        envHand = new ENVIRONMENTHANDLER();
+        envHandler = new ENVIRONMENTHANDLER();
     }
     
     public void run() 
     {
-        envHand.AddLevel();
-        //update everything
+        envHandler.addLevel();
+        while (!done) {
+            envHandler.update();
+        }
     }
     
-    public void ReactToKeyboard(String wich, PLAYER p)
+    public void ReactToKeyboard(String key, PLAYER player)
     {
-        switch (wich)
+        switch (key)
         {
             case "space": 
-                p.jump();
+                player.jump();
                 break;
                 
             case "left":
-                p.left();
+                player.left();
                 break;
                 
             case "right":
-                p.right();
+                player.right();
                 break;
         }
     }
