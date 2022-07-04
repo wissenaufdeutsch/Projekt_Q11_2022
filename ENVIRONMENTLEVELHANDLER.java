@@ -1,14 +1,13 @@
-public class ENVIRONMENTHANDLER
+public class ENVIRONMENTLEVELHANDLER
 {
 
     ENVIRONMENT env;
     LEVELS levels;
 
-    public ENVIRONMENTHANDLER(SUNRUNVIEW view)
+    public ENVIRONMENTLEVELHANDLER(ENVIRONMENT env)
     {
         levels = new LEVELS();
-        int[] startPosPlayer = {50, 50};
-        env = new ENVIRONMENT(startPosPlayer, view);
+        this.env = env;
     }
 
     public int chooseLevel()
@@ -16,7 +15,7 @@ public class ENVIRONMENTHANDLER
         return 0;
     }
     
-    public void addLevel()
+    public void addLevelEnv()
     {
         int level = chooseLevel();
         
@@ -25,10 +24,5 @@ public class ENVIRONMENTHANDLER
         {
           env.obstacleColumns.add(obstacleColumns);
         }
-    }
-
-    public void update() {
-        env.drawObstacles();
-        env.drawPlayer();
     }
 }

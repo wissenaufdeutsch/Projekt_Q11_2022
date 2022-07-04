@@ -14,6 +14,11 @@ public class LEVELS
         setObstacles(0, new DEFAULTFLOOR(), 0, 70, 50, 5);
     }
 
+    public static int[] giveStartPosPlayer() {
+        int[] startPosPlayer = {50, 50};
+        return startPosPlayer;
+    }
+
     public static int giveBoxesYDirection() {
         return 100;
     }

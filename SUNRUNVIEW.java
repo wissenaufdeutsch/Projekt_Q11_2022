@@ -7,30 +7,33 @@
 public class SUNRUNVIEW
 {
 
-    private JFrame fenster;
+    private JFrame frame;
     private SUNRUNPANEL panel;
     private int sizeBox;
     private int bottomOfLevel;
-    private int screenWidth;
-    private int screenHeight;
 
     public SUNRUNVIEW(int rectanglesYDirection)
     {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        screenWidth = (int) size.getWidth();
-        screenHeight = (int) size.getHeight();
+        int screenWidth = (int) size.getWidth();
+        int screenHeight = (int) size.getHeight();
 
         sizeBox = 10;
         bottomOfLevel = screenHeight / 2 + (rectanglesYDirection / 2) *  sizeBox;
 
-        fenster = new JFrame("Sun Run");
-        fenster.setSize(screenWidth, screenHeight);
-        fenster.getContentPane().setLayout(null);
-        fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenster.setVisible(true);
+        frame = new JFrame("Sun Run");
+        frame.setSize(screenWidth, screenHeight);
+        frame.getContentPane().setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
         panel = new SUNRUNPANEL();
-        fenster.add(panel);
+        frame.add(panel);
+    }
+
+    // TODO: return pressed keys
+    public String[] getPressedKeys() {
+        return null;
     }
 
     public void FigurAnzeigen()
@@ -43,12 +46,12 @@ public class SUNRUNVIEW
             JLabel icon = new JLabel(new ImageIcon("Kika2.png"));
             icon.setSize(1000, 1000);
             icon.setVisible(true);
-            fenster.add(icon);
+            frame.add(icon);
 
         } catch (java.io.IOException ioe) {
             ioe.printStackTrace();
         }
-        fenster.setVisible(true);
+        frame.setVisible(true);
     }
 
     public void drawObstacle(OBSTACLE obstacle, int xbox, int ybox) {

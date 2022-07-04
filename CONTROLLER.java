@@ -2,39 +2,47 @@ public class CONTROLLER
 {
 
     boolean done;
-    ENVIRONMENTHANDLER envHandler;
+    ENVIRONMENTLEVELHANDLER envHandler;
+    ENVIRONMENT env;
     SUNRUNVIEW view;
 
-    public CONTROLLER() 
+    public CONTROLLER()
     {
         this.done = false;
+
         view = new SUNRUNVIEW(LEVELS.giveBoxesYDirection());
-        envHandler = new ENVIRONMENTHANDLER(view);
+        env = new ENVIRONMENT(LEVELS.giveStartPosPlayer(), view);
+        envHandler = new ENVIRONMENTLEVELHANDLER(env);
+        envHandler.addLevelEnv();
     }
     
     public void run() 
     {
-        envHandler.addLevel();
         while (!done) {
-            envHandler.update();
+            //String [] pressedKeys = view.getPressedKeys();
+            //reactToKeyboard(pressedKeys);
+            env.drawObstacles();
+            env.drawPlayer();
         }
     }
-    
-    public void reactToKeyboard(String key, PLAYER player)
+
+    public void reactToKeyboard(String[] keys)
     {
-        switch (key)
-        {
-            case "space": 
-                player.jump();
-                break;
-                
-            case "left":
-                player.left();
-                break;
-                
-            case "right":
-                player.right();
-                break;
+        for (String key : keys) {
+            switch (key)
+            {
+                case "space":
+                    // player jump
+                    break;
+
+                case "left":
+                    // player go right
+                    break;
+
+                case "right":
+                    // player go left
+                    break;
+            }
         }
     }
 }
