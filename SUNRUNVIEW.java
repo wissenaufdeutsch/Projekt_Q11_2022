@@ -63,6 +63,6 @@ public class SUNRUNVIEW
     public void drawPlayer(PLAYER player) {
         Graphics2D graphics2D = (Graphics2D) panel.getGraphics();
         graphics2D.setColor(Color.RED);
-        graphics2D.drawRect(player.xpos, player.ypos, player.width, player.height);
+        graphics2D.drawRect(player.pos[0], player.pos[1], player.size[0], player.size[1]);
     }
 }

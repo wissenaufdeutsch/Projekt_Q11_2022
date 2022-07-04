@@ -14,7 +14,9 @@ public class ENVIRONMENT
     this.view = view;
 
     obstacleColumns = new ArrayList<OBSTACLE[]>();
-    player = new PLAYER(startPosPlayer[0], startPosPlayer[1], 50, 50);
+
+    int[] sizePlayer = {30, 50};
+    player = new PLAYER(startPosPlayer, sizePlayer);
   }
 
   public void drawObstacles() {

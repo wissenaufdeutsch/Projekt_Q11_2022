@@ -1,31 +1,27 @@
 public class PLAYER
 {
 
-    public int xpos;
-    public int ypos;
-    public int width;
-    public int height;
+    public int[] pos;
+    public int[] size;
 
-    public PLAYER(int startX, int startY, int width, int height)
+    public PLAYER(int[] startPos, int[] size)
     {
-        xpos = startX;
-        ypos = startY;
-        this.width = width;
-        this.height = height;
+        pos = startPos;
+        this.size = size;
     }
     
     public void jump()
     {
-        ypos = ypos+1;
+        pos[1] += 1;
     }
     
     public void left()
     {
-        xpos = xpos+1;
+        pos[0] += 1;
     }
     
     public void right()
     {
-        xpos = xpos-1;
+        pos[0] -= 1;
     }
 }
