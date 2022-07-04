@@ -51,9 +51,15 @@ public class SUNRUNVIEW
         fenster.setVisible(true);
     }
 
-    public void drawObstacle(OBSTACLE obstacle, int xpos, int ypos) {
+    public void drawObstacle(OBSTACLE obstacle, int xbox, int ybox) {
         Graphics2D graphics2D = (Graphics2D) panel.getGraphics();
         graphics2D.setColor(Color.GREEN);
-        graphics2D.drawRect(xpos * sizeBox, bottomOfLevel - ypos * sizeBox, sizeBox, sizeBox);
+        graphics2D.drawRect(xbox * sizeBox, bottomOfLevel - ybox * sizeBox, sizeBox, sizeBox);
+    }
+
+    public void drawPlayer(PLAYER player) {
+        Graphics2D graphics2D = (Graphics2D) panel.getGraphics();
+        graphics2D.setColor(Color.RED);
+        graphics2D.drawRect(player.xpos, player.ypos, player.width, player.height);
     }
 }

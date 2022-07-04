@@ -3,11 +3,13 @@ public class CONTROLLER
 
     boolean done;
     ENVIRONMENTHANDLER envHandler;
+    SUNRUNVIEW view;
 
     public CONTROLLER() 
     {
         this.done = false;
-        envHandler = new ENVIRONMENTHANDLER();
+        view = new SUNRUNVIEW(LEVELS.giveBoxesYDirection());
+        envHandler = new ENVIRONMENTHANDLER(view);
     }
     
     public void run() 
@@ -18,7 +20,7 @@ public class CONTROLLER
         }
     }
     
-    public void ReactToKeyboard(String key, PLAYER player)
+    public void reactToKeyboard(String key, PLAYER player)
     {
         switch (key)
         {
