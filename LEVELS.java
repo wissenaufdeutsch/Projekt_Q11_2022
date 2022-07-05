@@ -14,18 +14,8 @@ public class LEVELS
         setObstacles(0, new DEFAULTFLOOR(), 0, 70, 50, 5);
     }
 
-    public static int[] giveStartPosPlayer() {
-        int[] startPosPlayer = {50, 50};
-        return startPosPlayer;
-    }
-
     public static int giveBoxesYDirection() {
         return 100;
-    }
-
-    public OBSTACLE[][] giveLevel(int level)
-    {
-        return obstaclesColumnsLevels[level];
     }
 
     public void setObstacles(int level, OBSTACLE obstacleType, int xpos, int ypos, int width, int height)
@@ -35,5 +25,15 @@ public class LEVELS
                 obstaclesColumnsLevels[level][xpos + w][ypos + h] = obstacleType;
             }
         }
+    }
+
+    public OBSTACLE[][] giveLevel(int level)
+    {
+        return obstaclesColumnsLevels[level];
+    }
+
+    public static int[] giveStartPosPlayer() {
+        int[] startPosPlayer = {50, 50};
+        return startPosPlayer;
     }
 }
