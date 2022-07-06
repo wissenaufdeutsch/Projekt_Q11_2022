@@ -8,11 +8,11 @@ import java.awt.event.KeyEvent;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.ArrayList;
 
 
 
@@ -20,31 +20,22 @@ public class SUNRUNVIEW
 {
 
     private JFrame frame;
-    private JPanel panel;
-    private int sizeBox;
-    private int bottomOfLevel;
+    private SUNRUNPANEL panel;
     private Set<Character> pressedKeys;
 
-    public SUNRUNVIEW(int rectanglesYDirection)
+    public SUNRUNVIEW(int rectanglesYDirection, int sizeBox)
     {
+        frame = new JFrame("Sun Run");
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) size.getWidth();
         int screenHeight = (int) size.getHeight();
-        frame = new JFrame("Sun Run");
         frame.setSize(screenWidth, screenHeight);
-        frame.getContentPane().setLayout(null);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        panel = new JPanel();
-        panel.setSize(screenWidth, screenHeight);
-        panel.setLocation(0, 0);
-        panel.setVisible(true);
-        panel.setBackground(Color.WHITE);
+        panel = new SUNRUNPANEL(rectanglesYDirection, sizeBox);
         frame.add(panel);
-
-        sizeBox = 10;
-        bottomOfLevel = screenHeight / 2 + (rectanglesYDirection / 2) *  sizeBox;
 
         pressedKeys = new HashSet<Character>();
 
@@ -69,6 +60,18 @@ public class SUNRUNVIEW
          return pressedKeys;
     }
 
+    public void setObstacleColumns(ArrayList<OBSTACLE[]> obstacleColumns) {
+        panel.setObstacleColumns(obstacleColumns);
+    }
+
+    public void setPlayer(PLAYER player) {
+        panel.setPlayer(player);
+    }
+
+    public void setEntitys() {
+
+    }
+
     // TODO: change this to drawImg so it works for all images (scaling to size, path to img)
     public void FigurAnzeigen()
     {
@@ -88,15 +91,7 @@ public class SUNRUNVIEW
         frame.setVisible(true);
     }
 
-    public void drawObstacle(OBSTACLE obstacle, int xbox, int ybox) {
-        Graphics2D graphics2D = (Graphics2D) panel.getGraphics();
-        graphics2D.setColor(Color.GREEN);
-        graphics2D.drawRect(xbox * sizeBox, bottomOfLevel - ybox * sizeBox, sizeBox, sizeBox);
-    }
-
-    public void drawPlayer(PLAYER player) {
-        Graphics2D graphics2D = (Graphics2D) panel.getGraphics();
-        graphics2D.setColor(Color.RED);
-        graphics2D.drawRect(player.pos[0], player.pos[1], player.size[0], player.size[1]);
+    public void repaint() {
+        panel.repaint();
     }
 }

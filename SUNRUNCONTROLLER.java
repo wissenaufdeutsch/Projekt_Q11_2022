@@ -1,8 +1,8 @@
 import java.util.Set;
 
 
-//TODO: use the paint method because otherwise player is not erased
-//TODO: player not in environment
+//TODO: look here: https://learncodebygaming.com/blog/how-to-make-a-video-game-in-java-2d-basics ways of doing things
+//TODO: change env to game and put player and entitys in
 //TODO: movement of player like in real life (acceleration, velocity, position)
 //TODO: collision detection
 //TODO: make the obstacles scroll
@@ -29,7 +29,7 @@ public class SUNRUNCONTROLLER
     {
         this.done = false;
 
-        view = new SUNRUNVIEW(LEVELS.giveBoxesYDirection());
+        view = new SUNRUNVIEW(LEVELS.giveBoxesYDirection(), LEVELS.giveSizeBox());
         env = new ENVIRONMENT(LEVELS.giveStartPosPlayer(), view);
         envHandler = new ENVIRONMENTLEVELHANDLER(env);
         envHandler.addLevelEnv();
@@ -76,7 +76,6 @@ public class SUNRUNCONTROLLER
                 break;
 
             case 's':
-                System.out.println("not implemented");
                 break;
 
             case 'd':
@@ -86,7 +85,6 @@ public class SUNRUNCONTROLLER
     }
 
     public void displayGame() {
-        env.drawObstacles();
-        env.drawPlayer();
+        view.repaint();
     }
 }
