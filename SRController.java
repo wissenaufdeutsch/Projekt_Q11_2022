@@ -6,7 +6,6 @@ import java.util.Set;
 //TODO: make the obstacles scroll
 //TODO: change rectangles to images, then rename method Figurzeichen to drawImg and use it for obstacle as well (img path in Obstacles)
 //TODO: design levels and choose for infinity run
-//TODO: entitys
 
 
 public class SRController
@@ -30,6 +29,7 @@ public class SRController
         game = new Game(Levels.giveStartPosPlayer(), view);
         levelHandler = new LevelHandler(game);
         levelHandler.addLevel();
+        displayGame();
     }
 
     public void run() {
