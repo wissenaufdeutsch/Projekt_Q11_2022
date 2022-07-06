@@ -1,10 +1,11 @@
-import java.util.ArrayList;
-import javax.swing.JPanel;
-import java.awt.Dimension;
 import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.Graphics2D;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+
+import javax.swing.JPanel;
 
 
 class SRPanel extends JPanel {
