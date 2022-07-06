@@ -27,12 +27,11 @@ public class TTTMODEL implements TTTCONSTANTS
         }
 
     } 
-    
-    boolean ZugAlleine(int x, int y, BELEGUNG s){
-        return spielfeld[x][y].Belegen(s);            
-        
-    }
 
+    boolean ZugAlleine(int x, int y, BELEGUNG s){
+        return spielfeld[x][y].Belegen(s);          
+
+    }
 
     void Reset(){
         SpielerAmZug=1;
@@ -41,6 +40,10 @@ public class TTTMODEL implements TTTCONSTANTS
                 spielfeld[i][j]=new KÄSTCHEN();
             }
         }
+    }
+    
+    void SpielerAmZugSetzen(int i){
+        SpielerAmZug=i;
     }
 
     int SpielerAmZugGeben()
@@ -51,7 +54,7 @@ public class TTTMODEL implements TTTCONSTANTS
     KÄSTCHEN FeldGeben(int x, int y)
     {
         return spielfeld[x][y]; 
-        
+
     }   
 
     KÄSTCHEN[][]SpielfeldGeben(){
@@ -60,6 +63,4 @@ public class TTTMODEL implements TTTCONSTANTS
 
     }
 
-
-    } 
-
+} 

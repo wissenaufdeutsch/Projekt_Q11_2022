@@ -52,15 +52,19 @@ public class TICTACTOE implements TTTCONSTANTS
     }
 
     public void SpielerWechseln(){//wechselt den Spieler des PCs 
-        if (Spieler_PC==1){
-            Spieler_PC=2;
-        } else {
+        if (Spieler_PC==2){
             Spieler_PC=1;
+            ZugComputer();
+            m.SpielerAmZugSetzen(2);
+        } else {
+            Spieler_PC=2;
+            Reset();
         }
 
     }
 
     public void ModusWechseln(){
+        Reset();
         if (Spielmodus==MODUS.PLAYER){
             Spielmodus=MODUS.PC;
         } else {
@@ -74,7 +78,7 @@ public class TICTACTOE implements TTTCONSTANTS
         GewinnbedingungReset();
     }
 
-    public void ZugComputer(){
+    private void ZugComputer(){
         if(Spieler_PC==1){
             ZugPC(BELEGUNG.KREUZ);            
         } else {
