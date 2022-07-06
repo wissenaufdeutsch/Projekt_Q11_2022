@@ -10,12 +10,16 @@ public class LEVELS
         boxesXDirection = giveBoxesYDirection();
         boxesYDirection = 100;
         obstaclesColumnsLevels = new OBSTACLE[1000][boxesXDirection][boxesYDirection];
-        setObstacles(0, new DEFAULTFLOOR(), 0, 20, 50, 5);
-        setObstacles(0, new DEFAULTFLOOR(), 0, 70, 50, 5);
+        setObstacles(0, new DEFAULTFLOOR(), 0, 9, 50, 5);
+        setObstacles(0, new DEFAULTFLOOR(), 0, 60, 50, 5);
     }
 
     public static int giveBoxesYDirection() {
         return 100;
+    }
+
+    public static int giveSizeBox() {
+        return 10;
     }
 
     public void setObstacles(int level, OBSTACLE obstacleType, int xpos, int ypos, int width, int height)
@@ -32,8 +36,12 @@ public class LEVELS
         return obstaclesColumnsLevels[level];
     }
 
+    // the pos in the level not the frame
+    // pos is for the bottom left corner
     public static int[] giveStartPosPlayer() {
-        int[] startPosPlayer = {50, 50};
+        int xStartBox = 10;
+        int yStartBox = 20;
+        int[] startPosPlayer = {xStartBox * giveSizeBox(), yStartBox * giveSizeBox()};
         return startPosPlayer;
     }
 }

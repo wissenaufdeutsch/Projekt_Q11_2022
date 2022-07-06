@@ -12,16 +12,16 @@ public class PLAYER
     
     public void jump()
     {
-        pos[1] -= 1;
+        pos[1] += 5;
     }
     
     public void left()
     {
-        pos[0] -= 1;
+        pos[0] -= 5;
     }
     
     public void right()
     {
-        pos[0] += 1;
+        pos[0] += 5;
     }
 }
