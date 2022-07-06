@@ -7,16 +7,15 @@ import java.awt.Graphics2D;
 import java.awt.Graphics;
 
 
-class SUNRUNPANEL extends JPanel {
+class SRPanel extends JPanel {
 
-    public ArrayList<OBSTACLE[]> obstacleColumns;
-    public PLAYER player;
+    ArrayList<Obstacle[]> obstacleColumns;
+    Player player;
 
+    int sizeBox;
+    int bottomOfLevel;
 
-    private int sizeBox;
-    private int bottomOfLevel;
-
-    public SUNRUNPANEL(int rectanglesYDirection, int sizeBox) {
+    public SRPanel(int rectanglesYDirection, int sizeBox) {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) size.getWidth();
         int screenHeight = (int) size.getHeight();
@@ -29,19 +28,15 @@ class SUNRUNPANEL extends JPanel {
         this.sizeBox = sizeBox;
         bottomOfLevel = screenHeight / 2 + (rectanglesYDirection / 2) *  sizeBox;
 
-        obstacleColumns = new ArrayList<OBSTACLE[]>();
+        obstacleColumns = new ArrayList<Obstacle[]>();
     }
 
-    public void setObstacleColumns(ArrayList<OBSTACLE[]> obstacleColumns) {
+    public void setObstacleColumns(ArrayList<Obstacle[]> obstacleColumns) {
         this.obstacleColumns = obstacleColumns;
     }
 
-    public void setPlayer(PLAYER player) {
+    public void setPlayer(Player player) {
         this.player = player;
-    }
-
-    public void setEntitys() {
-
     }
 
     @Override
@@ -53,13 +48,12 @@ class SUNRUNPANEL extends JPanel {
         if (player != null) {
             drawPlayer(g2D);
         }
-
     }
 
-    public void drawObstacles(Graphics2D g2D) {
+    private void drawObstacles(Graphics2D g2D) {
         for (int x = 0; x < obstacleColumns.size(); x++) {
             for (int y = 0; y < obstacleColumns.get(x).length; y++) {
-                OBSTACLE obstacle = obstacleColumns.get(x)[y];
+                Obstacle obstacle = obstacleColumns.get(x)[y];
                 if (obstacle != null) {
                     drawObstacle(g2D, obstacle, x, y);
                 }
@@ -67,7 +61,7 @@ class SUNRUNPANEL extends JPanel {
         }
     }
 
-    public void drawObstacle(Graphics2D g2D, OBSTACLE obstacle, int xbox, int ybox) {
+    private void drawObstacle(Graphics2D g2D, Obstacle obstacle, int xbox, int ybox) {
         g2D.setColor(Color.GREEN);
         g2D.drawRect(xbox * sizeBox, bottomOfLevel - (1 + ybox) * sizeBox, sizeBox, sizeBox);
     }

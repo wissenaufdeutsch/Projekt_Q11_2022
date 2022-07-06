@@ -1,10 +1,10 @@
-public class PLAYER
+public class Player
 {
 
-    public int[] pos;
-    public int[] size;
+    int[] pos;
+    int[] size;
 
-    public PLAYER(int[] startPos, int[] size)
+    public Player(int[] startPos, int[] size)
     {
         pos = startPos;
         this.size = size;

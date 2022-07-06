@@ -2,21 +2,19 @@ import java.util.Set;
 
 
 //TODO: look here: https://learncodebygaming.com/blog/how-to-make-a-video-game-in-java-2d-basics ways of doing things
-//TODO: movement of player like in real life (acceleration, velocity, position)
-//TODO: collision detection
+//TODO: PlayerMover, that contains a AccelerationPositionCalculator and a CollisionDetector
 //TODO: make the obstacles scroll
-//TODO: rename method Figurzeichen to drawImg and use it for obstacle as well (img path in Obstacles)
-//TODO: change rectangles to images
-//TODO: design levels
+//TODO: change rectangles to images, then rename method Figurzeichen to drawImg and use it for obstacle as well (img path in Obstacles)
+//TODO: design levels and choose for infinity run
 //TODO: entitys
 
 
-public class SUNRUNCONTROLLER
+public class SRController
 {
 
-    LEVELHANDLER levelHandler;
-    GAME game;
-    SUNRUNVIEW view;
+    LevelHandler levelHandler;
+    Game game;
+    SRView view;
 
     boolean done;
     double interpolation = 0;
@@ -24,13 +22,13 @@ public class SUNRUNCONTROLLER
     final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
     final int MAX_FRAMESKIP = 5;
 
-    public SUNRUNCONTROLLER()
+    public SRController()
     {
         this.done = false;
 
-        view = new SUNRUNVIEW(LEVELS.giveBoxesYDirection(), LEVELS.giveSizeBox());
-        game = new GAME(LEVELS.giveStartPosPlayer(), view);
-        levelHandler = new LEVELHANDLER(game);
+        view = new SRView(Levels.giveBoxesYDirection(), Levels.giveSizeBox());
+        game = new Game(Levels.giveStartPosPlayer(), view);
+        levelHandler = new LevelHandler(game);
         levelHandler.addLevel();
     }
 
@@ -55,14 +53,14 @@ public class SUNRUNCONTROLLER
         }
     }
 
-    public void updateGame() {
+    private void updateGame() {
         Set<Character> pressedKeys = view.getPressedKeys();
         for (char key : pressedKeys) {
             reactToKey(key);
         }
     }
 
-    public void reactToKey(char key)
+    private void reactToKey(char key)
     {
         switch (key)
         {
@@ -83,7 +81,7 @@ public class SUNRUNCONTROLLER
         }
     }
 
-    public void displayGame() {
+    private void displayGame() {
         view.repaint();
     }
 }

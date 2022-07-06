@@ -1,6 +1,4 @@
 import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.KeyboardFocusManager;
 import java.awt.KeyEventDispatcher;
@@ -16,14 +14,14 @@ import java.util.ArrayList;
 
 
 
-public class SUNRUNVIEW
+public class SRView
 {
 
-    private JFrame frame;
-    private SUNRUNPANEL panel;
-    private Set<Character> pressedKeys;
+    JFrame frame;
+    SRPanel panel;
+    Set<Character> pressedKeys;
 
-    public SUNRUNVIEW(int rectanglesYDirection, int sizeBox)
+    public SRView(int rectanglesYDirection, int sizeBox)
     {
         frame = new JFrame("Sun Run");
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -34,7 +32,7 @@ public class SUNRUNVIEW
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        panel = new SUNRUNPANEL(rectanglesYDirection, sizeBox);
+        panel = new SRPanel(rectanglesYDirection, sizeBox);
         frame.add(panel);
 
         pressedKeys = new HashSet<Character>();
@@ -60,16 +58,12 @@ public class SUNRUNVIEW
          return pressedKeys;
     }
 
-    public void setObstacleColumns(ArrayList<OBSTACLE[]> obstacleColumns) {
+    public void setObstacleColumns(ArrayList<Obstacle[]> obstacleColumns) {
         panel.setObstacleColumns(obstacleColumns);
     }
 
-    public void setPlayer(PLAYER player) {
+    public void setPlayer(Player player) {
         panel.setPlayer(player);
-    }
-
-    public void setEntitys() {
-
     }
 
     // TODO: change this to drawImg so it works for all images (scaling to size, path to img)
