@@ -19,6 +19,10 @@ public class TICTACTOE implements TTTCONSTANTS
                 System.out.println("Unentschieden!");
             }
 
+            public void Fehlermeldung()
+            {
+                System.out.println("Fehler!"); 
+            }
         };
         m=new TTTMODEL();
         Gewinnbedingung= new KÄSTCHEN[8][3];
@@ -31,15 +35,20 @@ public class TICTACTOE implements TTTCONSTANTS
         if (Spielmodus==MODUS.PLAYER){
             ZugPlayer(x,y);
         } else if(Spieler_PC==1){
-            m.ZugAlleine(x,y,BELEGUNG.KREIS);
-            Spielende();
-            ZugComputer();
+            if(m.ZugAlleine(x,y,BELEGUNG.KREIS)==true){;
+                Spielende();
+                ZugComputer();
+            }else{
+                t.Fehlermeldung();  
+            }
         } else {
-            m.ZugAlleine(x,y,BELEGUNG.KREUZ);
-            Spielende();
-            ZugComputer();
+            if(m.ZugAlleine(x,y,BELEGUNG.KREUZ)==true){
+                Spielende();
+                ZugComputer();
+            }else{
+                t.Fehlermeldung();
+            }
         }
-
     }
 
     public void SpielerWechseln(){//wechselt den Spieler des PCs 

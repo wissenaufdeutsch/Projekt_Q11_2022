@@ -28,8 +28,9 @@ public class TTTMODEL implements TTTCONSTANTS
 
     } 
     
-    void ZugAlleine(int x, int y, BELEGUNG s){
-        spielfeld[x][y].Belegen(s);
+    boolean ZugAlleine(int x, int y, BELEGUNG s){
+        return spielfeld[x][y].Belegen(s);            
+        
     }
 
 
