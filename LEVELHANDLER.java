@@ -1,13 +1,13 @@
-public class ENVIRONMENTLEVELHANDLER
+public class LEVELHANDLER
 {
 
-    ENVIRONMENT env;
+    GAME game;
     LEVELS levels;
 
-    public ENVIRONMENTLEVELHANDLER(ENVIRONMENT env)
+    public LEVELHANDLER(GAME game)
     {
         levels = new LEVELS();
-        this.env = env;
+        this.game = game;
     }
 
     public int chooseLevel()
@@ -15,14 +15,14 @@ public class ENVIRONMENTLEVELHANDLER
         return 0;
     }
     
-    public void addLevelEnv()
+    public void addLevel()
     {
         int level = chooseLevel();
         
         OBSTACLE[][] obstacleColumnsLevel = levels.giveLevel(level);
         for (OBSTACLE[] obstacleColumns: obstacleColumnsLevel)
         {
-          env.obstacleColumns.add(obstacleColumns);
+          game.obstacleColumns.add(obstacleColumns);
         }
     }
 }

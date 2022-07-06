@@ -2,7 +2,6 @@ import java.util.Set;
 
 
 //TODO: look here: https://learncodebygaming.com/blog/how-to-make-a-video-game-in-java-2d-basics ways of doing things
-//TODO: change env to game and put player and entitys in
 //TODO: movement of player like in real life (acceleration, velocity, position)
 //TODO: collision detection
 //TODO: make the obstacles scroll
@@ -15,11 +14,11 @@ import java.util.Set;
 public class SUNRUNCONTROLLER
 {
 
-    boolean done;
-    ENVIRONMENTLEVELHANDLER envHandler;
-    ENVIRONMENT env;
+    LEVELHANDLER levelHandler;
+    GAME game;
     SUNRUNVIEW view;
 
+    boolean done;
     double interpolation = 0;
     final int TICKS_PER_SECOND = 25;
     final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
@@ -30,9 +29,9 @@ public class SUNRUNCONTROLLER
         this.done = false;
 
         view = new SUNRUNVIEW(LEVELS.giveBoxesYDirection(), LEVELS.giveSizeBox());
-        env = new ENVIRONMENT(LEVELS.giveStartPosPlayer(), view);
-        envHandler = new ENVIRONMENTLEVELHANDLER(env);
-        envHandler.addLevelEnv();
+        game = new GAME(LEVELS.giveStartPosPlayer(), view);
+        levelHandler = new LEVELHANDLER(game);
+        levelHandler.addLevel();
     }
 
     public void run() {
@@ -68,18 +67,18 @@ public class SUNRUNCONTROLLER
         switch (key)
         {
             case 'w':
-                env.player.jump();
+                game.player.jump();
                 break;
 
             case 'a':
-                env.player.left();
+                game.player.left();
                 break;
 
             case 's':
                 break;
 
             case 'd':
-                env.player.right();
+                game.player.right();
                 break;
         }
     }

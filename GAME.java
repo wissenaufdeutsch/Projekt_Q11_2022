@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class ENVIRONMENT
+public class GAME
 {
 
     public SUNRUNVIEW view;
@@ -9,7 +9,7 @@ public class ENVIRONMENT
     public ArrayList<OBSTACLE[]> obstacleColumns;
     public PLAYER player;
 
-    public ENVIRONMENT(int[] startPosPlayer, SUNRUNVIEW view) {
+    public GAME(int[] startPosPlayer, SUNRUNVIEW view) {
 
         this.view = view;
 
