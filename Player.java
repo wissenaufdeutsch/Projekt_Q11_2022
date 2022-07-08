@@ -1,13 +1,34 @@
 public class Player
 {
 
-    int[] pos;
+    double[] pos;
+    double[] vel;
     int[] size;
 
-    public Player(int[] startPos, int[] size)
+    public Player(double[] startPos, int[] size)
     {
         pos = startPos;
+
+        double[] startVel = {0, 0};
+        vel = startVel;
+
         this.size = size;
+    }
+
+    public double[] getPos() {
+        return pos;
+    }
+
+    public double[] getVel() {
+        return vel;
+    }
+
+    public void setPos(double[] pos) {
+        this.pos = pos;
+    }
+
+    public void setVel(double[] vel) {
+        this.vel = vel;
     }
     
     public void jump()

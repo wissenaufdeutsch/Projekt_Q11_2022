@@ -69,7 +69,7 @@ class SRPanel extends JPanel {
 
     public void drawPlayer(Graphics2D g2D) {
         g2D.setColor(Color.RED);
-        g2D.drawRect(player.pos[0], bottomOfLevel - player.size[1] - player.pos[1],
+        g2D.drawRect((int) (player.pos[0]), (int) (bottomOfLevel - player.size[1] - player.pos[1]),
                      player.size[0], player.size[1]);
     }
 }

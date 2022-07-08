@@ -8,7 +8,7 @@ public class Game
     Player player;
     ArrayList<Obstacle[]> obstacleColumns;
 
-    public Game(int[] startPosPlayer, SRView view) {
+    public Game(double[] startPosPlayer, SRView view) {
         this.view = view;
 
         obstacleColumns = new ArrayList<Obstacle[]>();
@@ -18,5 +18,9 @@ public class Game
 
         view.setObstacleColumns(obstacleColumns);
         view.setPlayer(player);
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

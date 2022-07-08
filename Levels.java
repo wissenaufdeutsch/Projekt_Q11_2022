@@ -8,6 +8,8 @@ public class Levels
         obstaclesColumnsLevels = new Obstacle[1000][giveBoxesXDirection()][giveBoxesYDirection()];
         setObstacles(0, new DefaultFloor(), 0, 9, 50, 5);
         setObstacles(0, new DefaultFloor(), 0, 60, 50, 5);
+        setObstacles(0, new DefaultFloor(), 10, 30, 100, 5);
+
     }
 
     private void setObstacles(int level, Obstacle obstacleType, int xpos, int ypos, int width, int height)
@@ -38,10 +40,10 @@ public class Levels
 
     // the pos in the level not the frame
     // pos is for the bottom left corner
-    public static int[] giveStartPosPlayer() {
-        int xStartBox = 10;
-        int yStartBox = 20;
-        int[] startPosPlayer = {xStartBox * giveSizeBox(), yStartBox * giveSizeBox()};
+    public static double[] giveStartPosPlayer() {
+        double xStartBox = 10;
+        double yStartBox = 20;
+        double[] startPosPlayer = {xStartBox * giveSizeBox(), yStartBox * giveSizeBox()};
         return startPosPlayer;
     }
 }

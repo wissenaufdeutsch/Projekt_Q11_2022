@@ -14,6 +14,7 @@ public class SRController
     LevelHandler levelHandler;
     Game game;
     SRView view;
+    PlayerMover playerMover;
 
     boolean done;
     double interpolation = 0;
@@ -27,6 +28,7 @@ public class SRController
 
         view = new SRView(Levels.giveBoxesYDirection(), Levels.giveSizeBox());
         game = new Game(Levels.giveStartPosPlayer(), view);
+        playerMover = new PlayerMover(game.getPlayer());
         levelHandler = new LevelHandler(game);
         levelHandler.addLevel();
         displayGame();
@@ -58,6 +60,7 @@ public class SRController
         for (char key : pressedKeys) {
             reactToKey(key);
         }
+        playerMover.move();
     }
 
     private void reactToKey(char key)
@@ -65,18 +68,15 @@ public class SRController
         switch (key)
         {
             case 'w':
-                game.player.jump();
+                playerMover.jump();
                 break;
 
             case 'a':
-                game.player.left();
-                break;
-
-            case 's':
+                playerMover.accLeft();
                 break;
 
             case 'd':
-                game.player.right();
+                playerMover.accRight();
                 break;
         }
     }
