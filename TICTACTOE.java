@@ -139,18 +139,14 @@ public class TICTACTOE implements TTTCONSTANTS
             }
         }
 
-        Gewinnbedingung[6][0]=m.FeldGeben(0,0);
-        Gewinnbedingung[6][1]=m.FeldGeben(1,1);
-        Gewinnbedingung[6][2]=m.FeldGeben(2,2);
-        Gewinnbedingung[7][0]=m.FeldGeben(0,2);
-        Gewinnbedingung[7][1]=m.FeldGeben(1,1);
-        Gewinnbedingung[7][2]=m.FeldGeben(2,0);
+        int c=6;
+        for (int i=0;i>-3;i=i-2){
+            Gewinnbedingung[c][0]=m.FeldGeben(Math.abs(i),0);
+            Gewinnbedingung[c][1]=m.FeldGeben(1,1);
+            Gewinnbedingung[c][2]=m.FeldGeben(i+2,2);
+            c=c+1;
+        }
 
-        //for (int c=0;c>-3;c=c-2){
-        //  if(IstGleich(m.FeldGeben(Math.abs(c),0),m.FeldGeben(1,1),m.FeldGeben(c+2,2)).equals(BELEGUNG.UNBELEGT)==false){
-        //    return m.FeldGeben(1,1).belegtGeben();
-        //}
-        //}
     }
 
     private KÄSTCHEN AnRand(){
