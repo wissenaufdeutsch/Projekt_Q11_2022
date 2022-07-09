@@ -37,15 +37,17 @@ public class TICTACTOE implements TTTCONSTANTS
 
         }else if(Spieler_PC==1){
             if(m.ZugAlleine(x,y,BELEGUNG.KREIS)==true){
-                Spielende();
-                NPC_Zug();
+                if(Spielende()==false){
+                    NPC_Zug();
+                }
             }else{
                 t.Fehlermeldung();  
             }
         } else {
             if(m.ZugAlleine(x,y,BELEGUNG.KREUZ)==true){
-                Spielende();
-                NPC_Zug();
+                if(Spielende()==false){
+                    NPC_Zug();
+                }
             }else{
                 t.Fehlermeldung();
             }
@@ -105,7 +107,7 @@ public class TICTACTOE implements TTTCONSTANTS
     private KÄSTCHEN ZufaelligesFeld(){
         boolean b=false;        
         while (b==false){
-            KÄSTCHEN k=m.FeldGeben((int) Math.random()*3, (int) Math.random()*3);
+            KÄSTCHEN k=m.FeldGeben((int) Math.round(Math.random()*2), (int) Math.round(Math.random()*2));
             if(k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
                 return k;
             }
@@ -121,13 +123,16 @@ public class TICTACTOE implements TTTCONSTANTS
         }
     }
 
-    private void Spielende(){
+    private boolean Spielende(){
         BELEGUNG s=HatGewonnen();
         if (s.equals(BELEGUNG.UNBELEGT)==false){
             t.SiegerDarstellen(s);
+            return true;
         } else if(IstUnentschieden()==true){
-            t.UnentschiedenDarstellen(); 
+            t.UnentschiedenDarstellen();
+            return true;
         }
+        return false;
     }
 
     private void ZugPlayer(int x, int y){
