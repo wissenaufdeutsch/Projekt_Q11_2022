@@ -34,17 +34,18 @@ public class TICTACTOE implements TTTCONSTANTS
     public void Zug(int x, int y){
         if (Spielmodus==MODUS.PLAYER){
             ZugPlayer(x,y);
-        } else if(Spieler_PC==1){
-            if(m.ZugAlleine(x,y,BELEGUNG.KREIS)==true){;
+
+        }else if(Spieler_PC==1){
+            if(m.ZugAlleine(x,y,BELEGUNG.KREIS)==true){
                 Spielende();
-                ZugComputer();
+                NPC_Zug();
             }else{
                 t.Fehlermeldung();  
             }
         } else {
             if(m.ZugAlleine(x,y,BELEGUNG.KREUZ)==true){
                 Spielende();
-                ZugComputer();
+                NPC_Zug();
             }else{
                 t.Fehlermeldung();
             }
@@ -54,7 +55,11 @@ public class TICTACTOE implements TTTCONSTANTS
     public void SpielerWechseln(){//wechselt den Spieler des PCs 
         if (Spieler_PC==2){
             Spieler_PC=1;
-            ZugComputer();
+            if(Spielmodus==MODUS.PC){
+                ZugComputer();
+            } else if(Spielmodus==MODUS.RANDOM){
+                RandomZug();
+            }
             m.SpielerAmZugSetzen(2);
         } else {
             Spieler_PC=2;
@@ -67,7 +72,9 @@ public class TICTACTOE implements TTTCONSTANTS
         Reset();
         if (Spielmodus==MODUS.PLAYER){
             Spielmodus=MODUS.PC;
-        } else {
+        } else if(Spielmodus==MODUS.PC){
+            Spielmodus=MODUS.RANDOM;
+        }else {
             Spielmodus=MODUS.PLAYER;
         }
 
@@ -76,6 +83,34 @@ public class TICTACTOE implements TTTCONSTANTS
     public void Reset(){
         m.Reset();
         GewinnbedingungReset();
+    }
+
+    private void NPC_Zug(){
+        if(Spielmodus==MODUS.PC){
+            ZugComputer();
+        } else if(Spielmodus==MODUS.RANDOM){
+            RandomZug();
+        }
+    }
+
+    private void RandomZug(){
+        if(Spieler_PC==1){
+            ZufaelligesFeld().Belegen(BELEGUNG.KREUZ);            
+        } else {
+            ZufaelligesFeld().Belegen(BELEGUNG.KREIS);
+        }
+        Spielende();
+    }
+
+    private KÄSTCHEN ZufaelligesFeld(){
+        boolean b=false;        
+        while (b==false){
+            KÄSTCHEN k=m.FeldGeben((int) Math.random()*3, (int) Math.random()*3);
+            if(k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                return k;
+            }
+        }
+        return null;
     }
 
     private void ZugComputer(){
