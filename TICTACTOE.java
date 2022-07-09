@@ -111,18 +111,32 @@ public class TICTACTOE implements TTTCONSTANTS
         KÄSTCHEN k0=WirdGewinnen(s1);
         KÄSTCHEN k1=InEcke();
         KÄSTCHEN k2=AnRand();
-        if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            k.Belegen(s); 
-        } else if(k0!=null && k0.belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            k0.Belegen(s);
-        }else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            m.FeldGeben(1,1).Belegen(s);
-        } else if(k1!= null){
-            k1.Belegen(s);
-        } else if(k2!=null){
-            k2.Belegen(s);
-        } 
+        if(Spezialfall()==false){
+            if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                k.Belegen(s); 
+            } else if(k0!=null && k0.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                k0.Belegen(s);
+            }else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                m.FeldGeben(1,1).Belegen(s);
+            } else if(k1!= null){
+                k1.Belegen(s);
+            } else if(k2!=null){
+                k2.Belegen(s);
+            } 
+        }
         Spielende();
+    }
+
+    private boolean Spezialfall(){
+        if(m.FeldGeben(0,0).belegtGeben().equals(m.FeldGeben(2,2).belegtGeben()) && m.FeldGeben(1,1).belegtGeben().equals(m.FeldGeben(0,0).belegtGeben())==false && m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
+            AnRand();
+            return true;
+        }
+        if(m.FeldGeben(0,2).belegtGeben().equals(m.FeldGeben(2,0).belegtGeben()) && m.FeldGeben(1,1).belegtGeben().equals(m.FeldGeben(2,0).belegtGeben())==false && m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
+            AnRand();
+            return true;
+        }
+        return false;
     }
 
     private void GewinnbedingungReset(){
