@@ -34,17 +34,20 @@ public class TICTACTOE implements TTTCONSTANTS
     public void Zug(int x, int y){
         if (Spielmodus==MODUS.PLAYER){
             ZugPlayer(x,y);
-        } else if(Spieler_PC==1){
-            if(m.ZugAlleine(x,y,BELEGUNG.KREIS)==true){;
-                Spielende();
-                ZugComputer();
+
+        }else if(Spieler_PC==1){
+            if(m.ZugAlleine(x,y,BELEGUNG.KREIS)==true){
+                if(Spielende()==false){
+                    NPC_Zug();
+                }
             }else{
                 t.Fehlermeldung();  
             }
         } else {
             if(m.ZugAlleine(x,y,BELEGUNG.KREUZ)==true){
-                Spielende();
-                ZugComputer();
+                if(Spielende()==false){
+                    NPC_Zug();
+                }
             }else{
                 t.Fehlermeldung();
             }
@@ -54,7 +57,7 @@ public class TICTACTOE implements TTTCONSTANTS
     public void SpielerWechseln(){//wechselt den Spieler des PCs 
         if (Spieler_PC==2){
             Spieler_PC=1;
-            ZugComputer();
+            NPC_Zug();
             m.SpielerAmZugSetzen(2);
         } else {
             Spieler_PC=2;
@@ -67,7 +70,9 @@ public class TICTACTOE implements TTTCONSTANTS
         Reset();
         if (Spielmodus==MODUS.PLAYER){
             Spielmodus=MODUS.PC;
-        } else {
+        } else if(Spielmodus==MODUS.PC){
+            Spielmodus=MODUS.RANDOM;
+        }else {
             Spielmodus=MODUS.PLAYER;
         }
 
@@ -78,6 +83,32 @@ public class TICTACTOE implements TTTCONSTANTS
         GewinnbedingungReset();
     }
 
+    private void NPC_Zug(){
+        if(Spielmodus==MODUS.PC){
+            ZugComputer();
+        } else if(Spielmodus==MODUS.RANDOM){
+            RandomZug();
+        }
+    }
+
+    private void RandomZug(){
+        if(Spieler_PC==1){
+            ZufaelligesFeld().Belegen(BELEGUNG.KREUZ);            
+        } else {
+            ZufaelligesFeld().Belegen(BELEGUNG.KREIS);
+        }
+        Spielende();
+    }
+
+    private KÄSTCHEN ZufaelligesFeld(){
+        while (true){
+            KÄSTCHEN k=m.FeldGeben((int) Math.round(Math.random()*2), (int) Math.round(Math.random()*2));
+            if(k.IstLeer()){
+                return k;
+            }
+        }
+    }
+
     private void ZugComputer(){
         if(Spieler_PC==1){
             ZugPC(BELEGUNG.KREUZ);            
@@ -86,13 +117,16 @@ public class TICTACTOE implements TTTCONSTANTS
         }
     }
 
-    private void Spielende(){
+    private boolean Spielende(){
         BELEGUNG s=HatGewonnen();
         if (s.equals(BELEGUNG.UNBELEGT)==false){
             t.SiegerDarstellen(s);
+            return true;
         } else if(IstUnentschieden()==true){
-            t.UnentschiedenDarstellen(); 
+            t.UnentschiedenDarstellen();
+            return true;
         }
+        return false;
     }
 
     private void ZugPlayer(int x, int y){
@@ -111,18 +145,30 @@ public class TICTACTOE implements TTTCONSTANTS
         KÄSTCHEN k0=WirdGewinnen(s1);
         KÄSTCHEN k1=InEcke();
         KÄSTCHEN k2=AnRand();
-        if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            k.Belegen(s); 
-        } else if(k0!=null && k0.belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            k0.Belegen(s);
-        }else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
-            m.FeldGeben(1,1).Belegen(s);
-        } else if(k1!= null){
-            k1.Belegen(s);
-        } else if(k2!=null){
-            k2.Belegen(s);
-        } 
+        if(Spezialfall()==false){
+            if(k!=null && k.IstLeer()){
+                k.Belegen(s); 
+            } else if(k0!=null && k0.IstLeer()){
+                k0.Belegen(s);
+            }else if(m.FeldGeben(1,1).IstLeer()){
+                m.FeldGeben(1,1).Belegen(s);
+            } else if(k1!= null){
+                k1.Belegen(s);
+            } else if(k2!=null){
+                k2.Belegen(s);
+            } 
+        }
         Spielende();
+    }
+
+    private boolean Spezialfall(){
+        for (int i=6;i<8;i=i+1){
+            if(Gewinnbedingung[i][0].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben()) && Gewinnbedingung[i][1].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben())==false && Gewinnbedingung[i][0].IstBelegt() && Gewinnbedingung[i][1].IstBelegt()){
+                AnRand();
+                return true; 
+            }
+        }
+        return false;
     }
 
     private void GewinnbedingungReset(){
@@ -151,10 +197,10 @@ public class TICTACTOE implements TTTCONSTANTS
 
     private KÄSTCHEN AnRand(){
         for(int i=0;i<3;i=i+2){
-            if(m.FeldGeben(i,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            if(m.FeldGeben(i,1).IstLeer()){
                 return m.FeldGeben(i,1);
             }
-            if(m.FeldGeben(1,i).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            if(m.FeldGeben(1,i).IstLeer()){
                 return m.FeldGeben(1,i);
             }
         }
@@ -164,7 +210,7 @@ public class TICTACTOE implements TTTCONSTANTS
     private KÄSTCHEN InEcke(){
         for(int i=0;i<3;i=i+2){
             for(int j=0;j<3;j=j+2){
-                if(m.FeldGeben(i,j).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                if(m.FeldGeben(i,j).IstLeer()){
                     return m.FeldGeben(i,j);
                 }
             }
@@ -198,7 +244,7 @@ public class TICTACTOE implements TTTCONSTANTS
         KÄSTCHEN[][]k=m.SpielfeldGeben();        
         for (int i=0;i<3;i=i+1){
             for (int j=0;j<3;j=j+1){
-                if(k[i][j].belegtGeben().equals(BELEGUNG.UNBELEGT)==true)
+                if(k[i][j].IstLeer())
                 {
                     return false;
                 }
@@ -218,7 +264,7 @@ public class TICTACTOE implements TTTCONSTANTS
     }
 
     private BELEGUNG IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
-        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
+        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.IstBelegt()){
             return k1.belegtGeben();
         } else {
             return BELEGUNG.UNBELEGT; 
