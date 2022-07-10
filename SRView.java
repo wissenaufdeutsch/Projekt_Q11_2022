@@ -1,5 +1,4 @@
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
@@ -8,10 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 
 
@@ -65,25 +61,6 @@ public class SRView
 
     public void setPlayer(Player player) {
         panel.setPlayer(player);
-    }
-
-    // TODO: change this to drawImg so it works for all images (scaling to size, path to img)
-    public void FigurAnzeigen()
-    {
-        // FIXME: why is a try-catch needed?
-        try {
-            Image img = ImageIO.read(getClass().getResource("Kika2.png"));
-            img = img.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-
-            JLabel icon = new JLabel(new ImageIcon("Kika2.png"));
-            icon.setSize(1000, 1000);
-            icon.setVisible(true);
-            frame.add(icon);
-
-        } catch (java.io.IOException ioe) {
-            ioe.printStackTrace();
-        }
-        frame.setVisible(true);
     }
 
     public void repaint() {

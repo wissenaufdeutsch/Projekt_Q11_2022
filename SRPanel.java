@@ -3,8 +3,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
@@ -12,6 +15,7 @@ class SRPanel extends JPanel {
 
     ArrayList<Obstacle[]> obstacleColumns;
     Player player;
+    BufferedImage playerImage;
 
     int sizeBox;
     int bottomOfLevel;
@@ -30,6 +34,8 @@ class SRPanel extends JPanel {
         bottomOfLevel = screenHeight / 2 + (rectanglesYDirection / 2) *  sizeBox;
 
         obstacleColumns = new ArrayList<Obstacle[]>();
+
+
     }
 
     public void setObstacleColumns(ArrayList<Obstacle[]> obstacleColumns) {
@@ -38,6 +44,12 @@ class SRPanel extends JPanel {
 
     public void setPlayer(Player player) {
         this.player = player;
+        try {
+            playerImage = ImageIO.read(getClass().getResourceAsStream("/Bunny.png"));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -47,7 +59,7 @@ class SRPanel extends JPanel {
         Graphics2D g2D = (Graphics2D) g;
         drawObstacles(g2D);
         if (player != null) {
-            drawPlayer(g2D);
+            drawPlayer(g);
         }
     }
 
@@ -67,9 +79,10 @@ class SRPanel extends JPanel {
         g2D.drawRect(xbox * sizeBox, bottomOfLevel - (1 + ybox) * sizeBox, sizeBox, sizeBox);
     }
 
-    public void drawPlayer(Graphics2D g2D) {
-        g2D.setColor(Color.RED);
-        g2D.drawRect((int) (player.pos[0]), (int) (bottomOfLevel - player.size[1] - player.pos[1]),
-                     player.size[0], player.size[1]);
+    private void drawPlayer(Graphics g) {
+        int[] size = player.getSize();
+        double[] pos = player.getPos();
+        g.drawImage(playerImage, (int) (pos[0]), (int) (bottomOfLevel - size[1] - pos[1]),
+                     size[0], size[1], null);
     }
 }

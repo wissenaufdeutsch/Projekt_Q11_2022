@@ -7,8 +7,8 @@ public class Levels
     {
         obstaclesColumnsLevels = new Obstacle[1000][giveBoxesXDirection()][giveBoxesYDirection()];
         setObstacles(0, new DefaultFloor(), 0, 9, 50, 5);
-        setObstacles(0, new DefaultFloor(), 0, 60, 50, 5);
-        setObstacles(0, new DefaultFloor(), 10, 30, 100, 5);
+        setObstacles(0, new DefaultFloor(), 0, 50, 50, 5);
+        setObstacles(0, new DefaultFloor(), 40, 30, 100, 5);
 
     }
 
