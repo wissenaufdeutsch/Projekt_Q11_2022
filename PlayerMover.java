@@ -1,28 +1,46 @@
+import java.util.ArrayList;
+
+
 class PlayerMover {
 
+    CollisionDetection collisionDetection;
     Player player;
+    ArrayList<Obstacle[]> obstacleColumns;
     boolean isAccelerating;
 
-    final double jumpSpeed = 15;
+    final double reboundReduction = 0;
+    final double jumpSpeed = 25;
     final double gravity = 1.5;
     final double acc = 1;
     final double drag = acc / 3;
     final double maxXVel = 12.5;
 
-    public PlayerMover(Player player) {
-        this.player = player;
+    public PlayerMover(Game game) {
+        player = game.getPlayer();
         isAccelerating = false;
     }
 
-    public void move() {
+    public void move(double blockingXKoordinate, double blockingYKoordinate) {
         if (!isAccelerating) {
             slowDown();
         }
         double[] pos = player.getPos();
         double[] vel = player.getVel();
-        pos[0] += vel[0];
+        int[] size = player.getSize();
+        if (blockingYKoordinate != -1) {
+            vel[1] *= -reboundReduction;
+            if (blockingYKoordinate > pos[1] + size[1] / 2) {
+                pos[1] = blockingYKoordinate - size[1];
+            } else {
+
+                pos[1] = blockingYKoordinate;
+            }
+
+        } else {
+            gravity();
+        }
         pos[1] += vel[1];
-        gravity();
+        pos[0] += vel[0];
         isAccelerating = false;
     }
 
