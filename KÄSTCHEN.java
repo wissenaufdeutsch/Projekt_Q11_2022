@@ -15,6 +15,20 @@ public class KÄSTCHEN implements TTTCONSTANTS
         }
     }
     
+    boolean IstBelegt(){
+        if(belegt==BELEGUNG.UNBELEGT){
+            return false;
+        }
+        return true;
+    }
+    
+    boolean IstLeer(){
+        if(belegt==BELEGUNG.UNBELEGT){
+            return true;
+        }
+        return false;
+    }
+    
     BELEGUNG belegtGeben(){
         return belegt;
     }

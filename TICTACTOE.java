@@ -57,11 +57,7 @@ public class TICTACTOE implements TTTCONSTANTS
     public void SpielerWechseln(){//wechselt den Spieler des PCs 
         if (Spieler_PC==2){
             Spieler_PC=1;
-            if(Spielmodus==MODUS.PC){
-                ZugComputer();
-            } else if(Spielmodus==MODUS.RANDOM){
-                RandomZug();
-            }
+            NPC_Zug();
             m.SpielerAmZugSetzen(2);
         } else {
             Spieler_PC=2;
@@ -105,14 +101,12 @@ public class TICTACTOE implements TTTCONSTANTS
     }
 
     private KÄSTCHEN ZufaelligesFeld(){
-        boolean b=false;        
-        while (b==false){
+        while (true){
             KÄSTCHEN k=m.FeldGeben((int) Math.round(Math.random()*2), (int) Math.round(Math.random()*2));
-            if(k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            if(k.IstLeer()){
                 return k;
             }
         }
-        return null;
     }
 
     private void ZugComputer(){
@@ -152,11 +146,11 @@ public class TICTACTOE implements TTTCONSTANTS
         KÄSTCHEN k1=InEcke();
         KÄSTCHEN k2=AnRand();
         if(Spezialfall()==false){
-            if(k!=null && k.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            if(k!=null && k.IstLeer()){
                 k.Belegen(s); 
-            } else if(k0!=null && k0.belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            } else if(k0!=null && k0.IstLeer()){
                 k0.Belegen(s);
-            }else if(m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            }else if(m.FeldGeben(1,1).IstLeer()){
                 m.FeldGeben(1,1).Belegen(s);
             } else if(k1!= null){
                 k1.Belegen(s);
@@ -168,13 +162,11 @@ public class TICTACTOE implements TTTCONSTANTS
     }
 
     private boolean Spezialfall(){
-        if(m.FeldGeben(0,0).belegtGeben().equals(m.FeldGeben(2,2).belegtGeben()) && m.FeldGeben(1,1).belegtGeben().equals(m.FeldGeben(0,0).belegtGeben())==false && m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
-            AnRand();
-            return true;
-        }
-        if(m.FeldGeben(0,2).belegtGeben().equals(m.FeldGeben(2,0).belegtGeben()) && m.FeldGeben(1,1).belegtGeben().equals(m.FeldGeben(2,0).belegtGeben())==false && m.FeldGeben(1,1).belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
-            AnRand();
-            return true;
+        for (int i=6;i<8;i=i+1){
+            if(Gewinnbedingung[i][0].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben()) && Gewinnbedingung[i][1].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben())==false && Gewinnbedingung[i][0].IstBelegt() && Gewinnbedingung[i][1].IstBelegt()){
+                AnRand();
+                return true; 
+            }
         }
         return false;
     }
@@ -205,10 +197,10 @@ public class TICTACTOE implements TTTCONSTANTS
 
     private KÄSTCHEN AnRand(){
         for(int i=0;i<3;i=i+2){
-            if(m.FeldGeben(i,1).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            if(m.FeldGeben(i,1).IstLeer()){
                 return m.FeldGeben(i,1);
             }
-            if(m.FeldGeben(1,i).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+            if(m.FeldGeben(1,i).IstLeer()){
                 return m.FeldGeben(1,i);
             }
         }
@@ -218,7 +210,7 @@ public class TICTACTOE implements TTTCONSTANTS
     private KÄSTCHEN InEcke(){
         for(int i=0;i<3;i=i+2){
             for(int j=0;j<3;j=j+2){
-                if(m.FeldGeben(i,j).belegtGeben().equals(BELEGUNG.UNBELEGT)){
+                if(m.FeldGeben(i,j).IstLeer()){
                     return m.FeldGeben(i,j);
                 }
             }
@@ -252,7 +244,7 @@ public class TICTACTOE implements TTTCONSTANTS
         KÄSTCHEN[][]k=m.SpielfeldGeben();        
         for (int i=0;i<3;i=i+1){
             for (int j=0;j<3;j=j+1){
-                if(k[i][j].belegtGeben().equals(BELEGUNG.UNBELEGT)==true)
+                if(k[i][j].IstLeer())
                 {
                     return false;
                 }
@@ -272,7 +264,7 @@ public class TICTACTOE implements TTTCONSTANTS
     }
 
     private BELEGUNG IstGleich(KÄSTCHEN k1,KÄSTCHEN k2, KÄSTCHEN k3){
-        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.belegtGeben().equals(BELEGUNG.UNBELEGT)==false){
+        if (k1.belegtGeben().equals(k2.belegtGeben()) && k1.belegtGeben().equals(k3.belegtGeben()) && k1.IstBelegt()){
             return k1.belegtGeben();
         } else {
             return BELEGUNG.UNBELEGT; 
