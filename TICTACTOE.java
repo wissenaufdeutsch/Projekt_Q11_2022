@@ -145,12 +145,12 @@ public class TICTACTOE implements TTTCONSTANTS
         KÄSTCHEN k0=WirdGewinnen(s1);
         KÄSTCHEN k1=InEcke();
         KÄSTCHEN k2=AnRand();
-        if(Spezialfall()==false){
-            if(k!=null && k.IstLeer()){
-                k.Belegen(s); 
-            } else if(k0!=null && k0.IstLeer()){
-                k0.Belegen(s);
-            }else if(m.FeldGeben(1,1).IstLeer()){
+        if(k!=null && k.IstLeer()){
+            k.Belegen(s); 
+        } else if(k0!=null && k0.IstLeer()){
+            k0.Belegen(s);
+        }else if(Spezialfall(s)==false){
+            if(m.FeldGeben(1,1).IstLeer()){
                 m.FeldGeben(1,1).Belegen(s);
             } else if(k1!= null){
                 k1.Belegen(s);
@@ -161,10 +161,10 @@ public class TICTACTOE implements TTTCONSTANTS
         Spielende();
     }
 
-    private boolean Spezialfall(){
+    private boolean Spezialfall(BELEGUNG s){
         for (int i=6;i<8;i=i+1){
             if(Gewinnbedingung[i][0].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben()) && Gewinnbedingung[i][1].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben())==false && Gewinnbedingung[i][0].IstBelegt() && Gewinnbedingung[i][1].IstBelegt()){
-                AnRand();
+                AnRand().Belegen(s);
                 return true; 
             }
         }
