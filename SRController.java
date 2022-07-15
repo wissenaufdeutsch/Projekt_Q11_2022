@@ -1,8 +1,14 @@
 import java.util.Set;
 
 
+//TODO: player can't jump over the level
+//TODO: upwards collision doesn't work at all, downwards kindof but to far away
+//TODO: think of a better architecture
+//TODO: put collision detection into Controller and pass a collision to PlayerMover
 //TODO: look here: https://learncodebygaming.com/blog/how-to-make-a-video-game-in-java-2d-basics ways of doing things
-//TODO: PlayerMover, that contains a AccelerationPositionCalculator and a CollisionDetector
+//TODO: drawImg in panel
+//TODO: private methods in PlayerMover
+//TODO: sometimes keypress is not detected
 //TODO: make the obstacles scroll
 //TODO: change rectangles to images, then rename method Figurzeichen to drawImg and use it for obstacle as well (img path in Obstacles)
 //TODO: design levels and choose for infinity run
@@ -15,6 +21,7 @@ public class SRController
     Game game;
     SRView view;
     PlayerMover playerMover;
+    CollisionDetection collisionDetection;
 
     boolean done;
     double interpolation = 0;
@@ -28,8 +35,9 @@ public class SRController
 
         view = new SRView(Levels.giveBoxesYDirection(), Levels.giveSizeBox());
         game = new Game(Levels.giveStartPosPlayer(), view);
-        playerMover = new PlayerMover(game.getPlayer());
+        playerMover = new PlayerMover(game);
         levelHandler = new LevelHandler(game);
+        collisionDetection = new CollisionDetection(game, Levels.giveSizeBox());
         levelHandler.addLevel();
         displayGame();
     }
@@ -60,7 +68,11 @@ public class SRController
         for (char key : pressedKeys) {
             reactToKey(key);
         }
-        playerMover.move();
+        collisionDetection.updateKoordinatesPlayer();
+        collisionDetection.updateBoxesPlayerIn();
+        double blockingYKoordinate = collisionDetection.getYBoxBlockingMovement();
+        playerMover.move(0, blockingYKoordinate);
+
     }
 
     private void reactToKey(char key)

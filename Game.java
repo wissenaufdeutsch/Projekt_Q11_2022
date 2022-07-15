@@ -13,11 +13,15 @@ public class Game
 
         obstacleColumns = new ArrayList<Obstacle[]>();
 
-        int[] sizePlayer = {30, 50};
+        int[] sizePlayer = {100, 100};
         player = new Player(startPosPlayer, sizePlayer);
 
         view.setObstacleColumns(obstacleColumns);
         view.setPlayer(player);
+    }
+
+    public ArrayList<Obstacle[]> getObstacleColumns() {
+        return obstacleColumns;
     }
 
     public Player getPlayer() {

@@ -23,26 +23,15 @@ public class Player
         return vel;
     }
 
+    public int[] getSize() {
+        return size;
+    }
+
     public void setPos(double[] pos) {
         this.pos = pos;
     }
 
     public void setVel(double[] vel) {
         this.vel = vel;
-    }
-    
-    public void jump()
-    {
-        pos[1] += 5;
-    }
-    
-    public void left()
-    {
-        pos[0] -= 5;
-    }
-    
-    public void right()
-    {
-        pos[0] += 5;
     }
 }
