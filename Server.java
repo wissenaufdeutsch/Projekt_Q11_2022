@@ -12,7 +12,7 @@ import java.util.LinkedList;
 public class Server extends Thread {
 
     private UDPManager udpThing;//manager for all UDP related problems (see UDPManager Class)
-    
+
     private int port = 30303;//Port for UDP
 
     private int tcpPort;//Port for TCP and yes it is NOT the same as the UDPPort!!
@@ -22,7 +22,7 @@ public class Server extends Thread {
     private boolean shutdown = false;//Some Random Boolean for shutdown of the Server
 
     private ArrayList<ConnectionThread> threads = new ArrayList<ConnectionThread>();//Every f****** Client needs new Thread so we give you a collection here 
-   //Every f****** Client needs new Thread so we give you a collection here 
+    //Every f****** Client needs new Thread so we give you a collection here 
 
     public Server(){//Constructor
         super();//needs to be cast, because of "extends Thread"
@@ -35,7 +35,7 @@ public class Server extends Thread {
 
                 if(whatIsThere.getMessage().equals("ClientConnect")){//if a client writes that it is ready to connect
                     try {
-                        System.out.println("Recieved UDP Broadcast from Client");//Random sysout for test purposes
+                        //System.out.println("Recieved UDP Broadcast from Client");//Random sysout for test purposes
                         //Send everyone ip and port of this server. The Client can then initiate the TCP-connection
                         udpThing.sendBroadcast("Greetings", port, ""+tcpPort/*The real art of casting int to String!*/);
 
@@ -66,23 +66,26 @@ public class Server extends Thread {
             e1.printStackTrace();//Stack blaaaa: You can do this better!
         }
         int x = 0;
-        while(x!=3 && !shutdown) {//as long as nobody wants to kill the server real badly
+        while(x!=2 && !shutdown) {//as long as nobody wants to kill the server real badly
             try {// Wait for a new connection.
-                System.out.println("im here");//test sysout
+                //System.out.println("im here");//test sysout
                 SocketChannel chan = ssc.accept();//try to accept an incoming connection
-                System.out.print("accept");
+                //System.out.print("accept");
                 String remotename = chan.getRemoteAddress().toString();//Get the RemoteName because the TextSocketChannel from Erich Schubert wants it
                 TextSocketChannel conn = new TextSocketChannel(chan, Charset.forName("UTF-8"), remotename);//new Textsocketchannel holds basically all the 
                 synchronized(this) {//synchronize it to make sure we don't get in trouble with some random other Threads
                     ConnectionThread t = new ConnectionThread(conn,this);//we have to open a new Thread for every connection
                     t.start();//start the new Thread
                     threads.add(t);//add it to the Collection!
-                    t.conn.send("Hello Client, are you there?");
-                    System.out.print("connected");
-                    
-                    if(x==0){
-                        t.conn.send("You're first");
+                    //t.conn.send("Hello Client, are you there?");
+                    System.out.print("Server: connected");
+                    if(x == 0){
+                        t.conn.send("erster");
                     }
+                    else{
+                        t.conn.send("zweiter");
+                    }
+
                 }    
                 x = x+1;
             }
@@ -92,25 +95,23 @@ public class Server extends Thread {
                 break;
             }
         }
-        
-         //leererSpielstand       
-        System.out.println("Server full");
+
+        //leererSpielstand       
+        //System.out.println("Server full");
     }
-    
+
     void sendmessanges(String m){
         for(int i=0; i<threads.size(); i++){
             try{
                 threads.get(i).conn.send(m);
             }
-        catch(IOException e) {
+            catch(IOException e) {
                 e.printStackTrace();
             }
         }
     }
-        
-    
-    //IGNORE ALL BELOW!! YOU DONT HAVE TO KNOW ANYTHING ABOUT IT
 
+    //IGNORE ALL BELOW!! YOU DONT HAVE TO KNOW ANYTHING ABOUT IT
     /**
      * Thread for a single connection.
      * 
@@ -128,45 +129,45 @@ public class Server extends Thread {
         public ConnectionThread(TextSocketChannel conn,Server se) {
             this.conn = conn;
             this.s=se;
-            
+
         }
 
         @Override
         public void run() {
             // String remotename = conn.getInfo();
             // fireConnected(remotename, conn);
-            
+
             try {
                 while(conn.isOpen()) {
                     String message = conn.read();
                     if(message == null){
                         break; // Disconnected.
                     }
-        
+
                     System.out.println("Server: " +message);
-                    
+
                     s.sendmessanges(message);
                     //for(int i=0; i<threads.size();i++){
                     //    threads.conn.send(message);
                     //}
                     //conn.send(message);
-                   
+
                     //fireReceived(conn, message);
                 }
                 System.out.println("failed");
             }
-            
+
             catch(IOException e) {
                 e.printStackTrace();
             }
             // fireDisconnected(remotename);
         }
-    
+
     }
     public static void wdawd(String[] args) {
         //
     }
-    
+
     public static void main(String[] args) {
         new Server();
     }
