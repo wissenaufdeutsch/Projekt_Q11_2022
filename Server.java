@@ -1,4 +1,4 @@
-
+//warum connected erst wenn 3ter es versucht?????????????????
 import java.util.ArrayList;
 import java.awt.desktop.SystemSleepEvent;
 import java.io.IOException;
@@ -80,10 +80,10 @@ public class Server extends Thread {
                     //t.conn.send("Hello Client, are you there?");
                     System.out.print("Server: connected");
                     if(x == 0){
-                        t.conn.send("erster");
+                        t.conn.send("erster a ");//zerteilen
                     }
                     else{
-                        t.conn.send("zweiter");
+                        t.conn.send("zweiter a ");
                     }
 
                 }    
@@ -101,6 +101,7 @@ public class Server extends Thread {
     }
 
     void sendmessanges(String m){
+    
         for(int i=0; i<threads.size(); i++){
             try{
                 threads.get(i).conn.send(m);
@@ -145,7 +146,7 @@ public class Server extends Thread {
                     }
 
                     System.out.println("Server: " +message);
-
+                    
                     s.sendmessanges(message);
                     //for(int i=0; i<threads.size();i++){
                     //    threads.conn.send(message);
