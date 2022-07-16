@@ -80,7 +80,7 @@ public class SRController
         switch (key)
         {
             case 'w':
-                playerMover.jump();
+                playerMover.tryJumping();
                 break;
 
             case 'a':
