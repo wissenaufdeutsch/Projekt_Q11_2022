@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
@@ -63,7 +63,9 @@ public class Client extends Thread{
     {   
         if(bistdran){
             try{
-                conn.send(a);
+       
+   
+                conn.send(a+ " "+String.valueOf(spielernummer)+" ");
                 bistdran = false;
                 //update view!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             }
@@ -94,38 +96,44 @@ public class Client extends Thread{
 
         while(conn.isOpen()) {
             try{
-                String message = conn.read();
-                System.out.println(message);
-
-                if(message == null) {
-                    break; // Disconnected.
-
-                }
-
-                if(message.equals("erster")){
+                
+                String z = conn.read();
+                
+                String []message = z.split(" ");
+                
+                
+                if(!message[1].equals(String.valueOf(spielernummer))){
+                if(message[0].equals("erster")){
                     bistdran = true;
                     System.out.println("that worked");
                     spielernummer = 1;
                 }
-                if(message.equals("zweiter")){
+                if(message[0].equals("zweiter")){
                     bistdran = false;
                     spielernummer = 2;
                 }
                 if( 
-                message == "1" ||
-                message == "2" ||
-                message == "3" ||
-                message == "4" ||
-                message == "5" ||
-                message == "6" ||
-                message == "7" ||
-                message == "8" ||
-                message == "9" ){
-                    System.out.println("that worked");
+                message[0].equals("1")||
+                message[0].equals("2")||
+                message[0].equals("3")||
+                message[0].equals("4")||
+                message[0].equals("5")||
+                message[0].equals("6")||
+                message[0].equals("7")||
+                message[0].equals("8")||
+                message[0].equals("9")
+                ){
+                    bistdran = true;
                     //view setzt !meinZeichen bei dem Feld "message"!!!!!!!!!!!!!!!!!!!!!!!!!
                     //in der View, wenn auf Feld gedrückt: mach sendnewchoice(feldnummer)!!!!!!!!!!!!!!!!!!!!!!!!!
                 }
-                System.out.println("Client"+spielernummer+": "+message);
+                System.out.println("Client"+spielernummer+": "+message[0]);
+            }
+                
+                if(message == null) {
+                    break; // Disconnected.
+
+                }
             }
             catch(IOException e) {
                 e.printStackTrace();
