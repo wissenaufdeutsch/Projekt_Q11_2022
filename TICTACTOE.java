@@ -1,14 +1,14 @@
 
 public class TICTACTOE implements TTTCONSTANTS
 {
-    TTTVIEW t;
+    TTTVIEW v;
     TTTMODEL m;
     private KÄSTCHEN[][] Gewinnbedingung;
     MODUS Spielmodus;
     int Spieler_PC;
 
     TICTACTOE(){
-        t=new TTTVIEW(){
+        v=new TTTVIEW(){
             public void SiegerDarstellen(BELEGUNG s)
             {
                 System.out.println(s);
@@ -41,7 +41,7 @@ public class TICTACTOE implements TTTCONSTANTS
                     NPC_Zug();
                 }
             }else{
-                t.Fehlermeldung();  
+                v.Fehlermeldung();  
             }
         } else {
             if(m.ZugAlleine(x,y,BELEGUNG.KREUZ)==true){
@@ -49,7 +49,7 @@ public class TICTACTOE implements TTTCONSTANTS
                     NPC_Zug();
                 }
             }else{
-                t.Fehlermeldung();
+                v.Fehlermeldung();
             }
         }
     }
@@ -115,15 +115,16 @@ public class TICTACTOE implements TTTCONSTANTS
         } else {
             ZugPC(BELEGUNG.KREIS);
         }
+        Spielende();
     }
 
     private boolean Spielende(){
         BELEGUNG s=HatGewonnen();
         if (s.equals(BELEGUNG.UNBELEGT)==false){
-            t.SiegerDarstellen(s);
+            v.SiegerDarstellen(s);
             return true;
         } else if(IstUnentschieden()==true){
-            t.UnentschiedenDarstellen();
+            v.UnentschiedenDarstellen();
             return true;
         }
         return false;
@@ -136,13 +137,7 @@ public class TICTACTOE implements TTTCONSTANTS
 
     private void ZugPC(BELEGUNG s){ //wer is PC
         KÄSTCHEN k=WirdGewinnen(s);
-        BELEGUNG s1;
-        if(s==BELEGUNG.KREIS){
-            s1=BELEGUNG.KREUZ;
-        }else {
-            s1=BELEGUNG.KREIS;
-        }
-        KÄSTCHEN k0=WirdGewinnen(s1);
+        KÄSTCHEN k0=WirdGewinnen(AndereBelegung(s));
         KÄSTCHEN k1=InEcke();
         KÄSTCHEN k2=AnRand();
         if(k!=null && k.IstLeer()){
@@ -157,18 +152,29 @@ public class TICTACTOE implements TTTCONSTANTS
             } else if(k2!=null){
                 k2.Belegen(s);
             } 
-        }
-        Spielende();
+        }     
     }
 
     private boolean Spezialfall(BELEGUNG s){
         for (int i=6;i<8;i=i+1){
-            if(Gewinnbedingung[i][0].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben()) && Gewinnbedingung[i][1].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben())==false && Gewinnbedingung[i][0].IstBelegt() && Gewinnbedingung[i][1].IstBelegt()){
-                AnRand().Belegen(s);
-                return true; 
+            if(Gewinnbedingung[i][0].IstBelegt() && Gewinnbedingung[i][1].IstBelegt() && Gewinnbedingung[i][2].IstBelegt()){
+                if(Gewinnbedingung[i][0].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben()) && Gewinnbedingung[i][1].belegtGeben().equals(Gewinnbedingung[i][2].belegtGeben())==false){
+                    AnRand().Belegen(s);
+                    return true; 
+                }
             }
         }
         return false;
+    }
+
+    private BELEGUNG AndereBelegung(BELEGUNG s){
+        BELEGUNG s1;
+        if(s==BELEGUNG.KREIS){
+            s1=BELEGUNG.KREUZ;
+        }else {
+            s1=BELEGUNG.KREIS;
+        }
+        return s1;
     }
 
     private void GewinnbedingungReset(){
