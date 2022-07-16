@@ -22,6 +22,7 @@ class PlayerMover {
         shouldJump = false;
     }
 
+    //TODO: sometimes player pulled down to fast when collision on the floor
     public void move(double blockingXKoordinate, double blockingYKoordinate) {
         if (!isAccelerating) {
             slowDown();
