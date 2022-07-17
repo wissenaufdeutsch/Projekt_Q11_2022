@@ -2,16 +2,10 @@ import java.util.Set;
 
 
 //TODO: player can't jump over the level
-//TODO: upwards collision doesn't work at all, downwards kindof but to far away
-//TODO: think of a better architecture
-//TODO: put collision detection into Controller and pass a collision to PlayerMover
-//TODO: look here: https://learncodebygaming.com/blog/how-to-make-a-video-game-in-java-2d-basics ways of doing things
-//TODO: drawImg in panel
-//TODO: private methods in PlayerMover
-//TODO: sometimes keypress is not detected
 //TODO: make the obstacles scroll
-//TODO: change rectangles to images, then rename method Figurzeichen to drawImg and use it for obstacle as well (img path in Obstacles)
+//TODO: change rectangles to images
 //TODO: design levels and choose for infinity run
+//TODO: maybe use interpolation in the game loop and the display
 
 
 public class SRController
@@ -26,7 +20,7 @@ public class SRController
     boolean done;
     double interpolation = 0;
     final int TICKS_PER_SECOND = 25;
-    final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+    final int SKIPPED_MILISECS_PER_TICK = 1000 / TICKS_PER_SECOND;
     final int MAX_FRAMESKIP = 5;
 
     public SRController()
@@ -43,30 +37,31 @@ public class SRController
     }
 
     public void run() {
-        double next_game_tick = System.currentTimeMillis();
+        double deltaTime;
+        double accumulator = 0;
+        double timeLastUpdate = System.currentTimeMillis();
+
         int loops;
-
         while (true) {
+            deltaTime = System.currentTimeMillis() - timeLastUpdate;
+            timeLastUpdate += deltaTime;
+            accumulator += deltaTime;
             loops = 0;
-            while (System.currentTimeMillis() > next_game_tick
-                    && loops < MAX_FRAMESKIP) {
 
+            while (accumulator > SKIPPED_MILISECS_PER_TICK && loops < MAX_FRAMESKIP) {
                 updateGame();
 
-                next_game_tick += SKIP_TICKS;
+                accumulator -= SKIPPED_MILISECS_PER_TICK;
                 loops++;
             }
 
-            interpolation = (System.currentTimeMillis() + SKIP_TICKS - next_game_tick
-                    / (double) SKIP_TICKS);
             displayGame();
         }
     }
 
     private void updateGame() {
         Set<Character> pressedKeys = view.getPressedKeys();
-            reactToKeys(pressedKeys);
-            view.reactToKeys(pressedKeys);
+        reactToKeys(pressedKeys);
         collisionDetection.updateKoordinatesPlayer();
         collisionDetection.updateBoxesPlayerIn();
         double blockingYKoordinate = collisionDetection.getYBoxBlockingMovement();
@@ -91,6 +86,8 @@ public class SRController
     }
 
     private void displayGame() {
+        Set<Character> pressedKeys = view.getPressedKeys();
+        view.reactToKeys(pressedKeys);
         view.repaint();
     }
 }
