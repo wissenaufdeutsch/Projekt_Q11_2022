@@ -34,7 +34,7 @@ public class TICTACTOE implements TTTCONSTANTS
     public void Zug(int x, int y){
         if (Spielmodus==MODUS.PLAYER){
             ZugPlayer(x,y);
-
+            Spielende();
         }else if(Spieler_PC==1){
             if(m.ZugAlleine(x,y,BELEGUNG.KREIS)==true){
                 if(Spielende()==false){
@@ -97,7 +97,6 @@ public class TICTACTOE implements TTTCONSTANTS
         } else {
             ZufaelligesFeld().Belegen(BELEGUNG.KREIS);
         }
-        Spielende();
     }
 
     private KÄSTCHEN ZufaelligesFeld(){
@@ -115,7 +114,6 @@ public class TICTACTOE implements TTTCONSTANTS
         } else {
             ZugPC(BELEGUNG.KREIS);
         }
-        Spielende();
     }
 
     private boolean Spielende(){
@@ -132,7 +130,6 @@ public class TICTACTOE implements TTTCONSTANTS
 
     private void ZugPlayer(int x, int y){
         m.Zug(x,y);
-        Spielende();
     }
 
     private void ZugPC(BELEGUNG s){ //wer is PC
@@ -168,17 +165,14 @@ public class TICTACTOE implements TTTCONSTANTS
     }
 
     private BELEGUNG AndereBelegung(BELEGUNG s){
-        BELEGUNG s1;
         if(s==BELEGUNG.KREIS){
-            s1=BELEGUNG.KREUZ;
+            return BELEGUNG.KREUZ;
         }else {
-            s1=BELEGUNG.KREIS;
+            return BELEGUNG.KREIS;
         }
-        return s1;
     }
 
     private void GewinnbedingungReset(){
-
         for(int i=0;i<3;i=i+1){
             for(int a=0;a<3;a=a+1){
                 Gewinnbedingung[i][a]=m.FeldGeben(i,a);
