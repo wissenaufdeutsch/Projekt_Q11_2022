@@ -8,11 +8,14 @@ public class Client extends Thread{
     private UDPManager udpThing;//Everyone needs a UDPthing! so we can shout to the World!
     private int port = 30303;//UDP Port nothing special yet
     private TextSocketChannel conn;//this thing can send and recieve over a TCP Connection
-    boolean bistdran;
+    public boolean bistdran;
     int spielernummer;
+    TTTViewSpielfeld t;
     //private static InetSocketAddress serverIP; We dont need this at the moment maybe when my code gets better!
     public Client(){//new Client new luck!
+  
         super();//have to invoke this because of extends Thread!
+        t = new TTTViewSpielfeld(this);
         bistdran = false;
         spielernummer = -1;
         this.udpThing = new UDPManager() {//have to make the UDP Thing concrete! looks complicated but its usefull here
@@ -104,12 +107,17 @@ public class Client extends Thread{
                 
                 if(!message[1].equals(String.valueOf(spielernummer))){
                 if(message[0].equals("erster")){
-                    bistdran = true;
-                    System.out.println("that worked");
+                    
+                    
                     spielernummer = 1;
                 }
+                if(message[0].equals("start")){
+                    
+                    
+                    bistdran = true;
+                }
                 if(message[0].equals("zweiter")){
-                    bistdran = false;
+                    
                     spielernummer = 2;
                 }
                 if( 
@@ -124,6 +132,7 @@ public class Client extends Thread{
                 message[0].equals("9")
                 ){
                     bistdran = true;
+                    t.updatebutton(message[0], false);
                     //view setzt !meinZeichen bei dem Feld "message"!!!!!!!!!!!!!!!!!!!!!!!!!
                     //in der View, wenn auf Feld gedrückt: mach sendnewchoice(feldnummer)!!!!!!!!!!!!!!!!!!!!!!!!!
                 }

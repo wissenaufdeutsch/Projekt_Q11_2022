@@ -85,9 +85,10 @@ public class Server extends Thread {
                     else{
                         t.conn.send("zweiter a ");
                     }
-
+                    
                 }    
                 x = x+1;
+                
             }
             catch(IOException e) {//in case something went wrong
                 e.printStackTrace();//random catch thing
@@ -95,7 +96,13 @@ public class Server extends Thread {
                 break;
             }
         }
-
+        try{
+            threads.get(0).conn.send("start a ");
+        }
+         catch(IOException e) {//in case something went wrong
+                e.printStackTrace();//random catch thing
+                shutdown = true;//Server leaves the building if it is on fire!!!
+            }
         //leererSpielstand       
         //System.out.println("Server full");
     }
