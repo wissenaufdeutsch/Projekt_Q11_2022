@@ -13,5 +13,5 @@ public interface TTTVIEW
 
     public void UnentschiedenDarstellen(); //Spiel ist vorbei, Ergebnis: Unentschieden
 
-public void Fehlermeldung();//Fehler, Zug wiederholen
+    public void Fehlermeldung();//Fehler, Zug wiederholen
 }

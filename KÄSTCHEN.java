@@ -7,7 +7,7 @@ public class KÄSTCHEN implements TTTCONSTANTS
     }
 
     boolean Belegen(BELEGUNG s){
-        if(belegt==BELEGUNG.UNBELEGT){
+        if(IstLeer()){
             belegt=s; 
             return true;
         } else {
