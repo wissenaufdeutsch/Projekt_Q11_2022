@@ -36,6 +36,7 @@ public class SRController
         displayGame();
     }
 
+    //TODO: cap the fps
     public void run() {
         double deltaTime;
         double accumulator = 0;

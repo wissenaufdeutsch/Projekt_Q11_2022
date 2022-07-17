@@ -16,6 +16,8 @@ public class SRView
 
     JFrame frame;
     SRPanel panel;
+    SoundPlayer soundPlayer;
+
     Set<Character> pressedKeys;
 
     public SRView(int rectanglesYDirection, int sizeBox)
@@ -32,6 +34,11 @@ public class SRView
         panel = new SRPanel(rectanglesYDirection, sizeBox);
         frame.add(panel);
 
+        soundPlayer = new SoundPlayer();
+        //TODO: try to get better sound quality
+        soundPlayer.playBackgroundMusic();
+
+        //TODO: put this into an extra class
         pressedKeys = new HashSet<Character>();
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager()

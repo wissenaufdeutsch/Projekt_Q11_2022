@@ -30,6 +30,8 @@ public class Levels
         obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 0, 9, 50, 5);
         obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 0, 50, 50, 5);
         obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 40, 30, 100, 5);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 80, 10, 100, 5);
+
         return obstacleColumns;
     }
 

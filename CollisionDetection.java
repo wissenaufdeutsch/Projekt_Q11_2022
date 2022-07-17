@@ -51,8 +51,8 @@ class CollisionDetection {
         int boxSideDirectionOfMovement = getYAxisBoxSideDirectionOfMovement(direction);
         double distancePlayerInOutsideBox = getDistancePlayerInOutsideBox(sideDirectionOfMovement);
 
-        System.out.println("vel: " + yVel + ", direction: " + direction + ", sideDirectionOfMovement: " + sideDirectionOfMovement +
-                           ", boxSideDirectionOfMovement: " + boxSideDirectionOfMovement + ", distancePlayerInOutsideBox: " + distancePlayerInOutsideBox);
+        //System.out.println("vel: " + yVel + ", direction: " + direction + ", sideDirectionOfMovement: " + sideDirectionOfMovement +
+        //                   ", boxSideDirectionOfMovement: " + boxSideDirectionOfMovement + ", distancePlayerInOutsideBox: " + distancePlayerInOutsideBox);
         for (int xBox = xBoxLeftOfPlayerIn; xBox < xBoxRightOfPlayerIn; ++xBox) {
             for (int yBox = 0; !isDistanceEnoughForMovement(yBox, yVel, distancePlayerInOutsideBox, direction); yBox += direction) {
                 if (obstacleColumns.get(xBox)[boxSideDirectionOfMovement + yBox] != null) {
