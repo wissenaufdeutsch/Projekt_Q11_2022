@@ -3,9 +3,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -17,6 +21,7 @@ class SRPanel extends JPanel {
     Player player;
     BufferedImage playerImage;
 
+    char lastXSidePressed;
     int sizeBox;
     int bottomOfLevel;
 
@@ -34,8 +39,7 @@ class SRPanel extends JPanel {
         bottomOfLevel = screenHeight / 2 + (rectanglesYDirection / 2) *  sizeBox;
 
         obstacleColumns = new ArrayList<Obstacle[]>();
-
-
+        lastXSidePressed = 'r';
     }
 
     public void setObstacleColumns(ArrayList<Obstacle[]> obstacleColumns) {
@@ -49,7 +53,38 @@ class SRPanel extends JPanel {
         } catch(IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void reactToKeys(Set<Character> pressedKeys)
+    {
+        if (pressedKeys.contains('a') && pressedKeys.contains('d')) {
+
+        }
+        else if (pressedKeys.contains('a')) {
+            if (lastXSidePressed == 'r') {
+                flipPlayerImage();
+            }
+            lastXSidePressed = 'l';
+        }
+        else if (pressedKeys.contains('d')) {
+            if (lastXSidePressed == 'l') {
+                flipPlayerImage();
+            }
+            lastXSidePressed = 'r';
+        }
+    }
+
+    private void flipPlayerImage() {
+        playerImage = flipImageHorizontally(playerImage);
+    }
+
+    private BufferedImage flipImageHorizontally(BufferedImage image) {
+        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        tx.translate(-image.getWidth(null), 0);
+        AffineTransformOp op = new AffineTransformOp(tx,
+            AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        image = op.filter(image, null);
+        return image;
     }
 
     @Override
@@ -82,6 +117,7 @@ class SRPanel extends JPanel {
     private void drawPlayer(Graphics g) {
         int[] size = player.getSize();
         double[] pos = player.getPos();
+
         g.drawImage(playerImage, (int) (pos[0]), (int) (bottomOfLevel - size[1] - pos[1]),
                      size[0], size[1], null);
     }

@@ -1,29 +1,36 @@
 public class Levels
 {
-
-    Obstacle[][][] obstaclesColumnsLevels;
-
-    public Levels()
-    {
-        obstaclesColumnsLevels = new Obstacle[1000][giveBoxesXDirection()][giveBoxesYDirection()];
-        setObstacles(0, new DefaultFloor(), 0, 9, 50, 5);
-        setObstacles(0, new DefaultFloor(), 0, 50, 50, 5);
-        setObstacles(0, new DefaultFloor(), 40, 30, 100, 5);
-
+    private Obstacle[][] createObstacleColumns() {
+        return new Obstacle[giveBoxesXDirection()][giveBoxesYDirection()];
     }
 
-    private void setObstacles(int level, Obstacle obstacleType, int xpos, int ypos, int width, int height)
+    private Obstacle[][] setRectangleObstacles(Obstacle[][] obstacleColumns, Obstacle obstacleType, int xpos, int ypos, int width, int height)
     {
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
-                obstaclesColumnsLevels[level][xpos + w][ypos + h] = obstacleType;
+                obstacleColumns[xpos + w][ypos + h] = obstacleType;
             }
         }
+        return obstacleColumns;
     }
 
     public Obstacle[][] giveLevel(int level)
     {
-        return obstaclesColumnsLevels[level];
+        switch (level) {
+            case 0:
+                return giveLevel0();
+            default:
+                System.out.println("Level " + level + "not available.");
+                return null;
+        }
+    }
+
+    private Obstacle[][] giveLevel0() {
+        Obstacle[][] obstacleColumns = createObstacleColumns();
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 0, 9, 50, 5);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 0, 50, 50, 5);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 40, 30, 100, 5);
+        return obstacleColumns;
     }
 
     public static int giveBoxesXDirection() {

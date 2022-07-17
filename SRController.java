@@ -65,9 +65,8 @@ public class SRController
 
     private void updateGame() {
         Set<Character> pressedKeys = view.getPressedKeys();
-        for (char key : pressedKeys) {
-            reactToKey(key);
-        }
+            reactToKeys(pressedKeys);
+            view.reactToKeys(pressedKeys);
         collisionDetection.updateKoordinatesPlayer();
         collisionDetection.updateBoxesPlayerIn();
         double blockingYKoordinate = collisionDetection.getYBoxBlockingMovement();
@@ -75,21 +74,19 @@ public class SRController
 
     }
 
-    private void reactToKey(char key)
+    private void reactToKeys(Set<Character> pressedKeys)
     {
-        switch (key)
-        {
-            case 'w':
-                playerMover.jump();
-                break;
+        if (pressedKeys.contains('w')) {
+            playerMover.tryJumping();
+        }
+        if (pressedKeys.contains('a') && pressedKeys.contains('d')) {
 
-            case 'a':
-                playerMover.accLeft();
-                break;
-
-            case 'd':
-                playerMover.accRight();
-                break;
+        }
+        else if (pressedKeys.contains('a')) {
+            playerMover.accLeft();
+        }
+        else if (pressedKeys.contains('d')) {
+            playerMover.accRight();
         }
     }
 

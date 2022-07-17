@@ -51,6 +51,11 @@ public class SRView
             });
     }
 
+    public void reactToKeys(Set<Character> pressedKeys)
+    {
+        panel.reactToKeys(pressedKeys);
+    }
+
     public Set<Character> getPressedKeys() {
          return pressedKeys;
     }
