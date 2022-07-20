@@ -229,7 +229,7 @@ public class TICTACTOE implements TTTCONSTANTS
                 }
                 if(a==2){
                     for(int b=0;b<3;b=b+1){
-                        if(Gewinnbedingung[wo][b].belegtGeben().equals(s)==false){
+                        if(Gewinnbedingung[wo][b].belegtGeben().equals(s)==false && Gewinnbedingung[wo][b].IstLeer()){
                             return Gewinnbedingung[wo][b];
                         }
                     }
