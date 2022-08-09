@@ -23,6 +23,9 @@ public class Levels
             case 1:
                 return giveLevel1();
                 
+            case 2:
+                return giveLevel2();
+                
             default:
                 System.out.println("Level " + level + "not available.");
                 return null;
@@ -47,6 +50,26 @@ public class Levels
         obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 80, 23, 20, 3);
         obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 25, 9, 15, 10); //deadly
         obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 25, 50, 15, 10); //deadly
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 100, 9, 40, 5);
+        
+        return obstacleColumns;
+    }
+    
+    private Obstacle[][] giveLevel2()
+    {
+      Obstacle[][] obstacleColumns = createObstacleColumns();
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 0, 9, 40, 5);
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 13, 30, 15, 10); //deadly
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 40, 9, 12, 12);
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 52, 21, 12, 8);
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 64, 29, 12, 8);
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 76, 9, 17, 20); //deadly
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 76, 37, 17, 10); //deadly
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 58, 47, 7, 3);
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 45, 50, 13, 5);
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 71, 55, 20, 5);
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 93, 29, 13, 8);
+      obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 99, 9, 40, 5);
         
         return obstacleColumns;
     }
