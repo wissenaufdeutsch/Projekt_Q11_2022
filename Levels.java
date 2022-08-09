@@ -19,6 +19,10 @@ public class Levels
         switch (level) {
             case 0:
                 return giveLevel0();
+                
+            case 1:
+                return giveLevel1();
+                
             default:
                 System.out.println("Level " + level + "not available.");
                 return null;
@@ -32,6 +36,18 @@ public class Levels
         obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 40, 30, 100, 5);
         obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 80, 10, 100, 5);
 
+        return obstacleColumns;
+    }
+    
+    private Obstacle[][] giveLevel1()
+    {
+        Obstacle[][] obstacleColumns = createObstacleColumns();
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 0, 9, 80, 5);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 80, 9, 20, 12); //deadly
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 80, 23, 20, 3);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 25, 9, 15, 10); //deadly
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 25, 50, 15, 10); //deadly
+        
         return obstacleColumns;
     }
 
