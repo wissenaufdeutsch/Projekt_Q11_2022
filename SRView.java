@@ -9,10 +9,7 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 
-
-
-public class SRView
-{
+public class SRView {
 
     JFrame frame;
     SRPanel panel;
@@ -20,8 +17,7 @@ public class SRView
 
     Set<Character> pressedKeys;
 
-    public SRView(int rectanglesYDirection, int sizeBox)
-    {
+    public SRView(int rectanglesYDirection, int sizeBox) {
         frame = new JFrame("Sun Run");
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) size.getWidth();
@@ -35,36 +31,37 @@ public class SRView
         frame.add(panel);
 
         soundPlayer = new SoundPlayer();
-        //TODO: try to get better sound quality
+        // TODO: try to get better sound quality
         soundPlayer.playBackgroundMusic();
 
-        //TODO: put this into an extra class
+        // TODO: put this into an extra class
         pressedKeys = new HashSet<Character>();
 
-        KeyboardFocusManager.getCurrentKeyboardFocusManager()
-            .addKeyEventDispatcher(new KeyEventDispatcher() {
-                @Override
-                public boolean dispatchKeyEvent(final KeyEvent e) {
-                    if(e.getID() == KeyEvent.KEY_PRESSED){
-                        pressedKeys.add(e.getKeyChar());
-                    }
-
-
-                    if(e.getID() == KeyEvent.KEY_RELEASED){
-                        pressedKeys.remove(e.getKeyChar());
-                    }
-                    return false;
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(final KeyEvent e) {
+                if (e.getID() == KeyEvent.KEY_PRESSED) {
+                    pressedKeys.add(e.getKeyChar());
                 }
-            });
+
+                if (e.getID() == KeyEvent.KEY_RELEASED) {
+                    pressedKeys.remove(e.getKeyChar());
+                }
+                return false;
+            }
+        });
     }
 
-    public void reactToKeys(Set<Character> pressedKeys)
-    {
+    public void setViewedPoint(double[] viewedPoint) {
+        panel.setViewedPoint(viewedPoint);
+    }
+
+    public void reactToKeys(Set<Character> pressedKeys) {
         panel.reactToKeys(pressedKeys);
     }
 
     public Set<Character> getPressedKeys() {
-         return pressedKeys;
+        return pressedKeys;
     }
 
     public void setObstacleColumns(ArrayList<Obstacle[]> obstacleColumns) {

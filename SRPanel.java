@@ -10,10 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
 
 class SRPanel extends JPanel {
 
@@ -24,6 +22,7 @@ class SRPanel extends JPanel {
     char lastXSidePressed;
     int sizeBox;
     int bottomOfLevel;
+    double[] viewedPoint;
 
     public SRPanel(int rectanglesYDirection, int sizeBox) {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -36,10 +35,18 @@ class SRPanel extends JPanel {
         setLayout(null);
 
         this.sizeBox = sizeBox;
-        bottomOfLevel = screenHeight / 2 + (rectanglesYDirection / 2) *  sizeBox;
+        bottomOfLevel = screenHeight / 2 + (rectanglesYDirection / 2) * sizeBox;
 
         obstacleColumns = new ArrayList<Obstacle[]>();
         lastXSidePressed = 'r';
+        viewedPoint = new double[2];
+        viewedPoint[0] = 0;
+        viewedPoint[1] = 0;
+    }
+
+    public void setViewedPoint(double[] viewedPoint) {
+        this.viewedPoint = viewedPoint;
+        System.out.println(this.viewedPoint[0]);
     }
 
     public void setObstacleColumns(ArrayList<Obstacle[]> obstacleColumns) {
@@ -50,23 +57,20 @@ class SRPanel extends JPanel {
         this.player = player;
         try {
             playerImage = ImageIO.read(getClass().getResourceAsStream("/Bunny.png"));
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void reactToKeys(Set<Character> pressedKeys)
-    {
+    public void reactToKeys(Set<Character> pressedKeys) {
         if (pressedKeys.contains('a') && pressedKeys.contains('d')) {
 
-        }
-        else if (pressedKeys.contains('a')) {
+        } else if (pressedKeys.contains('a')) {
             if (lastXSidePressed == 'r') {
                 flipPlayerImage();
             }
             lastXSidePressed = 'l';
-        }
-        else if (pressedKeys.contains('d')) {
+        } else if (pressedKeys.contains('d')) {
             if (lastXSidePressed == 'l') {
                 flipPlayerImage();
             }
@@ -81,8 +85,7 @@ class SRPanel extends JPanel {
     private BufferedImage flipImageHorizontally(BufferedImage image) {
         AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
         tx.translate(-image.getWidth(null), 0);
-        AffineTransformOp op = new AffineTransformOp(tx,
-            AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
         image = op.filter(image, null);
         return image;
     }
@@ -111,14 +114,15 @@ class SRPanel extends JPanel {
 
     private void drawObstacle(Graphics2D g2D, Obstacle obstacle, int xbox, int ybox) {
         g2D.setColor(Color.GREEN);
-        g2D.drawRect(xbox * sizeBox, bottomOfLevel - (1 + ybox) * sizeBox, sizeBox, sizeBox);
+        g2D.drawRect((int) (xbox * sizeBox - viewedPoint[0]),
+                (int) (bottomOfLevel - (1 + ybox) * sizeBox - viewedPoint[1]), sizeBox, sizeBox);
     }
 
     private void drawPlayer(Graphics g) {
         int[] size = player.getSize();
         double[] pos = player.getPos();
 
-        g.drawImage(playerImage, (int) (pos[0]), (int) (bottomOfLevel - size[1] - pos[1]),
-                     size[0], size[1], null);
+        g.drawImage(playerImage, (int) (pos[0] - viewedPoint[0]),
+                (int) (bottomOfLevel - size[1] - pos[1] - viewedPoint[1]), size[0], size[1], null);
     }
 }

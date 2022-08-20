@@ -1,15 +1,12 @@
 import java.util.Set;
 
-
 //TODO: player can't jump over the level
 //TODO: make the obstacles scroll
 //TODO: change rectangles to images
 //TODO: design levels and choose for infinity run
 //TODO: maybe use interpolation in the game loop and the display
 
-
-public class SRController
-{
+public class SRController {
 
     LevelHandler levelHandler;
     Game game;
@@ -19,13 +16,18 @@ public class SRController
 
     boolean done;
     double interpolation = 0;
+    double[] viewedPoint;
+
     final int TICKS_PER_SECOND = 25;
     final int SKIPPED_MILISECS_PER_TICK = 1000 / TICKS_PER_SECOND;
     final int MAX_FRAMESKIP = 5;
+    final double SCROLLING_SPEED = 2;
 
-    public SRController()
-    {
-        this.done = false;
+    public SRController() {
+        done = false;
+        viewedPoint = new double[2];
+        viewedPoint[0] = 0;
+        viewedPoint[1] = 0;
 
         view = new SRView(Levels.giveBoxesYDirection(), Levels.giveSizeBox());
         game = new Game(Levels.giveStartPosPlayer(), view);
@@ -36,7 +38,7 @@ public class SRController
         displayGame();
     }
 
-    //TODO: cap the fps
+    // TODO: cap the fps
     public void run() {
         double deltaTime;
         double accumulator = 0;
@@ -68,20 +70,18 @@ public class SRController
         double blockingYKoordinate = collisionDetection.getYBoxBlockingMovement();
         playerMover.move(0, blockingYKoordinate);
 
+        viewedPoint[0] += SCROLLING_SPEED;
     }
 
-    private void reactToKeys(Set<Character> pressedKeys)
-    {
+    private void reactToKeys(Set<Character> pressedKeys) {
         if (pressedKeys.contains('w')) {
             playerMover.tryJumping();
         }
         if (pressedKeys.contains('a') && pressedKeys.contains('d')) {
 
-        }
-        else if (pressedKeys.contains('a')) {
+        } else if (pressedKeys.contains('a')) {
             playerMover.accLeft();
-        }
-        else if (pressedKeys.contains('d')) {
+        } else if (pressedKeys.contains('d')) {
             playerMover.accRight();
         }
     }
@@ -89,6 +89,7 @@ public class SRController
     private void displayGame() {
         Set<Character> pressedKeys = view.getPressedKeys();
         view.reactToKeys(pressedKeys);
+        view.setViewedPoint(viewedPoint);
         view.repaint();
     }
 }
