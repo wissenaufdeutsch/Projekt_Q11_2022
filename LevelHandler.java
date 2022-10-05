@@ -23,6 +23,6 @@ public class LevelHandler
 
     private int chooseLevel()
     {
-        return 2;
+        return 3;
     }
 }

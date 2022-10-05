@@ -26,6 +26,9 @@ public class Levels
             case 2:
                 return giveLevel2();
                 
+            case 3: 
+                return giveLevel3();
+                
             default:
                 System.out.println("Level " + level + "not available.");
                 return null;
@@ -70,6 +73,23 @@ public class Levels
       obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 71, 55, 20, 5);
       obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 93, 29, 13, 8);
       obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 99, 9, 40, 5);
+        
+        return obstacleColumns;
+    }
+    
+    private Obstacle[][] giveLevel3() {
+        Obstacle[][] obstacleColumns = createObstacleColumns();
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 0, 9, 30, 5);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 20, 20, 12, 5);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 32, 20, 60, 5); //deadly
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 32, 30, 3, 10);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 42, 40, 3, 10);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 52, 50, 3, 10);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 62, 60, 3, 10);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 72, 50, 3, 10);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 82, 40, 3, 10);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 92, 30, 3, 10);
+        obstacleColumns = setRectangleObstacles(obstacleColumns, new DefaultFloor(), 95, 9, 30, 5);
         
         return obstacleColumns;
     }
