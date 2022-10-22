@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 
-class CollisionDetection {
+class SRCollisionDetection {
 
-    Player player;
-    ArrayList<Obstacle[]> obstacleColumns;
+    SRPlayer player;
+    ArrayList<SRObstacle[]> obstacleColumns;
 
     double xLeftOfPlayer;
     double xRightOfPlayer;
@@ -18,7 +18,7 @@ class CollisionDetection {
 
     int sizeBox;
 
-    public CollisionDetection(Game game, int sizeBox) {
+    public SRCollisionDetection(SRGame game, int sizeBox) {
         this.sizeBox = sizeBox;
 
         player = game.getPlayer();
@@ -67,8 +67,32 @@ class CollisionDetection {
         return -1;
     }
 
-    private int getDirectionToLook(double yVel) {
-        if (yVel > 0) {
+
+    public double getXBoxBlockingMovement() {
+        double xVel = player.getVel()[0];
+        int direction = getDirectionToLook(xVel);
+        double sideDirectionOfMovement = getYAxisSideDirectionOfMovement(direction);
+        int boxSideDirectionOfMovement = getYAxisBoxSideDirectionOfMovement(direction);
+        double distancePlayerInOutsideBox = getDistancePlayerInOutsideBox(sideDirectionOfMovement);
+
+        //System.out.println("vel: " + xVel + ", direction: " + direction + ", sideDirectionOfMovement: " + sideDirectionOfMovement +
+        //                   ", boxSideDirectionOfMovement: " + boxSideDirectionOfMovement + ", distancePlayerInOutsideBox: " + distancePlayerInOutsideBox);
+        for (int yBox = yBoxBottomOfPlayerIn; yBox < yBoxTopOfPlayerIn; ++yBox) {
+            for (int xBox = 0; !isDistanceEnoughForMovement(xBox, xVel, distancePlayerInOutsideBox, direction); xBox += direction) {
+                if (obstacleColumns.get(yBox)[boxSideDirectionOfMovement + xBox] != null) {
+                    double blockingXKoordinate = (xBox + boxSideDirectionOfMovement) * sizeBox;
+                    if (direction == -1) {
+                        blockingXKoordinate += sizeBox;
+                    }
+                    return blockingXKoordinate;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private int getDirectionToLook(double vel) {
+        if (vel > 0) {
             return 1;
         } else {
             return -1;
@@ -83,6 +107,14 @@ class CollisionDetection {
         }
     }
 
+    private double getXAxisSideDirectionOfMovement(int direction) {
+        if (direction == 1) {
+            return xRightOfPlayer;
+        } else {
+            return xLeftOfPlayer;
+        }
+    }
+
     private int getYAxisBoxSideDirectionOfMovement(int direction) {
         if (direction == 1) {
             return yBoxTopOfPlayerIn;
@@ -91,16 +123,24 @@ class CollisionDetection {
         }
     }
 
+    private int getXAxisBoxSideDirectionOfMovement(int direction) {
+        if (direction == 1) {
+            return xBoxRightOfPlayerIn;
+        } else {
+            return xBoxLeftOfPlayerIn;
+        }
+    }
+
     private double getDistancePlayerInOutsideBox(double koordinateSidePlayer) {
         return koordinateSidePlayer % sizeBox;
     }
 
 
-    private boolean isDistanceEnoughForMovement(int box, double yVel, double distancePlayerInOutsideBox, int direction) {
+    private boolean isDistanceEnoughForMovement(int box, double vel, double distancePlayerInOutsideBox, int direction) {
         double blockingYKoordinate = Math.abs(box) * sizeBox;
         if (direction == -1) {
             blockingYKoordinate -= sizeBox;
         }
-        return  blockingYKoordinate - distancePlayerInOutsideBox > Math.abs(yVel);
+        return  blockingYKoordinate - distancePlayerInOutsideBox > Math.abs(vel);
     }
 }

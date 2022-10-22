@@ -1,11 +1,11 @@
-public class Player
+public class SRPlayer
 {
 
     double[] pos;
     double[] vel;
     int[] size;
 
-    public Player(double[] startPos, int[] size)
+    public SRPlayer(double[] startPos, int[] size)
     {
         pos = startPos;
 

@@ -9,14 +9,14 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class SoundPlayer {
+public class SRSoundPlayer {
 
     Map<String, Clip> sounds;
 
     String backGroundMusic;
 
-    public SoundPlayer() {
-        backGroundMusic = "ClassicalBackgroundMusic.wav";
+    public SRSoundPlayer() {
+        backGroundMusic = "SRClassicalBackgroundMusic.wav";
         sounds = new HashMap<String, Clip>();
         addSound(backGroundMusic);
     }

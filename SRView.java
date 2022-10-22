@@ -13,7 +13,7 @@ public class SRView {
 
     JFrame frame;
     SRPanel panel;
-    SoundPlayer soundPlayer;
+    SRSoundPlayer soundPlayer;
 
     Set<Character> pressedKeys;
 
@@ -30,7 +30,7 @@ public class SRView {
         panel = new SRPanel(rectanglesYDirection, sizeBox);
         frame.add(panel);
 
-        soundPlayer = new SoundPlayer();
+        soundPlayer = new SRSoundPlayer();
         // TODO: try to get better sound quality
         soundPlayer.playBackgroundMusic();
 
@@ -64,11 +64,11 @@ public class SRView {
         return pressedKeys;
     }
 
-    public void setObstacleColumns(ArrayList<Obstacle[]> obstacleColumns) {
+    public void setObstacleColumns(ArrayList<SRObstacle[]> obstacleColumns) {
         panel.setObstacleColumns(obstacleColumns);
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(SRPlayer player) {
         panel.setPlayer(player);
     }
 

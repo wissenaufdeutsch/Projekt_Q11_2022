@@ -1,18 +1,17 @@
 import java.util.Set;
 
 //TODO: player can't jump over the level
-//TODO: make the obstacles scroll
 //TODO: change rectangles to images
 //TODO: design levels and choose for infinity run
 //TODO: maybe use interpolation in the game loop and the display
 
 public class SRController {
 
-    LevelHandler levelHandler;
-    Game game;
+    SRLevelHandler levelHandler;
+    SRGame game;
     SRView view;
-    PlayerMover playerMover;
-    CollisionDetection collisionDetection;
+    SRPlayerMover playerMover;
+    SRCollisionDetection collisionDetection;
 
     boolean done;
     double interpolation = 0;
@@ -29,11 +28,11 @@ public class SRController {
         viewedPoint[0] = 0;
         viewedPoint[1] = 0;
 
-        view = new SRView(Levels.giveBoxesYDirection(), Levels.giveSizeBox());
-        game = new Game(Levels.giveStartPosPlayer(), view);
-        playerMover = new PlayerMover(game);
-        levelHandler = new LevelHandler(game);
-        collisionDetection = new CollisionDetection(game, Levels.giveSizeBox());
+        view = new SRView(SRLevels.giveBoxesYDirection(), SRLevels.giveSizeBox());
+        game = new SRGame(SRLevels.giveStartPosPlayer(), view);
+        playerMover = new SRPlayerMover(game);
+        levelHandler = new SRLevelHandler(game);
+        collisionDetection = new SRCollisionDetection(game, SRLevels.giveSizeBox());
         levelHandler.addLevel();
         displayGame();
     }
@@ -68,8 +67,9 @@ public class SRController {
         collisionDetection.updateKoordinatesPlayer();
         collisionDetection.updateBoxesPlayerIn();
         double blockingYKoordinate = collisionDetection.getYBoxBlockingMovement();
+        double blockingXKoordinate = collisionDetection.getXBoxBlockingMovement();
+        System.out.println("blocking x: " + blockingXKoordinate + " blocking y: " + blockingYKoordinate);
         playerMover.move(0, blockingYKoordinate);
-
         viewedPoint[0] += SCROLLING_SPEED;
     }
 

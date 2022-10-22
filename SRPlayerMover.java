@@ -1,22 +1,22 @@
 import java.util.ArrayList;
 
 
-class PlayerMover {
+class SRPlayerMover {
 
-    CollisionDetection collisionDetection;
-    Player player;
-    ArrayList<Obstacle[]> obstacleColumns;
+    SRCollisionDetection collisionDetection;
+    SRPlayer player;
+    ArrayList<SRObstacle[]> obstacleColumns;
     boolean isAccelerating;
     boolean shouldJump;
 
     final double reboundReduction = 0;
-    final double jumpVel = 25;
-    final double gravity = 1.5;
-    final double acc = 1;
+    final double jumpVel = 27;
+    final double gravity = 2;
+    final double acc = 1.75;
     final double drag = acc / 3;
     final double maxXVel = 12.5;
 
-    public PlayerMover(Game game) {
+    public SRPlayerMover(SRGame game) {
         player = game.getPlayer();
         isAccelerating = false;
         shouldJump = false;
